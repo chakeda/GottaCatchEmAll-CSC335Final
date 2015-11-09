@@ -3,7 +3,7 @@ package model;
 import java.util.Observable;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Map  extends Observable{
+public class Map extends Observable{
 	
 	/***
 	 * Instantiation and its methods

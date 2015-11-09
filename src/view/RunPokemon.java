@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -24,7 +26,14 @@ public class RunPokemon extends JFrame {
 	  public RunPokemon() {
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    setSize(256, 256 + 20); // +20 for title etc
-	    setLocation(100, 30);
+	    
+	    //Set location to middle of screen
+	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+	    int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
+	    int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
+	    this.setLocation(x, y);
+	  
+	    //setLocation(100, 30);
 	    this.addKeyListener(new ArrowKeyListener());
 	    map = new Map();
 	    mapPanel = new MapView(map);
