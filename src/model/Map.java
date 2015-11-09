@@ -113,6 +113,7 @@ public class Map  extends Observable{
 	 * Movement methods
 	 */
 	
+	// if the space is a bush/tree whatever, or is out of bounds, do not move in that direction
 	public boolean moveable(String direction){
 		int tempI = 0;
 		int tempJ = 0;
@@ -124,52 +125,74 @@ public class Map  extends Observable{
 					if (direction == "up"){
 						tempI = i - 1;
 						tempJ = j;
-						if (map[tempI][tempJ] == "B"){
+						if (movementIsWithinBounds(tempI,tempJ)){
+							if (map[tempI][tempJ] == "B"){
+								return false;
+							}
+						}else{
 							return false;
 						}
 					}
 					if (direction == "right"){
 						tempI = i;
 						tempJ = j + 1;
-						if (map[tempI][tempJ] == "B"){
+						if (movementIsWithinBounds(tempI,tempJ)){
+							if (map[tempI][tempJ] == "B"){
+								return false;
+							}
+						}else{
 							return false;
 						}
 					}
 					if (direction == "down"){
 						tempI = i + 1;
 						tempJ = j;
-						if (map[tempI][tempJ] == "B"){
+						if (movementIsWithinBounds(tempI,tempJ)){
+							if (map[tempI][tempJ] == "B"){
+								return false;
+							}
+						}else{
 							return false;
 						}
 					}
 					if (direction == "left"){
 						tempI = i;
 						tempJ = j - 1;
-						if (map[tempI][tempJ] == "B"){
+						if (movementIsWithinBounds(tempI,tempJ)){
+							if (map[tempI][tempJ] == "B"){
+								return false;
+							}
+						}else{
 							return false;
 						}
 					} 
-					
-					// prevents out of bounds. In future we'll have a bunch of trees
-					if (tempI == -1){
-						return false;
-					}
-					if (tempI == map.length){
-						return false;
-					}
-					if (tempJ == -1){
-						return false;
-					}
-					if (tempJ == map.length){
-						return false;
-					}
 				}
 			}
+		}
+		// shouldn't get here.
+		return true;
+	}
+	
+	// sees if the movement is within bounds, used in moveable()
+	public boolean movementIsWithinBounds(int tempI, int tempJ){
+		// prevents out of bounds. In future we'll have a bunch of trees
+		if (tempI == -1){
+			return false;
+		}
+		if (tempI == map.length){
+			return false;
+		}
+		if (tempJ == -1){
+			return false;
+		}
+		if (tempJ == map.length){
+			return false;
 		}
 		return true;
 	}
 	
-	// move trainer, call movement observer
+	// move trainer, call movement observer. out of bounds and obstacles are 
+	//     accounted for in the mapview
 	public void moveTrainer(String direction){
 		int tempI = 0;
 		int tempJ = 0;
@@ -204,22 +227,6 @@ public class Map  extends Observable{
 					} 
 				}
 			}
-		}
-		
-		System.out.println(tempI + ", " + tempJ);
-				
-		// prevents out of bounds. In future we'll have a bunch of trees
-		if (tempI == -1){
-			tempI = 0;
-		}
-		if (tempI == map.length){
-			tempI = map.length-1;
-		}
-		if (tempJ == -1){
-			tempJ = 0;
-		}
-		if (tempJ == map.length){
-			tempJ = map.length-1;
 		}
 		
 		// the mapFog (foreground) will have the trainer
