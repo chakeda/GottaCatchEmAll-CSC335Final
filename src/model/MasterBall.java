@@ -9,6 +9,7 @@ public class MasterBall extends Item{
 	@Override
 	public void update() {
 		// Make the Trainers catchability 100%
+		this.foundByTrainer = true; 
 		
 	}
 
