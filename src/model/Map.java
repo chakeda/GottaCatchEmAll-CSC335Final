@@ -1,5 +1,7 @@
 package model;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -12,11 +14,16 @@ public class Map extends Observable{
 	//// note: making map into Object or Character causes null pointers 
 	private String[][] map;
 	private String[][] mapFog;
+	private Item[][] mapItems;
+	private ArrayList<Item> mapItemList;
 	
 	// instantiate
 	public Map(){
 		map = new String[32][32]; // background
 		mapFog = new String[32][32]; // foreground
+		mapItems = new Item[32][32];
+		mapItemList = new ArrayList<Item>();
+		
 		cleanNulls();
 		
 		//// statically generate map 
@@ -33,6 +40,7 @@ public class Map extends Observable{
 		setBush(0,2);
 		setBush(0,7);
 		
+		
 		// map2: top right (0,16), (17,32)
 		setGrass(0,19);
 		setGrass(1,19);
@@ -44,6 +52,7 @@ public class Map extends Observable{
 		setBush(11,21);
 		setBush(12,22);
 		setBush(13,23);
+		setItem(new RunningShoes("Running Shoes", Category.HOLD_ITEM), 4,20);
 		
 		// map3: bottom left (17,32), (0, 16)
 		setGrass(29,2);
@@ -88,6 +97,16 @@ public class Map extends Observable{
 		map[k][j] = "B";
 	}
 	
+	// sets an Item (unwalkable terrain)
+	// another parallel map exists to store items
+	public void setItem(Item item, int k, int j){
+		map[k][j] = "I"; // add to map
+		
+		// add to parallel item map, store the item
+		mapItemList.add(item); // add item to top
+		mapItems[k][j] = mapItemList.get(mapItemList.size()-1); // get the top item
+	}
+	
 	// sets a hunter
 	public void setTrainer(int k, int j){
 		mapFog[k][j] = "T";
@@ -128,6 +147,11 @@ public class Map extends Observable{
 							if (map[tempI][tempJ] == "B"){ 
 								return false;
 							}
+							if (map[tempI][tempJ] == "I"){
+								map[tempI][tempJ] = ""; // turn ball to plain
+								// TODO: somehow add the item into the inventory...
+								return false;
+							}
 						}else{
 							return false;
 						}
@@ -137,6 +161,11 @@ public class Map extends Observable{
 						tempJ = j + 1;
 						if (movementIsWithinBounds(tempI,tempJ)){
 							if (map[tempI][tempJ] == "B"){
+								return false;
+							}
+							if (map[tempI][tempJ] == "I"){
+								map[tempI][tempJ] = ""; // turn ball to plain
+								// TODO: somehow add the item into the inventory...
 								return false;
 							}
 						}else{
@@ -150,6 +179,11 @@ public class Map extends Observable{
 							if (map[tempI][tempJ] == "B"){
 								return false;
 							}
+							if (map[tempI][tempJ] == "I"){
+								map[tempI][tempJ] = ""; // turn ball to plain
+								// TODO: somehow add the item into the inventory...
+								return false;
+							}
 						}else{
 							return false;
 						}
@@ -159,6 +193,11 @@ public class Map extends Observable{
 						tempJ = j - 1;
 						if (movementIsWithinBounds(tempI,tempJ)){
 							if (map[tempI][tempJ] == "B"){
+								return false;
+							}
+							if (map[tempI][tempJ] == "I"){
+								map[tempI][tempJ] = "G"; // turn ball to plain
+								// TODO: somehow add the item into the inventory...
 								return false;
 							}
 						}else{
@@ -281,5 +320,10 @@ public class Map extends Observable{
 	// get map fog (trainer) at coord
 	public String getFogAt(int i, int j){
 		return mapFog[i][j];
+	}
+	
+	// get itemMap unit
+	public Item getItemAt(int i, int j){
+		return mapItems[i][j];
 	}
 }

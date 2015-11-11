@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -19,7 +20,7 @@ import model.Map;
 public class MapView extends JPanel implements Observer {
 
 	  private Map map;
-	  private Image player, plain, grass, bush;
+	  private Image player, plain, grass, bush, item;
 	  private int X, Y, tic, n;
 	  private String direction;
 	  private Timer timer;
@@ -33,6 +34,7 @@ public class MapView extends JPanel implements Observer {
 	      plain = ImageIO.read(new File("./images/plain.png"));
 	      grass = ImageIO.read(new File("./images/grass.png"));
 	      bush = ImageIO.read(new File("./images/bush.png"));
+	      item = ImageIO.read(new File("./images/pokeball.png"));
 	    } catch (IOException e) {
 	      e.printStackTrace();
 	    }
@@ -73,6 +75,9 @@ public class MapView extends JPanel implements Observer {
 					}
 					else if(map.getTileAt(i, j) == "B"){ 
 						imageGrid[i][j] = bush;
+					}
+					else if(map.getTileAt(i, j) == "I"){ 
+						imageGrid[i][j] = item;
 					}
 					else{
 						imageGrid[i][j] = plain;
