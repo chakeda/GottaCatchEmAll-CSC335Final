@@ -8,6 +8,7 @@ public class CostumeChange extends Item{
 
 	@Override
 	public void update() {
+		this.foundByTrainer = true; 
 		
 	}
 

@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.Image;
+import java.util.Random;
 
 public abstract class Pokemon {
 	
@@ -58,8 +59,7 @@ public abstract class Pokemon {
 	public Image getCaughtImage(){
 		return caughtImage;
 	}
-	
-	
+		
 	// The following four functions are unique to each pokemon
 	public abstract void increaseEscapability();
 	public abstract void decreaseEscapability();
@@ -75,5 +75,23 @@ public abstract class Pokemon {
 	public void throwBait(){
 		decreaseEscapability();
 		decreaseCatchability();
+	}
+	
+	public boolean throwPokeball(Random r){
+		int ballVariable = r.nextInt(100);
+		System.out.println(ballVariable);
+		if(ballVariable > this.getCatchability())
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean willRunAway(Random r){
+		int runVariable = r.nextInt(100);
+		System.out.println(runVariable);
+		if(runVariable < this.getEscapability())
+			return true;
+		else
+			return false;
 	}
 }

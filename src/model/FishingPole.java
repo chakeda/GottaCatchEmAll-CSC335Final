@@ -9,7 +9,7 @@ public class FishingPole extends Item{
 	@Override
 	public void update() {
 		// fish pokemon out of the water change something to true probably
-		
+		this.foundByTrainer= true; 
 	}
 
 }

@@ -8,7 +8,8 @@ public class RunningShoes extends Item{
 
 	@Override
 	public void update() {
-		
+		this.foundByTrainer = true; 
 	}
 
 }
+    
