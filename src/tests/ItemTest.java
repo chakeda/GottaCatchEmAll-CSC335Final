@@ -59,9 +59,7 @@ public class ItemTest {
 		
 		//iterate through items list and make sure that all items have been found
 		for(Item items:trainer.getItemList()){
-			if(items.equals("RICK MERCER MERMAID")){
 				assertTrue(items.isFound());
-			}
 		}
 	}
 
