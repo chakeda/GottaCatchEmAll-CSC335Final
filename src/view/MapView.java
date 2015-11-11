@@ -50,7 +50,7 @@ public class MapView extends JPanel implements Observer {
 	  
 	  // timer based repaints
 	  private void drawBoardWithAnimation() {
-		n = 8; // 8 * 2 = 16px.
+		n = 8; 
 		tic = 1;
 		timer = new Timer(40, new TimerListener());
 		timer.start();

@@ -9,7 +9,7 @@ public class Map extends Observable{
 	 * Instantiation and its methods
 	 */
 	
-	//// note: making map into Object or Character causes null pointers like a mf
+	//// note: making map into Object or Character causes null pointers 
 	private String[][] map;
 	private String[][] mapFog;
 	
@@ -21,7 +21,7 @@ public class Map extends Observable{
 		
 		//// statically generate map 
 		
-		// top left (0,16), (0,16)
+		// map1: top left (0,16), (0,16)
 		setTrainer(3,3); // trainer starts here
 		setGrass(4,4);
 		setGrass(5,5);
@@ -33,7 +33,7 @@ public class Map extends Observable{
 		setBush(0,2);
 		setBush(0,7);
 		
-		// top right (0,16), (17,32)
+		// map2: top right (0,16), (17,32)
 		setGrass(0,19);
 		setGrass(1,19);
 		setGrass(2,19);
@@ -45,7 +45,7 @@ public class Map extends Observable{
 		setBush(12,22);
 		setBush(13,23);
 		
-		// bottom left (17,32), (0, 16)
+		// map3: bottom left (17,32), (0, 16)
 		setGrass(29,2);
 		setGrass(30,2);
 		setGrass(31,2);
@@ -59,7 +59,7 @@ public class Map extends Observable{
 		setBush(25,5);
 		setBush(31,9);
 		
-		// bottom right (17,32),(17,32)
+		// map4: bottom right (17,32),(17,32)
 		setGrass(18,18);
 		setGrass(20,18);
 		setGrass(22,18);
@@ -121,12 +121,11 @@ public class Map extends Observable{
 		for (int i=0; i<map.length; i++){
 			for (int j=0; j<map.length; j++){
 				if (mapFog[i][j] == "T"){				
-					// previous space becomes map. get resultant position
 					if (direction == "up"){
 						tempI = i - 1;
 						tempJ = j;
-						if (movementIsWithinBounds(tempI,tempJ)){
-							if (map[tempI][tempJ] == "B"){
+						if (movementIsWithinBounds(tempI,tempJ)){ 
+							if (map[tempI][tempJ] == "B"){ 
 								return false;
 							}
 						}else{
@@ -191,8 +190,8 @@ public class Map extends Observable{
 		return true;
 	}
 	
-	// move trainer, call movement observer. out of bounds and obstacles are 
-	//     accounted for in the mapview
+	// move trainer, call movement observer. Note that out of bounds and obstacles are 
+	//     accounted for in the mapview, so we do no error checking here
 	public void moveTrainer(String direction){
 		int tempI = 0;
 		int tempJ = 0;

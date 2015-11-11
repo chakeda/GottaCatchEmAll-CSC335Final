@@ -8,31 +8,70 @@ import model.Map;
 
 public class MapTest {
 	
-	// not much is testable. Map is gui intensive.
-	// try visual testing. 
+	// gui intensive!!! try visual testing. 
 
 	@Test
-	public void test() {
+	public void testTheBasics() {
+		// instantiate!
 		Map map = new Map();
 		
+		// test setters
 		map.setBush(16, 16);
 		assertEquals(map.getTileAt(16, 16), "B");
-		
 		map.setGrass(17, 17);
 		assertEquals(map.getTileAt(17, 17), "G");
 		
-		map.setTrainer(3, 3);
+		// tiles already there
+		assertEquals(map.getTileAt(5, 5), "G");
+		
+		// so is the trainer. test his location
 		assertEquals(map.getFogAt(3, 3), "T");
 		assertEquals(map.getTrainerX(), 3);
 		assertEquals(map.getTrainerY(), 3);
 		
+		// test one movement
 		map.moveTrainer("up"); 
 		assertEquals(map.getFogAt(2, 3), "T");
 		assertEquals(map.getTrainerX(), 2); 
-		// yeah that's weird, but it makes sense in the gui's perspective
 		assertEquals(map.getTrainerY(), 3);
 		
+		// just test this too
 		assertEquals(map.getMapLength(), 32);
-	}
+		
+		// test inability to walk out of bounds
+		map.moveTrainer("up"); 
+		assertEquals(map.getFogAt(1, 3), "T");
+		map.moveTrainer("up"); 
+		assertEquals(map.getFogAt(0, 3), "T");
+		assertFalse(map.moveable("up"));
+		// note: running a moveTrainer("up") will cause an out of bounds exception.
+		
+		// test inability to walk on bushes
+		assertEquals(map.getTileAt(1, 1), "B");
+		map.moveTrainer("down"); 
+		map.moveTrainer("left"); 
+		assertFalse(map.moveable("left"));
+		assertTrue(map.moveable("down"));
+		
+		// for code coverage
+		map.moveTrainer("left"); 
+		map.moveTrainer("left"); 
+		map.moveTrainer("up"); 
+		assertEquals(map.getFogAt(0, 0), "T");
+		assertFalse(map.moveable("up"));
+
+		// try to get more code coverage
+		for(int i=0; i<map.getMapLength()-1; i++){
+			map.moveTrainer("right"); 	
+		}
+		assertFalse(map.moveable("right"));
+
+		
+
+
+
+		
+		
+	}	
 
 }

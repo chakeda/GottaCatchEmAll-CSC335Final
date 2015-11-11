@@ -3,11 +3,14 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 import model.Map;
 
@@ -43,48 +46,59 @@ public class RunPokemon extends JFrame {
 	  }
 
 	  private class ArrowKeyListener implements KeyListener {
+	      
+		
+		long lastPressProcessed = 0;
 
 	    @Override
-	    public void keyPressed(KeyEvent ke) {
-
-	      if (ke.getKeyCode() == KeyEvent.VK_UP){
-	    	  if (map.moveable("up")){
-	    		  map.moveTrainer("up");
-	    	  }
-	      }
-
-	      if (ke.getKeyCode() == KeyEvent.VK_DOWN){
-	    	  if (map.moveable("down")){
-	    		  map.moveTrainer("down");
-	    	  }
-	      }
+	    public void keyPressed(KeyEvent ke) { 
  
-	      if (ke.getKeyCode() == KeyEvent.VK_LEFT){ // mirror
-	    	  if (map.moveable("left")){
-	    		  map.moveTrainer("left");
-	    	  }	      
-	      }
+	      // take inputs only 330ms at a time
+          if(System.currentTimeMillis() - lastPressProcessed > 330) {
 
-	      if (ke.getKeyCode() == KeyEvent.VK_RIGHT){ // mirror
-	    	  if (map.moveable("right")){
-	    		  map.moveTrainer("right");
-	    	  }
-	      }
-	      
-	      // check things
-	      if (ke.getKeyCode() == KeyEvent.VK_ENTER){
-	    	  Object[] possibleValues = { "Check Pokemon", "Check Inventory", "Save and Quit" };
-	    	  Object selectedValue = JOptionPane.showInputDialog(null,
-	    	  "Choose one", "Input",
-	    	  JOptionPane.INFORMATION_MESSAGE, null,
-	    	  possibleValues, possibleValues[0]);
-	      }
+	    	  if (ke.getKeyCode() == KeyEvent.VK_UP){
+		    	  if (map.moveable("up")){
+		    		  map.moveTrainer("up");
+		    	  }
+		      }
 	    	  
+		      if (ke.getKeyCode() == KeyEvent.VK_DOWN){
+		    	  if (map.moveable("down")){
+		    		  map.moveTrainer("down");
+		    	  }
+		      }
+	 
+		      if (ke.getKeyCode() == KeyEvent.VK_LEFT){
+		    	  if (map.moveable("left")){
+		    		  map.moveTrainer("left");
+		    	  }	      
+		      }
+	
+		      if (ke.getKeyCode() == KeyEvent.VK_RIGHT){
+		    	  if (map.moveable("right")){
+		    		  map.moveTrainer("right");
+		    	  }
+		      }
+		      
+		      // check things - stub
+		      if (ke.getKeyCode() == KeyEvent.VK_ENTER){
+		    	  Object[] possibleValues = { "Check Pokemon", "Check Inventory", "Save and Quit" };
+		    	  Object selectedValue = JOptionPane.showInputDialog(null,
+		    	  "Choose one", "Input",
+		    	  JOptionPane.INFORMATION_MESSAGE, null,
+		    	  possibleValues, possibleValues[0]);
+		      }
+		      
+              lastPressProcessed = System.currentTimeMillis();
+		      
+          }   
 	    }
 
 	    @Override
-	    public void keyTyped(KeyEvent e) { }
+	    public void keyTyped(KeyEvent ke) { }
+	    
 	    @Override
-	    public void keyReleased(KeyEvent e) { }
+	    public void keyReleased(KeyEvent ke) { }
 	  }
+	  
 	}
