@@ -72,6 +72,7 @@ public class TrainerTest {
 		assertEquals(trainer.getPokeballsRemaining(), 14);
 		
 		//****COSTUME TEST
+		/*
 		BufferedImage img;
 		try {
 			img = ImageIO.read(new File("./images/Sponge.png"));
@@ -81,6 +82,7 @@ public class TrainerTest {
 			System.out.println("IMAGE NOT FOUND");
 			e.printStackTrace();
 		}
+		*/
 		
 		//*****steps test
 		

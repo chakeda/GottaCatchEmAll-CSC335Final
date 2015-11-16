@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Map extends Observable{
+public class Map extends Observable implements Serializable{
 	
 	/***
 	 * Instantiation and its methods
@@ -52,7 +52,7 @@ public class Map extends Observable{
 		setBush(11,21);
 		setBush(12,22);
 		setBush(13,23);
-		setItem(new RunningShoes("Running Shoes", Category.HOLD_ITEM), 4,20);
+		// setItem(new RunningShoes("Running Shoes", Category.HOLD_ITEM), 4,20); // breaks serialization
 		
 		// map3: bottom left (17,32), (0, 16)
 		setGrass(29,2);
