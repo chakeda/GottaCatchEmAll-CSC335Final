@@ -1,16 +1,16 @@
 package model;
 
-public class Scyther extends Pokemon{
+public class Paras extends Pokemon{
 	
-	private static final int RARITY = 7; // 1-10
-	private static final int DURATION = 5; //5 minutes, after five minutes, pokemon will flee
-	private static final int ESCAPABILITY = 50; // out of a possible 100, the higher the number = more likely to run
-	private static final int CATCHABILITY = 75; //out of a possible 100, the higher the number = harder to catch
-	private static final int ESCAPABILITYCONSTANT = 10;
-	private static final int CATCHABILITYCONSTANT = 5;
+	private static final int RARITY = 2; //out of 10
+	private static final int DURATION = 15; //how long the pokemon will fight in minutes, 1-15min
+	private static final int ESCAPABILITY = 10; // out of a possible 100, with 100 being it will always escape
+	private static final int CATCHABILITY = 90; //out of a possible 100, with 100 being it will always be caught
+	private static final int ESCAPABILITYCONSTANT = 3;
+	private static final int CATCHABILITYCONSTANT = 10;
 	
 	
-	public Scyther(){ 
+	public Paras(){ 
 		this.setCatchability(CATCHABILITY);
 		this.setDuration(DURATION);
 		this.setEscapability(ESCAPABILITY);

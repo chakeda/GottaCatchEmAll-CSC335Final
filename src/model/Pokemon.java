@@ -1,12 +1,9 @@
 package model;
 
-import java.awt.Image;
 import java.util.Random;
 
 public abstract class Pokemon {
 	
-	private Image battleImage; //can later change to a collection of images/sprite
-	private Image caughtImage; //smaller image similar to seeing the 5 pokemon you currently have
 	private int rarity; // rarity, 0-10
 	private int duration; //max duration of battle before escaping
 	private int escapability; //likelihood to escape (higher for more rare pokemon) 
@@ -43,22 +40,6 @@ public abstract class Pokemon {
 		return catchability;
 	}
 	
-	//the following getImages can be used later for gui purposes
-	
-	public void setBattleImage(Image i){
-		battleImage = i;
-	}
-	public Image getBattleImage(){
-		return battleImage;
-	}
-	
-	
-	public void setCaughtImage(Image c){
-		caughtImage = c;
-	}
-	public Image getCaughtImage(){
-		return caughtImage;
-	}
 		
 	// The following four functions are unique to each pokemon
 	public abstract void increaseEscapability();
@@ -67,17 +48,18 @@ public abstract class Pokemon {
 	public abstract void increaseCatchability();
 	public abstract void decreaseCatchability();
 	
-	public void throwRock(){
+	public void rockThrown(){
 		increaseEscapability();
 		increaseCatchability();
 	}
 	
-	public void throwBait(){
+	public void baitThrown(){
 		decreaseEscapability();
 		decreaseCatchability();
 	}
 	
-	public boolean throwPokeball(Random r){
+	
+	public boolean isCaught(Random r){
 		int ballVariable = r.nextInt(100);
 		System.out.println(ballVariable);
 		if(ballVariable > this.getCatchability())
