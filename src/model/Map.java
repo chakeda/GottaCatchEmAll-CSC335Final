@@ -3,10 +3,13 @@ package model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Observable;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class Map extends Observable implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/***
 	 * Instantiation and its methods
 	 */
@@ -136,18 +139,17 @@ public class Map extends Observable implements Serializable{
 	public boolean moveable(String direction){
 		int tempI = 0;
 		int tempJ = 0;
-		String dir = null;
 		for (int i=0; i<map.length; i++){
 			for (int j=0; j<map.length; j++){
-				if (mapFog[i][j] == "T"){				
-					if (direction == "up"){
+				if (mapFog[i][j]!=null && mapFog[i][j].equals("T")){				
+					if (direction.equals("up")){
 						tempI = i - 1;
 						tempJ = j;
 						if (movementIsWithinBounds(tempI,tempJ)){ 
-							if (map[tempI][tempJ] == "B"){ 
+							if (map[tempI][tempJ].equals("B")){ 
 								return false;
 							}
-							if (map[tempI][tempJ] == "I"){
+							if (map[tempI][tempJ].equals("I")){
 								map[tempI][tempJ] = ""; // turn ball to plain
 								// TODO: somehow add the item into the inventory...
 								return false;
@@ -156,14 +158,14 @@ public class Map extends Observable implements Serializable{
 							return false;
 						}
 					}
-					if (direction == "right"){
+					if (direction.equals("right")){
 						tempI = i;
 						tempJ = j + 1;
 						if (movementIsWithinBounds(tempI,tempJ)){
-							if (map[tempI][tempJ] == "B"){
+							if (map[tempI][tempJ].equals("B")){
 								return false;
 							}
-							if (map[tempI][tempJ] == "I"){
+							if (map[tempI][tempJ].equals("I")){
 								map[tempI][tempJ] = ""; // turn ball to plain
 								// TODO: somehow add the item into the inventory...
 								return false;
@@ -172,14 +174,14 @@ public class Map extends Observable implements Serializable{
 							return false;
 						}
 					}
-					if (direction == "down"){
+					if (direction.equals("down")){
 						tempI = i + 1;
 						tempJ = j;
 						if (movementIsWithinBounds(tempI,tempJ)){
-							if (map[tempI][tempJ] == "B"){
+							if (map[tempI][tempJ].equals("B")){
 								return false;
 							}
-							if (map[tempI][tempJ] == "I"){
+							if (map[tempI][tempJ].equals("I")){
 								map[tempI][tempJ] = ""; // turn ball to plain
 								// TODO: somehow add the item into the inventory...
 								return false;
@@ -192,10 +194,10 @@ public class Map extends Observable implements Serializable{
 						tempI = i;
 						tempJ = j - 1;
 						if (movementIsWithinBounds(tempI,tempJ)){
-							if (map[tempI][tempJ] == "B"){
+							if (map[tempI][tempJ].equals("B")){
 								return false;
 							}
-							if (map[tempI][tempJ] == "I"){
+							if (map[tempI][tempJ].equals("I")){
 								map[tempI][tempJ] = "G"; // turn ball to plain
 								// TODO: somehow add the item into the inventory...
 								return false;
@@ -231,37 +233,32 @@ public class Map extends Observable implements Serializable{
 	
 	// move trainer, call movement observer. Note that out of bounds and obstacles are 
 	//     accounted for in the mapview, so we do no error checking here
-	public void moveTrainer(String direction){
+	public void moveTrainer(Direction dir){
 		int tempI = 0;
 		int tempJ = 0;
-		String dir = null;
 		for (int i=0; i<map.length; i++){
 			for (int j=0; j<map.length; j++){
-				if (mapFog[i][j] == "T"){				
+				if (mapFog[i][j] !=null && mapFog[i][j].equals("T")){				
 					// previous space becomes map. get resultant position
-					if (direction == "up"){
+					if (dir == Direction.NORTH){
 						mapFog[i][j] = map[i][j];
 						tempI = i - 1;
 						tempJ = j;
-						dir = "up";
 					}
-					if (direction == "right"){
+					if (dir == Direction.EAST){
 						mapFog[i][j] = map[i][j];
 						tempI = i;
-						tempJ = j + 1;
-						dir = "right";
+						tempJ = j + 1;	
 					}
-					if (direction == "down"){
+					if (dir == Direction.SOUTH){
 						mapFog[i][j] = map[i][j];
 						tempI = i + 1;
 						tempJ = j;
-						dir = "down";
 					}
-					if (direction == "left"){
+					if (dir == Direction.WEST){
 						mapFog[i][j] = map[i][j];
 						tempI = i;
 						tempJ = j - 1;
-						dir = "left";
 					} 
 				}
 			}
@@ -269,6 +266,7 @@ public class Map extends Observable implements Serializable{
 		
 		// the mapFog (foreground) will have the trainer
 		mapFog[tempI][tempJ] = "T";
+		
 		
 		// update gui
 	    setChanged();
@@ -285,8 +283,8 @@ public class Map extends Observable implements Serializable{
 	public int getTrainerX(){
 		for (int i=0; i<map.length; i++){
 			for (int j=0; j<map.length; j++){
-				if (mapFog[i][j] == "T"){
-					return i;
+				if (mapFog[i][j]!=null && mapFog[i][j].equals("T")){
+					return j;
 				}
 			}
 		}
@@ -298,8 +296,8 @@ public class Map extends Observable implements Serializable{
 	public int getTrainerY(){
 		for (int i=0; i<map.length; i++){
 			for (int j=0; j<map.length; j++){
-				if (mapFog[i][j] == "T"){
-					return j;
+				if (mapFog[i][j]!=null && mapFog[i][j].equals("T")){
+					return i;
 				}
 			}
 		}

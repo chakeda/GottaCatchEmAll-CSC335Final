@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import model.Direction;
 import model.Map;
 import model.Trainer;
 
@@ -28,7 +29,12 @@ import model.Trainer;
 
 public class RunPokemon extends JFrame{
 
-	  // main game loop
+	  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	// main game loop
 	  public static void main(String[] args) {
 
 			int reload = JOptionPane.OK_OPTION;
@@ -88,6 +94,7 @@ public class RunPokemon extends JFrame{
 	     * Instantiate the juicy, delicious objects
 	     */
 	    map = new Map();
+	    
 	    trainer = new Trainer("Testy");
 	    mapPanel = new MapView(map);
 	    
@@ -116,7 +123,7 @@ public class RunPokemon extends JFrame{
 		     * Instantiate the juicy, delicious objects
 		     */
 		    map = aMap;
-		    /*
+		   /* 
 		    for (int i=0; i<map.getMapLength(); i++){
 			    for (int j=0; j<map.getMapLength(); j++){
 			    	System.out.print(map.getTileAt(i, j));
@@ -148,7 +155,7 @@ public class RunPokemon extends JFrame{
 
 	    	  if (ke.getKeyCode() == KeyEvent.VK_UP){
 		    	  if (map.moveable("up")){
-		    		  map.moveTrainer("up");
+		    		  map.moveTrainer(Direction.NORTH);
 		    		  trainer.incrementSteps(1);
 		    		  if (trainer.getSteps() == 50){
 		    			  JOptionPane.showMessageDialog(null, "Game Over. You walked 50 steps");
@@ -159,7 +166,7 @@ public class RunPokemon extends JFrame{
 	    	  
 		      if (ke.getKeyCode() == KeyEvent.VK_DOWN){
 		    	  if (map.moveable("down")){
-		    		  map.moveTrainer("down");
+		    		  map.moveTrainer(Direction.SOUTH);
 		    		  trainer.incrementSteps(1);
 		    		  if (trainer.getSteps() == 50){
 		    			  JOptionPane.showMessageDialog(null, "Game Over. You walked 50 steps");
@@ -170,7 +177,7 @@ public class RunPokemon extends JFrame{
 	 
 		      if (ke.getKeyCode() == KeyEvent.VK_LEFT){
 		    	  if (map.moveable("left")){
-		    		  map.moveTrainer("left");
+		    		  map.moveTrainer(Direction.WEST);
 		    		  trainer.incrementSteps(1);
 		    		  if (trainer.getSteps() == 50){
 		    			  JOptionPane.showMessageDialog(null, "Game Over. You walked 50 steps");
@@ -181,7 +188,7 @@ public class RunPokemon extends JFrame{
 	
 		      if (ke.getKeyCode() == KeyEvent.VK_RIGHT){
 		    	  if (map.moveable("right")){
-		    		  map.moveTrainer("right");
+		    		  map.moveTrainer(Direction.EAST);
 		    		  trainer.incrementSteps(1);
 		    		  if (trainer.getSteps() == 50){
 		    			  JOptionPane.showMessageDialog(null, "Game Over. You walked 50 steps");
@@ -231,9 +238,9 @@ public class RunPokemon extends JFrame{
 				if (reply == JOptionPane.YES_OPTION){
 					// write trainer
 					File f = new File("trainerSave.txt");
-			        f.delete();
+					f.delete();
 					try {
-						FileOutputStream fos = new FileOutputStream("trainerSave.txt", false);
+						FileOutputStream fos = new FileOutputStream(f, false);
 						ObjectOutputStream oos = new ObjectOutputStream(fos);
 						oos.writeObject(trainer);
 						oos.close();
@@ -243,9 +250,9 @@ public class RunPokemon extends JFrame{
 					}
 					// write map
 					File f2 = new File("mapSave.txt");
-			        f2.delete();
+					f2.delete();
 					try {
-						FileOutputStream fos = new FileOutputStream("mapSave.txt", false);
+						FileOutputStream fos = new FileOutputStream(f2, false);
 						ObjectOutputStream oos = new ObjectOutputStream(fos);
 						oos.writeObject(map);
 						oos.close();
