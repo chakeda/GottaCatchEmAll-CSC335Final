@@ -2,10 +2,10 @@ package model;
 
 public class Pinsir extends Pokemon{
 	
-	private static final int RARITY = 7; //out of 10
-	private static final int DURATION = 5; //how long the pokemon will fight in minutes, 1-15min
-	private static final int ESCAPABILITY = 75; // out of a possible 100, with 100 being it will always escape
-	private static final int CATCHABILITY = 10; //out of a possible 100, with 100 being it will always be caught
+	private static final int RARITY = 7; 
+	private static final int DURATION = 5; 
+	private static final int ESCAPABILITY = 75; 
+	private static final int CATCHABILITY = 90; 
 	private static final int ESCAPABILITYCONSTANT = 15;
 	private static final int CATCHABILITYCONSTANT = 10;
 	

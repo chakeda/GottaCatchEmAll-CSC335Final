@@ -10,7 +10,12 @@ import model.Chansey;
 import model.Cubone;
 import model.Kangaskhan;
 import model.Nidoran;
+import model.Paras;
+import model.Pinsir;
+import model.Rhyhorn;
 import model.Scyther;
+import model.Tauros;
+import model.Venomoth;
 
 public class PokemonTest {
 
@@ -588,4 +593,388 @@ public class PokemonTest {
 		assertEquals(0, s.getEscapability());
 		assertEquals(0, s.getCatchability());
 	}
+	
+	/*** Begin Paras Tests 
+	private static final int RARITY = 2;
+	private static final int DURATION = 15; 
+	private static final int ESCAPABILITY = 10; 
+	private static final int CATCHABILITY = 10; 
+	private static final int ESCAPABILITYCONSTANT = 5;
+	private static final int CATCHABILITYCONSTANT = 10;
+	 * 
+	 * 
+	 * 
+	 * ***/
+	@Test
+	public void testParasConstructor() {
+		Paras c = new Paras();
+		assertEquals(2, c.getRarity());
+		assertEquals(15, c.getDuration());
+		assertEquals(10, c.getEscapability());
+		assertEquals(10, c.getCatchability());
+	}
+	
+	@Test
+	public void rockThrownAtParas(){
+		Paras c = new Paras();
+		c.rockThrown();
+		assertEquals(15, c.getEscapability());
+		assertEquals(20, c.getCatchability());
+	}
+	
+	@Test
+	public void baitThrownAtParas(){
+		Paras s = new Paras();
+		s.baitThrown();
+		assertEquals(5, s.getEscapability());
+		assertEquals(0, s.getCatchability());
+	}
+	
+	@Test
+	public void testMultipleThrowsRocksAtParas(){
+		Paras s = new Paras();
+		s.rockThrown();
+		s.rockThrown();
+		assertEquals(20, s.getEscapability());
+		assertEquals(30, s.getCatchability());
+	}
+	
+	@Test
+	public void testThresholdsThrowsRocksatParas(){
+		Paras s = new Paras();
+		s.rockThrown();
+		s.rockThrown();
+		s.rockThrown();
+		s.rockThrown();
+		s.rockThrown();
+		s.rockThrown();
+		s.rockThrown();
+		s.rockThrown();
+		s.rockThrown();
+		s.rockThrown();
+		s.rockThrown();
+		s.rockThrown();
+		s.rockThrown();
+		s.rockThrown();
+		s.rockThrown();
+		s.rockThrown();
+		s.rockThrown();
+		s.rockThrown();
+		assertEquals(100, s.getEscapability());
+		assertEquals(100, s.getCatchability());
+		s.rockThrown();
+		assertEquals(100, s.getEscapability());
+		assertEquals(100, s.getCatchability());
+	}
+	
+	@Test
+	public void testMultipleBaitThrowsAtParas(){
+		Paras s = new Paras();
+		s.baitThrown();
+		s.baitThrown();
+		s.baitThrown();
+		assertEquals(0, s.getEscapability());
+		assertEquals(0, s.getCatchability());
+		s.baitThrown();
+		assertEquals(0, s.getEscapability());
+		assertEquals(0, s.getCatchability());
+	}
+	
+	/*** Begin Pinsir Tests 
+	private static final int RARITY = 7; 
+	private static final int DURATION = 5; 
+	private static final int ESCAPABILITY = 75; 
+	private static final int CATCHABILITY = 90; 
+	private static final int ESCAPABILITYCONSTANT = 15;
+	private static final int CATCHABILITYCONSTANT = 10;
+	 * 
+	 * 
+	 * 
+	 * ***/
+	@Test
+	public void testPinsirConstructor() {
+		Pinsir c = new Pinsir();
+		assertEquals(7, c.getRarity());
+		assertEquals(5, c.getDuration());
+		assertEquals(75, c.getEscapability());
+		assertEquals(90, c.getCatchability());
+	}
+	
+	@Test
+	public void rockThrownAtPinsir(){
+		Pinsir c = new Pinsir();
+		c.rockThrown();
+		assertEquals(90, c.getEscapability());
+		assertEquals(100, c.getCatchability());
+	}
+	
+	@Test
+	public void baitThrownAtPinsir(){
+		Pinsir s = new Pinsir();
+		s.baitThrown();
+		assertEquals(60, s.getEscapability());
+		assertEquals(80, s.getCatchability());
+	}
+	
+	@Test
+	public void testMultipleThrowsRocksAtPinsir(){
+		Pinsir s = new Pinsir();
+		s.rockThrown();
+		s.rockThrown();
+		assertEquals(100, s.getEscapability());
+		assertEquals(100, s.getCatchability());
+		s.rockThrown();
+		assertEquals(100, s.getEscapability());
+		assertEquals(100, s.getCatchability());
+	}
+	
+	
+	@Test
+	public void testMultipleBaitThrowsAtPinsir(){
+		Pinsir s = new Pinsir();
+		s.baitThrown();
+		s.baitThrown();
+		s.baitThrown();
+		s.baitThrown();
+		s.baitThrown();
+		assertEquals(0, s.getEscapability());
+		assertEquals(40, s.getCatchability());
+		s.baitThrown();
+		s.baitThrown();
+		s.baitThrown();
+		s.baitThrown();
+		assertEquals(0, s.getEscapability());
+		assertEquals(0, s.getCatchability());
+		s.baitThrown();
+		assertEquals(0, s.getEscapability());
+		assertEquals(0, s.getCatchability());
+	}
+	
+	/*** Begin Rhyhorn Tests 
+	private static final int RARITY = 4;
+	private static final int DURATION = 10;
+	private static final int ESCAPABILITY = 50;
+	private static final int CATCHABILITY = 50;
+	private static final int ESCAPABILITYCONSTANT = 15;
+	private static final int CATCHABILITYCONSTANT = 15;
+	 * 
+	 * 
+	 * 
+	 * ***/
+	@Test
+	public void testRhyhornConstructor() {
+		Rhyhorn c = new Rhyhorn();
+		assertEquals(4, c.getRarity());
+		assertEquals(10, c.getDuration());
+		assertEquals(50, c.getEscapability());
+		assertEquals(50, c.getCatchability());
+	}
+	
+	@Test
+	public void rockThrownAtRhyhorn(){
+		Rhyhorn c = new Rhyhorn();
+		c.rockThrown();
+		assertEquals(65, c.getEscapability());
+		assertEquals(65, c.getCatchability());
+	}
+	
+	@Test
+	public void baitThrownAtRhyhorn(){
+		Rhyhorn s = new Rhyhorn();
+		s.baitThrown();
+		assertEquals(35, s.getEscapability());
+		assertEquals(35, s.getCatchability());
+	}
+	
+	@Test
+	public void testMultipleThrowsRocksAtRhyhorn(){
+		Rhyhorn s = new Rhyhorn();
+		s.rockThrown();
+		s.rockThrown();
+		assertEquals(80, s.getEscapability());
+		assertEquals(80, s.getCatchability());
+	}
+	
+	@Test
+	public void testThresholdsThrowsRocksatRhyhorn(){
+		Rhyhorn s = new Rhyhorn();
+		s.rockThrown();
+		s.rockThrown();
+		s.rockThrown();
+		s.rockThrown();
+		assertEquals(100, s.getEscapability());
+		assertEquals(100, s.getCatchability());
+		s.rockThrown();
+		assertEquals(100, s.getEscapability());
+		assertEquals(100, s.getCatchability());
+	}
+	
+	@Test
+	public void testMultipleBaitThrowsAtRhyhorn(){
+		Rhyhorn s = new Rhyhorn();
+		s.baitThrown();
+		s.baitThrown();
+		s.baitThrown();
+		s.baitThrown();
+		assertEquals(0, s.getEscapability());
+		assertEquals(0, s.getCatchability());
+		s.baitThrown();
+		assertEquals(0, s.getEscapability());
+		assertEquals(0, s.getCatchability());
+	}
+	
+	/*** Begin Tauros Tests 
+	private static final int RARITY = 5;
+	private static final int DURATION = 7;
+	private static final int ESCAPABILITY = 60;
+	private static final int CATCHABILITY = 60;
+	private static final int ESCAPABILITYCONSTANT = 10;
+	private static final int CATCHABILITYCONSTANT = 10;
+	 * 
+	 * 
+	 * 
+	 * ***/
+	@Test
+	public void testTaurosConstructor() {
+		Tauros c = new Tauros();
+		assertEquals(5, c.getRarity());
+		assertEquals(7, c.getDuration());
+		assertEquals(60, c.getEscapability());
+		assertEquals(60, c.getCatchability());
+	}
+	
+	@Test
+	public void rockThrownAtTauros(){
+		Tauros c = new Tauros();
+		c.rockThrown();
+		assertEquals(70, c.getEscapability());
+		assertEquals(70, c.getCatchability());
+	}
+	
+	@Test
+	public void baitThrownAtTauros(){
+		Tauros s = new Tauros();
+		s.baitThrown();
+		assertEquals(50, s.getEscapability());
+		assertEquals(50, s.getCatchability());
+	}
+	
+	@Test
+	public void testMultipleThrowsRocksAtTauros(){
+		Tauros s = new Tauros();
+		s.rockThrown();
+		s.rockThrown();
+		assertEquals(80, s.getEscapability());
+		assertEquals(80, s.getCatchability());
+	}
+	
+	@Test
+	public void testThresholdsThrowsRocksatTauros(){
+		Tauros s = new Tauros();
+		s.rockThrown();
+		s.rockThrown();
+		s.rockThrown();
+		s.rockThrown();
+		assertEquals(100, s.getEscapability());
+		assertEquals(100, s.getCatchability());
+		s.rockThrown();
+		assertEquals(100, s.getEscapability());
+		assertEquals(100, s.getCatchability());
+	}
+	
+	@Test
+	public void testMultipleBaitThrowsAtTauros(){
+		Tauros s = new Tauros();
+		s.baitThrown();
+		s.baitThrown();
+		s.baitThrown();
+		s.baitThrown();
+		s.baitThrown();
+		s.baitThrown();
+		assertEquals(0, s.getEscapability());
+		assertEquals(0, s.getCatchability());
+		s.baitThrown();
+		assertEquals(0, s.getEscapability());
+		assertEquals(0, s.getCatchability());
+	}
+	
+	/*** Begin Venomoth Tests 
+	private static final int RARITY = 6;
+	private static final int DURATION = 10;
+	private static final int ESCAPABILITY = 35;
+	private static final int CATCHABILITY = 65;
+	private static final int ESCAPABILITYCONSTANT = 10;
+	private static final int CATCHABILITYCONSTANT = 15;
+	 * 
+	 * 
+	 * 
+	 * ***/
+	@Test
+	public void testVenomothConstructor() {
+		Venomoth c = new Venomoth();
+		assertEquals(6, c.getRarity());
+		assertEquals(10, c.getDuration());
+		assertEquals(35, c.getEscapability());
+		assertEquals(65, c.getCatchability());
+	}
+	
+	@Test
+	public void rockThrownAtVenomoth(){
+		Venomoth c = new Venomoth();
+		c.rockThrown();
+		assertEquals(45, c.getEscapability());
+		assertEquals(80, c.getCatchability());
+	}
+	
+	@Test
+	public void baitThrownAtVenomoth(){
+		Venomoth s = new Venomoth();
+		s.baitThrown();
+		assertEquals(25, s.getEscapability());
+		assertEquals(50, s.getCatchability());
+	}
+	
+	@Test
+	public void testMultipleThrowsRocksAtVenomoth(){
+		Venomoth s = new Venomoth();
+		s.rockThrown();
+		s.rockThrown();
+		assertEquals(55, s.getEscapability());
+		assertEquals(95, s.getCatchability());
+	}
+	
+	@Test
+	public void testThresholdsThrowsRocksatVenomoth(){
+		Venomoth s = new Venomoth();
+		s.rockThrown();
+		s.rockThrown();
+		s.rockThrown();
+		s.rockThrown();
+		s.rockThrown();
+		s.rockThrown();
+		s.rockThrown();
+		assertEquals(100, s.getEscapability());
+		assertEquals(100, s.getCatchability());
+		s.rockThrown();
+		assertEquals(100, s.getEscapability());
+		assertEquals(100, s.getCatchability());
+	}
+	
+	@Test
+	public void testMultipleBaitThrowsAtVenomoth(){
+		Venomoth s = new Venomoth();
+		s.baitThrown();
+		s.baitThrown();
+		s.baitThrown();
+		s.baitThrown();
+		s.baitThrown();
+		s.baitThrown();
+		s.baitThrown();
+		assertEquals(0, s.getEscapability());
+		assertEquals(0, s.getCatchability());
+		s.baitThrown();
+		assertEquals(0, s.getEscapability());
+		assertEquals(0, s.getCatchability());
+	}
+	
 }

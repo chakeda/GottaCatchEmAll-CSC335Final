@@ -2,10 +2,10 @@ package model;
 
 public class Venomoth extends Pokemon{
 	
-	private static final int RARITY = 6; //out of 10
-	private static final int DURATION = 10; //how long the pokemon will fight in minutes, 1-15min
-	private static final int ESCAPABILITY = 35; // out of a possible 100, with 100 being it will always escape
-	private static final int CATCHABILITY = 65; //out of a possible 100, with 100 being it will always be caught
+	private static final int RARITY = 6;
+	private static final int DURATION = 10;
+	private static final int ESCAPABILITY = 35;
+	private static final int CATCHABILITY = 65;
 	private static final int ESCAPABILITYCONSTANT = 10;
 	private static final int CATCHABILITYCONSTANT = 15;
 	
