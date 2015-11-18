@@ -2,8 +2,13 @@ package model;
 
 public class RunningShoes extends Item{
 
-	public RunningShoes(String name, Category category) {
-		super(name, category);
+	public RunningShoes() {
+		super("RunningShoes", Category.BATTLE_ITEM);
+		this.foundByTrainer = false;
+	}
+	
+	public RunningShoes(String name, Category catagory){
+		super(name, catagory); 
 	}
 
 	@Override

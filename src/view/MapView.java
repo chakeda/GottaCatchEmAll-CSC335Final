@@ -27,7 +27,7 @@ public class MapView extends JPanel implements Observer {
 	 * 
 	 */
 	private Map map;
-	  private Image player, plain, grass, bush, item;
+	  private Image player, plain, grass, bush, pokeball, runningShoes, fishingPole, costumeChange;
 	  private int X, Y, tic, n;
 	  private Direction direction;
 	  private Timer timer;
@@ -41,7 +41,11 @@ public class MapView extends JPanel implements Observer {
 	      plain = ImageIO.read(new File("./images/plain.png"));
 	      grass = ImageIO.read(new File("./images/grass.png"));
 	      bush = ImageIO.read(new File("./images/bush.png"));
-	      item = ImageIO.read(new File("./images/pokeball.png"));
+	      pokeball = ImageIO.read(new File("./images/pokeball.png"));
+	      runningShoes = ImageIO.read(new File("./images/runningShoes.jpe"));
+	      fishingPole = ImageIO.read(new File("./images/fishingPole.png"));
+	      costumeChange = ImageIO.read(new File("./images/costumeChange.png"));
+	      pokeball = ImageIO.read(new File("./images/pokeball.png"));
 	    } catch (IOException e) {
 	      e.printStackTrace();
 	    }
@@ -84,7 +88,7 @@ public class MapView extends JPanel implements Observer {
 						imageGrid[i][j] = bush;
 					}
 					else if(map.getTileAt(i, j).equals("I")){ 
-						imageGrid[i][j] = item;
+						imageGrid[i][j] = pokeball;
 					}
 					else{
 						imageGrid[i][j] = plain;
