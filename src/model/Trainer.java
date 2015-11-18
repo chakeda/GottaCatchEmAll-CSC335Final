@@ -1,46 +1,39 @@
 package model;
 
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
 
-public class Trainer {
 
-	String PlayerName;
+public class Trainer implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String playerName;
 	private int numberOfSteps;
 	private int pokemonCaught;
-	public static final int Max_Steps = 500;
-	public static final int Max_Pokemon_Caught = 5;
-	public static final int StartNumOfPokeballs = 15;
+	private static final int MAX_POKEMON_CAUGHT = 5;
+	private static final int START_NUM_POKEBALLS = 15;
 	private ArrayList<Pokemon> caughtPokemon;
 	private ArrayList<Item> itemList;
 	private Item usingItem;
 	private int pokeballsRemaining;
 	private Direction dir;
-	private BufferedImage costume;
-	private Point playerLocation;
+	// private BufferedImage costume; // breaks serialization.
+
 	
 	public Trainer(String PlayerName){		//initialize instance variables
-		this.PlayerName = PlayerName;
+		this.playerName = PlayerName;
 		numberOfSteps = 0;
 		pokemonCaught= 0;
 		caughtPokemon = new ArrayList<Pokemon>();
 		itemList = new ArrayList<Item>();
 		usingItem =null;
-		pokeballsRemaining = StartNumOfPokeballs;
+		pokeballsRemaining = START_NUM_POKEBALLS;
 		dir = Direction.NORTH;
-		try {
-			costume = ImageIO.read(new File("./images/trainer.gif"));
-		} catch (IOException e) {
-			System.out.println("Image Not Found");
-			e.printStackTrace();
-		}
-		playerLocation = new Point(3,3);
 	}
 	
 	//*************GETTERS*************************
@@ -65,12 +58,7 @@ public class Trainer {
 	public Direction getDirectionFacing(){
 		return dir;
 	}
-	public Point getPlayerLocation(){
-		return playerLocation;
-	}
-	public BufferedImage getCostume(){
-		return costume;
-	}
+
 	//******SETTERS*************************************
 	public void setItemUsing(Item item){
 		usingItem = item;
@@ -78,12 +66,7 @@ public class Trainer {
 	public void setDirectionFacing(Direction d){
 		dir = d;
 	}
-	public void setPlayerLocation(int x, int y){
-		 playerLocation = new Point(x,y);
-	}
-	public void setCostume(BufferedImage bi){
-		costume = bi;
-	}
+	
 	//******GAMEPLAY METHODS***********************************
 	public void incrementSteps(int n){	//
 		numberOfSteps = numberOfSteps+n;
@@ -102,32 +85,9 @@ public class Trainer {
 		pokeballsRemaining-=1;
 	}
 	
-	//Implement this Method with map.movable???
-	public void moveTrainer(Direction d){
-		dir = d;
-		//draw player facing the current direction
-		if(numberOfSteps<Max_Steps){
-			if(dir==Direction.NORTH){
-				//is movable? 
-				playerLocation.y-=1;
-				incrementSteps(1);
-			}
-			if(dir==Direction.SOUTH){
-				//is movable? 
-				playerLocation.y+=1;
-				incrementSteps(1);
-			}
-			if(dir==Direction.EAST){
-				//is movable?
-				playerLocation.x+=1;
-				incrementSteps(1);
-			}
-			if(dir==Direction.WEST){
-				//is movable?
-				playerLocation.x-=1;
-				incrementSteps(1);
-			}	
-		}
+	
+	public String getPlayerName(){
+		return playerName;
 	}
 	
 	public boolean gameOver(){
@@ -137,10 +97,7 @@ public class Trainer {
 				return true;
 			}
 		}
-		if(numberOfSteps == Max_Steps){
-			return true;
-		}
-		else if(pokemonCaught==Max_Pokemon_Caught){
+		if(pokemonCaught==MAX_POKEMON_CAUGHT){
 			return true;
 		}
 		else{

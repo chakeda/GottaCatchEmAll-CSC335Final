@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -15,20 +14,28 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import model.Direction;
 import model.Map;
 
 public class MapView extends JPanel implements Observer {
 
-	  private Map map;
+	  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private Map map;
 	  private Image player, plain, grass, bush, item;
 	  private int X, Y, tic, n;
-	  private String direction;
+	  private Direction direction;
 	  private Timer timer;
 
 	  public MapView(Map map) {
 	    this.map = map; // Avoid null pointer when board is first drawn
-	    X = map.getTrainerX() * 16;
-	    Y = map.getTrainerY() * 16;
+	    X = this.map.getTrainerX() * 16;
+	    Y = this.map.getTrainerY() * 16;
 	    try {
 	      player = ImageIO.read(new File("./images/trainer.gif"));
 	      plain = ImageIO.read(new File("./images/plain.png"));
@@ -46,7 +53,7 @@ public class MapView extends JPanel implements Observer {
 	  @Override
 	  public void update(Observable observable, Object dir) {
 	    map = (Map) observable;
-	    direction = (String) dir;
+	    direction = (Direction) dir;
 	    drawBoardWithAnimation();
 	  }
 	  
@@ -70,18 +77,18 @@ public class MapView extends JPanel implements Observer {
 			for (int i=0; i<map.getMapLength(); i++){
 				for (int j=0; j<map.getMapLength(); j++){
 					
-					if(map.getTileAt(i, j) == "G"){
+					if(map.getTileAt(i, j).equals("G")){
 						imageGrid[i][j] = grass;
 					}
-					else if(map.getTileAt(i, j) == "B"){ 
+					else if(map.getTileAt(i, j).equals("B")){ 
 						imageGrid[i][j] = bush;
 					}
-					else if(map.getTileAt(i, j) == "I"){ 
+					else if(map.getTileAt(i, j).equals("I")){ 
 						imageGrid[i][j] = item;
 					}
 					else{
 						imageGrid[i][j] = plain;
-					}
+					}		
 				}
 			}
 			
@@ -133,22 +140,22 @@ public class MapView extends JPanel implements Observer {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if (tic <= n){
-					if (direction == "up"){
+					if (direction == Direction.NORTH){
 						Y = Y - 2;
 						repaint();
 						tic++;
 					}
-					if (direction == "left"){
+					if (direction == Direction.WEST){
 						X = X - 2;
 						repaint();
 						tic++;
 					}
-					if (direction == "down"){
+					if (direction == Direction.SOUTH){
 						Y = Y + 2;
 						repaint();
 						tic++;
 					}
-					if (direction == "right"){
+					if (direction == Direction.EAST){
 						X = X + 2;
 						repaint();
 						tic++;

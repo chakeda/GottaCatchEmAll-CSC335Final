@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import model.Direction;
 import model.Map;
 
 public class MapTest {
@@ -30,7 +31,7 @@ public class MapTest {
 		assertEquals(map.getTrainerY(), 3);
 		
 		// test one movement
-		map.moveTrainer("up"); 
+		map.moveTrainer(Direction.NORTH); 
 		assertEquals(map.getFogAt(2, 3), "T");
 		assertEquals(map.getTrainerX(), 2); 
 		assertEquals(map.getTrainerY(), 3);
@@ -39,30 +40,30 @@ public class MapTest {
 		assertEquals(map.getMapLength(), 32);
 		
 		// test inability to walk out of bounds
-		map.moveTrainer("up"); 
+		map.moveTrainer(Direction.NORTH); 
 		assertEquals(map.getFogAt(1, 3), "T");
-		map.moveTrainer("up"); 
+		map.moveTrainer(Direction.NORTH); 
 		assertEquals(map.getFogAt(0, 3), "T");
 		assertFalse(map.moveable("up"));
 		// note: running a moveTrainer("up") will cause an out of bounds exception.
 		
 		// test inability to walk on bushes
 		assertEquals(map.getTileAt(1, 1), "B");
-		map.moveTrainer("down"); 
-		map.moveTrainer("left"); 
+		map.moveTrainer(Direction.SOUTH); 
+		map.moveTrainer(Direction.WEST); 
 		assertFalse(map.moveable("left"));
 		assertTrue(map.moveable("down"));
 		
 		// for code coverage
-		map.moveTrainer("left"); 
-		map.moveTrainer("left"); 
-		map.moveTrainer("up"); 
+		map.moveTrainer(Direction.WEST); 
+		map.moveTrainer(Direction.WEST); 
+		map.moveTrainer(Direction.NORTH); 
 		assertEquals(map.getFogAt(0, 0), "T");
 		assertFalse(map.moveable("up"));
 
 		// try to get more code coverage
 		for(int i=0; i<map.getMapLength()-1; i++){
-			map.moveTrainer("right"); 	
+			map.moveTrainer(Direction.EAST); 	
 		}
 		assertFalse(map.moveable("right"));
 
