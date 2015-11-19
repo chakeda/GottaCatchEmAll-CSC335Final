@@ -1,6 +1,5 @@
 package model;
 
-import java.awt.Graphics;
 
 public abstract class Item {
 	private String name; 

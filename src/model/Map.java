@@ -145,71 +145,41 @@ public class Map extends Observable implements Serializable{
 					if (direction.equals("up")){
 						tempI = i - 1;
 						tempJ = j;
-						if (movementIsWithinBounds(tempI,tempJ)){ 
-							if (map[tempI][tempJ].equals("B")){ 
-								return false;
-							}
-							if (map[tempI][tempJ].equals("I")){
-								map[tempI][tempJ] = ""; // turn ball to plain
-								// TODO: somehow add the item into the inventory...
-								return false;
-							}
-						}else{
-							return false;
-						}
 					}
 					if (direction.equals("right")){
 						tempI = i;
 						tempJ = j + 1;
-						if (movementIsWithinBounds(tempI,tempJ)){
-							if (map[tempI][tempJ].equals("B")){
-								return false;
-							}
-							if (map[tempI][tempJ].equals("I")){
-								map[tempI][tempJ] = ""; // turn ball to plain
-								// TODO: somehow add the item into the inventory...
-								return false;
-							}
-						}else{
-							return false;
-						}
 					}
 					if (direction.equals("down")){
 						tempI = i + 1;
-						tempJ = j;
-						if (movementIsWithinBounds(tempI,tempJ)){
-							if (map[tempI][tempJ].equals("B")){
-								return false;
-							}
-							if (map[tempI][tempJ].equals("I")){
-								map[tempI][tempJ] = ""; // turn ball to plain
-								// TODO: somehow add the item into the inventory...
-								return false;
-							}
-						}else{
-							return false;
-						}
+						tempJ = j;	
 					}
 					if (direction == "left"){
 						tempI = i;
 						tempJ = j - 1;
-						if (movementIsWithinBounds(tempI,tempJ)){
-							if (map[tempI][tempJ].equals("B")){
-								return false;
-							}
-							if (map[tempI][tempJ].equals("I")){
-								map[tempI][tempJ] = "G"; // turn ball to plain
-								// TODO: somehow add the item into the inventory...
-								return false;
-							}
-						}else{
-							return false;
-						}
-					} 
+					}
+					if(!checkMoveable(tempI, tempJ)){
+						return false;
+					}
 				}
 			}
 		}
-		// shouldn't get here.
+		return true;
+	}
+	
+	private boolean checkMoveable(int tempI, int tempJ){
+		if (movementIsWithinBounds(tempI,tempJ)){ 
+			if (map[tempI][tempJ].equals("B")){ 
+				return false;
+			}
+			if (map[tempI][tempJ].equals("I")){
+				map[tempI][tempJ] = ""; // turn ball to plain
+				// TODO: somehow add the item into the inventory...
+				return false;
+			}
+		}else{
+			return false;
+		}
 		return true;
 	}
 	
@@ -281,28 +251,30 @@ public class Map extends Observable implements Serializable{
 
 	// get X location
 	public int getTrainerX(){
+		int xlocation = 0;
 		for (int i=0; i<map.length; i++){
 			for (int j=0; j<map.length; j++){
 				if (mapFog[i][j]!=null && mapFog[i][j].equals("T")){
-					return j;
+					xlocation = j;
 				}
 			}
 		}
-		// shouldnt happen
-		return 0;
+		
+		return xlocation;
 	}
 	
 	// get Y location
 	public int getTrainerY(){
+		int ylocation = 0;
 		for (int i=0; i<map.length; i++){
 			for (int j=0; j<map.length; j++){
 				if (mapFog[i][j]!=null && mapFog[i][j].equals("T")){
-					return i;
+					ylocation = i;
 				}
 			}
 		}
-		// shouldnt happen
-		return 0;
+		
+		return ylocation;
 	}
 	
 	// get map length

@@ -1,16 +1,11 @@
 package tests;
 
 import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-
 import model.Category;
 import model.CostumeChange;
-import model.Direction;
 import model.FishingPole;
 import model.Item;
 import model.MasterBall;
-import model.Pokemon;
 import model.RunningShoes;
 import model.Trainer;
 
@@ -61,6 +56,17 @@ public class ItemTest {
 		for(Item items:trainer.getItemList()){
 				assertTrue(items.isFound());
 		}
+	}
+	
+	@Test
+	public void testAbstractItemSetters(){
+		MasterBall mb = new MasterBall("master", Category.POKEBALLS);
+		assertEquals(mb.getName(), "master");
+		assertEquals(mb.getCategory(), Category.POKEBALLS);
+		mb.setName("MASTER");
+		mb.setCategory(Category.HOLD_ITEM);
+		assertEquals(mb.getName(), "MASTER");
+		assertEquals(mb.getCategory(), Category.HOLD_ITEM);
 	}
 
 }

@@ -63,9 +63,6 @@ public class Trainer implements Serializable {
 	public void setItemUsing(Item item){
 		usingItem = item;
 	}
-	public void setDirectionFacing(Direction d){
-		dir = d;
-	}
 	
 	//******GAMEPLAY METHODS***********************************
 	public void incrementSteps(int n){	//
