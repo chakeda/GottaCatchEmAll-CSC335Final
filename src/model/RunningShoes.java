@@ -16,5 +16,11 @@ public class RunningShoes extends Item{
 		this.foundByTrainer = true; 
 	}
 
+	@Override
+	public void execute() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
     

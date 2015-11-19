@@ -13,4 +13,10 @@ public class MasterBall extends Item{
 		
 	}
 
+	@Override
+	public void execute() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -14,5 +14,10 @@ public class FishingPole extends Item{
 		// fish pokemon out of the water change something to true probably
 		this.foundByTrainer= true; 
 	}
+	@Override
+	public void execute() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
