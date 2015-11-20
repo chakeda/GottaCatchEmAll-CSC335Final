@@ -8,6 +8,7 @@ public abstract class Pokemon {
 	private int duration; //max duration of battle before escaping
 	private int escapability; //likelihood to escape (higher for more rare pokemon) 
 	private int catchability; //likelihood to be caught
+	private String name; // pokemon name for views, added by Kite
 	
 	public void setRarity(int r){
 		rarity = r;
@@ -40,6 +41,13 @@ public abstract class Pokemon {
 		return catchability;
 	}
 	
+	public void setName(String n){
+		name = n;
+	}
+	public String getName(){
+		return name;
+	}
+	
 		
 	// The following four functions are unique to each pokemon
 	public abstract void increaseEscapability();
@@ -61,7 +69,7 @@ public abstract class Pokemon {
 	
 	public boolean isCaught(Random r){
 		int ballVariable = r.nextInt(100);
-		System.out.println(ballVariable);
+		//System.out.println(ballVariable); // kills focus in view
 		if(ballVariable > this.getCatchability())
 			return true;
 		else
@@ -70,7 +78,7 @@ public abstract class Pokemon {
 	
 	public boolean willRunAway(Random r){
 		int runVariable = r.nextInt(100);
-		System.out.println(runVariable);
+		//System.out.println(runVariable);  // kills focus in view
 		if(runVariable < this.getEscapability())
 			return true;
 		else

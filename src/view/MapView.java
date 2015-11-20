@@ -26,14 +26,14 @@ public class MapView extends JPanel implements Observer {
 	/**
 	 * 
 	 */
-	private Map map;
+	  private Map map;
 	  private Image player, plain, grass, bush, pokeball, runningShoes, fishingPole, costumeChange;
 	  private int X, Y, tic, n;
 	  private Direction direction;
 	  private Timer timer;
 
 	  public MapView(Map map) {
-	    this.map = map; // Avoid null pointer when board is first drawn
+	    this.map = map; 
 	    X = this.map.getTrainerX() * 16;
 	    Y = this.map.getTrainerY() * 16;
 	    try {

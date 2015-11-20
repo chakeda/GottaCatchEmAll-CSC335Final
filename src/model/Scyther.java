@@ -8,6 +8,7 @@ public class Scyther extends Pokemon{
 	private static final int CATCHABILITY = 75; //out of a possible 100, the higher the number = harder to catch
 	private static final int ESCAPABILITYCONSTANT = 10;
 	private static final int CATCHABILITYCONSTANT = 5;
+	private static final String NAME = "Scyther";
 	
 	
 	public Scyther(){ 
@@ -15,6 +16,7 @@ public class Scyther extends Pokemon{
 		this.setDuration(DURATION);
 		this.setEscapability(ESCAPABILITY);
 		this.setRarity(RARITY); //took out battle image
+		this.setName(NAME);
 	}
 	
 	

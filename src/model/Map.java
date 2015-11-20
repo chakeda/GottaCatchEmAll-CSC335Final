@@ -3,6 +3,7 @@ package model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.Random;
 
 public class Map extends Observable implements Serializable{
 	
@@ -18,20 +19,18 @@ public class Map extends Observable implements Serializable{
 	private String[][] map;
 	private String[][] mapFog;
 	private Item[][] mapItems;
-	private ArrayList<Item> mapItemList;
 	
 	// instantiate
 	public Map(){
 		map = new String[32][32]; // background
 		mapFog = new String[32][32]; // foreground
 		mapItems = new Item[32][32];
-		mapItemList = new ArrayList<Item>();
 		
 		cleanNulls();
 		
 		//// statically generate map 
 		
-		// map1: top left (0,16), (0,16)
+		// map1.1: top left (0,16), (0,16)
 		setTrainer(3,3); // trainer starts here
 		setGrass(4,4);
 		setGrass(5,5);
@@ -42,9 +41,9 @@ public class Map extends Observable implements Serializable{
 		setBush(1,2);
 		setBush(0,2);
 		setBush(0,7);
+		setItem(new RunningShoes("Running Shoes", Category.HOLD_ITEM), 10,10); 
 		
-		
-		// map2: top right (0,16), (17,32)
+		// map1.2: top right (0,16), (17,32)
 		setGrass(0,19);
 		setGrass(1,19);
 		setGrass(2,19);
@@ -55,9 +54,8 @@ public class Map extends Observable implements Serializable{
 		setBush(11,21);
 		setBush(12,22);
 		setBush(13,23);
-		// setItem(new RunningShoes("Running Shoes", Category.HOLD_ITEM), 4,20); // breaks serialization
 		
-		// map3: bottom left (17,32), (0, 16)
+		// map1.3: bottom left (17,32), (0, 16)
 		setGrass(29,2);
 		setGrass(30,2);
 		setGrass(31,2);
@@ -71,7 +69,7 @@ public class Map extends Observable implements Serializable{
 		setBush(25,5);
 		setBush(31,9);
 		
-		// map4: bottom right (17,32),(17,32)
+		// map1.4: bottom right (17,32),(17,32)
 		setGrass(18,18);
 		setGrass(20,18);
 		setGrass(22,18);
@@ -90,6 +88,35 @@ public class Map extends Observable implements Serializable{
 		setBush(22,21);
 	}
 	
+	// This is map #2. Built with any string as parameter
+	public Map(String anyString){
+		map = new String[32][32]; // background
+		mapFog = new String[32][32]; // foreground
+		mapItems = new Item[32][32];
+		
+		cleanNulls();
+		
+		//// statically generate map 
+		
+		// map2.1: top left (0,16), (0,16) - just make loads of grass
+		setTrainer(8,8); // trainer starts here
+		for (int i=0; i<16; i++){
+			for (int j=0; j<16; j++){
+				if (i==8 && j==8){
+					// do nothing
+				}else{
+					setGrass(i, j);					
+				}
+			}
+		}
+		
+		// map2.2: top right (0,16), (17,32)
+		
+		// map2.3: bottom left (17,32), (0, 16)
+
+		// map2.4: bottom right (17,32),(17,32)
+	}
+	
 	// sets grass
 	public void setGrass(int k, int j){
 		map[k][j] = "G";
@@ -104,10 +131,6 @@ public class Map extends Observable implements Serializable{
 	// another parallel map exists to store items
 	public void setItem(Item item, int k, int j){
 		map[k][j] = "I"; // add to map
-		
-		// add to parallel item map, store the item
-		mapItemList.add(item); // add item to top
-		mapItems[k][j] = mapItemList.get(mapItemList.size()-1); // get the top item
 	}
 	
 	// sets a hunter
@@ -167,6 +190,7 @@ public class Map extends Observable implements Serializable{
 		return true;
 	}
 	
+	// can I move there
 	private boolean checkMoveable(int tempI, int tempJ){
 		if (movementIsWithinBounds(tempI,tempJ)){ 
 			if (map[tempI][tempJ].equals("B")){ 
@@ -181,6 +205,34 @@ public class Map extends Observable implements Serializable{
 			return false;
 		}
 		return true;
+	}
+	
+	// computes probability, returns true if an encounter occurs.
+	public boolean beginPokemonBattle(int tempI, int tempJ){
+		if (map[tempI][tempJ].equals("G")){ 
+			// pokemon spawn chance is 10%.
+			Random generator = new Random(); 
+			int random = generator.nextInt(10) + 1; // 1-11
+			if (random == 1){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	// return which pokemon
+	public Pokemon whoToBattle(){
+		Random generator = new Random(); 
+		int random = generator.nextInt(10) + 1; // 1-11	
+		
+		// TODO: placeholders. should utilize Pokemon.RARITY
+		if (random < 3){
+			Pokemon thePokemon = new Scyther();
+			return thePokemon;
+		}else{
+			Pokemon thePokemon = new Nidoran();
+			return thePokemon;
+		}
 	}
 	
 	// sees if the movement is within bounds, used in moveable()

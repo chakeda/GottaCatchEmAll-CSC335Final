@@ -8,13 +8,14 @@ public class Tauros extends Pokemon{
 	private static final int CATCHABILITY = 60;
 	private static final int ESCAPABILITYCONSTANT = 10;
 	private static final int CATCHABILITYCONSTANT = 10;
-	
+	private static final String NAME = "Tauros";
 	
 	public Tauros(){ 
 		this.setCatchability(CATCHABILITY);
 		this.setDuration(DURATION);
 		this.setEscapability(ESCAPABILITY);
 		this.setRarity(RARITY); //took out battle image
+		this.setName(NAME);
 	}
 	
 	

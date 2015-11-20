@@ -97,7 +97,7 @@ public class Trainer implements Serializable {
 		if(pokemonCaught==MAX_POKEMON_CAUGHT){
 			return true;
 		}
-		if(numberOfSteps==50){
+		if(numberOfSteps==100){
 			return true;
 		}
 		else{
