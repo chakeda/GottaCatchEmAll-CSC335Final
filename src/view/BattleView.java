@@ -23,10 +23,10 @@ import javax.swing.Timer;
 import model.Direction;
 import model.Map;
 import model.Pokemon;
-import model.Tauros;
 import model.Trainer;
-import model.Scyther;
-import model.Nidoran;
+import model.pokemon.Nidoran;
+import model.pokemon.Scyther;
+import model.pokemon.Tauros;
 
 public class BattleView extends JPanel implements Observer{
 

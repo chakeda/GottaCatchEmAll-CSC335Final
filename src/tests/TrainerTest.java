@@ -7,8 +7,8 @@ import org.junit.Test;
 import model.Category;
 import model.Direction;
 import model.FishingPole;
-import model.Scyther;
 import model.Trainer;
+import model.pokemon.Scyther;
 
 public class TrainerTest {
 	@Test

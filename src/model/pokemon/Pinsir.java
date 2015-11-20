@@ -1,4 +1,6 @@
-package model;
+package model.pokemon;
+
+import model.Pokemon;
 
 public class Pinsir extends Pokemon{
 	
@@ -15,6 +17,7 @@ public class Pinsir extends Pokemon{
 		this.setDuration(DURATION);
 		this.setEscapability(ESCAPABILITY);
 		this.setRarity(RARITY); //took out battle image
+		this.setName("Pinsir");
 	}
 	
 	

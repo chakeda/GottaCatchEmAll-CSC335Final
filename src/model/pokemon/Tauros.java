@@ -1,20 +1,22 @@
-package model;
+package model.pokemon;
 
-public class Venomoth extends Pokemon{
+import model.Pokemon;
+
+public class Tauros extends Pokemon{
 	
-	private static final int RARITY = 6;
-	private static final int DURATION = 10;
-	private static final int ESCAPABILITY = 35;
-	private static final int CATCHABILITY = 65;
+	private static final int RARITY = 5;
+	private static final int DURATION = 7;
+	private static final int ESCAPABILITY = 60;
+	private static final int CATCHABILITY = 60;
 	private static final int ESCAPABILITYCONSTANT = 10;
-	private static final int CATCHABILITYCONSTANT = 15;
+	private static final int CATCHABILITYCONSTANT = 10;
 	
-	
-	public Venomoth(){ 
+	public Tauros(){ 
 		this.setCatchability(CATCHABILITY);
 		this.setDuration(DURATION);
 		this.setEscapability(ESCAPABILITY);
 		this.setRarity(RARITY); //took out battle image
+		this.setName("Tauros");
 	}
 	
 	

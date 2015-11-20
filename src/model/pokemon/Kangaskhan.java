@@ -1,21 +1,24 @@
-package model;
+package model.pokemon;
 
-public class Nidoran extends Pokemon{
+import model.Pokemon;
+
+public class Kangaskhan extends Pokemon{
 	
-	private static final int RARITY = 1;
-	private static final int DURATION = 15;
-	private static final int ESCAPABILITY = 5;
-	private static final int CATCHABILITY = 5;
-	private static final int ESCAPABILITYCONSTANT = 5;
+	private static final int RARITY = 8;
+	private static final int DURATION = 5; 
+	private static final int ESCAPABILITY = 85;
+	private static final int CATCHABILITY = 85; 
+	private static final int ESCAPABILITYCONSTANT = 15;
 	private static final int CATCHABILITYCONSTANT = 5;
-	private static final String NAME = "Nidoran";
 	
-	public Nidoran(){ 
+	
+	public Kangaskhan(){ 
 		this.setCatchability(CATCHABILITY);
 		this.setDuration(DURATION);
 		this.setEscapability(ESCAPABILITY);
 		this.setRarity(RARITY); //took out battle image
-		this.setName(NAME);
+		this.setName("Kangaskhan");
+		
 	}
 	
 	

@@ -6,16 +6,16 @@ import java.util.Random;
 
 import org.junit.Test;
 
-import model.Chansey;
-import model.Cubone;
-import model.Kangaskhan;
-import model.Nidoran;
-import model.Paras;
-import model.Pinsir;
-import model.Rhyhorn;
-import model.Scyther;
-import model.Tauros;
-import model.Venomoth;
+import model.pokemon.Chansey;
+import model.pokemon.Cubone;
+import model.pokemon.Kangaskhan;
+import model.pokemon.Nidoran;
+import model.pokemon.Paras;
+import model.pokemon.Pinsir;
+import model.pokemon.Rhyhorn;
+import model.pokemon.Scyther;
+import model.pokemon.Tauros;
+import model.pokemon.Venomoth;
 
 public class PokemonTest {
 
