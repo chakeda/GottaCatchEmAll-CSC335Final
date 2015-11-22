@@ -1,21 +1,23 @@
-package model;
+package model.pokemon;
 
-public class Tauros extends Pokemon{
+import model.Pokemon;
+
+public class Cubone extends Pokemon{
 	
-	private static final int RARITY = 5;
-	private static final int DURATION = 7;
-	private static final int ESCAPABILITY = 60;
-	private static final int CATCHABILITY = 60;
-	private static final int ESCAPABILITYCONSTANT = 10;
+	private static final int RARITY = 3; 
+	private static final int DURATION = 15; 
+	private static final int ESCAPABILITY = 10;
+	private static final int CATCHABILITY = 15; 
+	private static final int ESCAPABILITYCONSTANT = 5;
 	private static final int CATCHABILITYCONSTANT = 10;
-	private static final String NAME = "Tauros";
 	
-	public Tauros(){ 
+	
+	public Cubone(){ 
 		this.setCatchability(CATCHABILITY);
 		this.setDuration(DURATION);
 		this.setEscapability(ESCAPABILITY);
 		this.setRarity(RARITY); //took out battle image
-		this.setName(NAME);
+		this.setName("Cubone");
 	}
 	
 	

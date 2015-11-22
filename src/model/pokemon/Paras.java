@@ -1,20 +1,23 @@
-package model;
+package model.pokemon;
 
-public class Chansey extends Pokemon{
+import model.Pokemon;
+
+public class Paras extends Pokemon{
 	
-	private static final int RARITY = 5;
-	private static final int DURATION = 10;
-	private static final int ESCAPABILITY = 25;
-	private static final int CATCHABILITY = 50;
+	private static final int RARITY = 2;
+	private static final int DURATION = 15; 
+	private static final int ESCAPABILITY = 10; 
+	private static final int CATCHABILITY = 10; 
 	private static final int ESCAPABILITYCONSTANT = 5;
-	private static final int CATCHABILITYCONSTANT = 5;
+	private static final int CATCHABILITYCONSTANT = 10;
 	
 	
-	public Chansey(){ 
+	public Paras(){ 
 		this.setCatchability(CATCHABILITY);
 		this.setDuration(DURATION);
 		this.setEscapability(ESCAPABILITY);
 		this.setRarity(RARITY); //took out battle image
+		this.setName("Paras");
 	}
 	
 	

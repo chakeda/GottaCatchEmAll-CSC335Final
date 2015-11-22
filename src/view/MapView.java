@@ -76,7 +76,7 @@ public class MapView extends JPanel implements Observer {
 		    
 			// we're going to build and draw this.
 			Image[][] imageGrid = new Image[map.getMapLength()][map.getMapLength()];
-	
+			
 			// start with terrain. find terrain
 			for (int i=0; i<map.getMapLength(); i++){
 				for (int j=0; j<map.getMapLength(); j++){
@@ -96,8 +96,16 @@ public class MapView extends JPanel implements Observer {
 				}
 			}
 			
+			// set all tiles to plain, so you can draw items
 			// draw the current active map
 		    // then, display the dude. always on top
+			
+			for (int r = 0; r < 512; r += 16){
+			    for (int c = 0; c < 512; c += 16){
+		    		  g2.drawImage(plain, r, c, null);
+				}		
+			}
+			
 			if (X < 256 && Y < 256){
 				// top left
 				for (int r = 0; r < 256; r += 16){
@@ -139,7 +147,7 @@ public class MapView extends JPanel implements Observer {
 	    }
 	  
 		// move around
-		private class TimerListener implements ActionListener{
+	    private class TimerListener implements ActionListener{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {

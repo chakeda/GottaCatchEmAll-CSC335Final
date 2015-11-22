@@ -1,20 +1,23 @@
-package model;
+package model.pokemon;
 
-public class Rhyhorn extends Pokemon{
+import model.Pokemon;
+
+public class Venomoth extends Pokemon{
 	
-	private static final int RARITY = 4;
+	private static final int RARITY = 6;
 	private static final int DURATION = 10;
-	private static final int ESCAPABILITY = 50;
-	private static final int CATCHABILITY = 50;
-	private static final int ESCAPABILITYCONSTANT = 15;
+	private static final int ESCAPABILITY = 35;
+	private static final int CATCHABILITY = 65;
+	private static final int ESCAPABILITYCONSTANT = 10;
 	private static final int CATCHABILITYCONSTANT = 15;
 	
 	
-	public Rhyhorn(){ 
+	public Venomoth(){ 
 		this.setCatchability(CATCHABILITY);
 		this.setDuration(DURATION);
 		this.setEscapability(ESCAPABILITY);
 		this.setRarity(RARITY); //took out battle image
+		this.setName("Venomoth");
 	}
 	
 	

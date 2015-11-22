@@ -23,8 +23,8 @@ import javax.swing.JPanel;
 import model.Direction;
 import model.Map;
 import model.Pokemon;
-import model.Scyther;
 import model.Trainer;
+import model.pokemon.Scyther;
 
 // this file plays the game.
 

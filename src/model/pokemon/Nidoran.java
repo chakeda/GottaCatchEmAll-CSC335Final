@@ -1,20 +1,22 @@
-package model;
+package model.pokemon;
 
-public class Paras extends Pokemon{
+import model.Pokemon;
+
+public class Nidoran extends Pokemon{
 	
-	private static final int RARITY = 2;
-	private static final int DURATION = 15; 
-	private static final int ESCAPABILITY = 10; 
-	private static final int CATCHABILITY = 10; 
+	private static final int RARITY = 1;
+	private static final int DURATION = 15;
+	private static final int ESCAPABILITY = 5;
+	private static final int CATCHABILITY = 5;
 	private static final int ESCAPABILITYCONSTANT = 5;
-	private static final int CATCHABILITYCONSTANT = 10;
+	private static final int CATCHABILITYCONSTANT = 5;
 	
-	
-	public Paras(){ 
+	public Nidoran(){ 
 		this.setCatchability(CATCHABILITY);
 		this.setDuration(DURATION);
 		this.setEscapability(ESCAPABILITY);
 		this.setRarity(RARITY); //took out battle image
+		this.setName("Nidoran");
 	}
 	
 	

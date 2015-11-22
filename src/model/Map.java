@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Random;
 
+import model.pokemon.Nidoran;
+import model.pokemon.Scyther;
+
 public class Map extends Observable implements Serializable{
 	
 	/**
