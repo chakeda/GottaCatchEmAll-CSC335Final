@@ -114,9 +114,6 @@ public class RunPokemon extends JFrame{
 	    battlePanel = new BattleView(new Scyther(), trainer); // scyther is a placeholder
 	    
 	    // listeners
-	    /***
-	     * TO-FUCKING-DO: listeners do not function on BattleView
-	     */
 	    this.addKeyListener(new ArrowKeyListener());
 		this.addWindowListener(new CloseButtonListener());
 		battlePanel.addKeyListener(new ArrowKeyListener());
@@ -130,53 +127,48 @@ public class RunPokemon extends JFrame{
 		bothViews.addKeyListener(new ArrowKeyListener());
 	    bothViews.setFocusable(true);
 	    this.add(bothViews, BorderLayout.CENTER);
-	   
-	    // shenanigans
 	    this.setFocusable(true);
 	  }
 	  
 	  // Constructor overload: this one takes the save state
 	  public RunPokemon(Map aMap, Trainer aTrainer) {
-		    this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		    setSize(256, 256 + 20); // +20 for title etc
-		    
-		    //Set location to middle of screen
-		    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-		    int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
-		    int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
-		    this.setLocation(x, y);
-		  
-		    //setLocation(100, 30);
-		    
-		    /***
-		     * Instantiate the juicy, delicious objects given in parameter
-		     */
-		    // note: map can take map2 or map1
-		    map = aMap; 
-		    trainer = aTrainer;
-		    mapPanel = new MapView(map);
-		    battlePanel = new BattleView(new Scyther(), trainer); // scyther is a placeholder
+	    this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+	    setSize(256, 256 + 20); // +20 for title etc
+	    
+	    //Set location to middle of screen
+	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+	    int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
+	    int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
+	    this.setLocation(x, y);
+	  
+	    //setLocation(100, 30);
+	    
+	    /***
+	     * Instantiate the juicy, delicious objects given in parameter
+	     */
+	    // note: map can take map2 or map1
+	    map = aMap; 
+	    trainer = aTrainer;
+	    mapPanel = new MapView(map);
+	    battlePanel = new BattleView(new Scyther(), trainer); // scyther is a placeholder
 
-		    // listeners
-		    /***
-		     * TO-FUCKING-DO: listeners do not function on BattleView
-		     */
-		    this.addKeyListener(new ArrowKeyListener());
-			this.addWindowListener(new CloseButtonListener());
-		    this.setFocusable(true);
-			battlePanel.addKeyListener(new ArrowKeyListener());
-			battlePanel.setFocusable(true); // gotta focus or cant listen
-		    map.addObserver(mapPanel);
-		    
-		    // make the cardlayout bothViews, overworld is default
-		    bothViews = new JPanel(new CardLayout());
-		    bothViews.add(mapPanel, "overworld");
-		    bothViews.add(battlePanel, "battle");
-			bothViews.addKeyListener(new ArrowKeyListener());
-		    bothViews.setFocusable(true);
-		    this.add(bothViews, BorderLayout.CENTER);
-		    
-		  }
+	    // listeners
+	    this.addKeyListener(new ArrowKeyListener());
+		this.addWindowListener(new CloseButtonListener());
+	    this.setFocusable(true);
+		battlePanel.addKeyListener(new ArrowKeyListener());
+		battlePanel.setFocusable(true); // gotta focus or cant listen
+	    map.addObserver(mapPanel);
+	    
+	    // make the cardlayout bothViews, overworld is default
+	    bothViews = new JPanel(new CardLayout());
+	    bothViews.add(mapPanel, "overworld");
+	    bothViews.add(battlePanel, "battle");
+		bothViews.addKeyListener(new ArrowKeyListener());
+	    bothViews.setFocusable(true);
+	    this.add(bothViews, BorderLayout.CENTER);
+	    
+	  }
 
 	  private class ArrowKeyListener implements KeyListener {
 		
@@ -307,6 +299,7 @@ public class RunPokemon extends JFrame{
 	    public void keyReleased(KeyEvent ke) { }
 	  }
 	  
+	  // serialization on window close via prompt
 	  private class CloseButtonListener implements WindowListener{
 
 			@Override

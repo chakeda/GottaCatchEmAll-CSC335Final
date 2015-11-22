@@ -209,6 +209,7 @@ public class Map extends Observable implements Serializable{
 	
 	// computes probability, returns true if an encounter occurs.
 	public boolean beginPokemonBattle(int tempI, int tempJ){
+		// only called in grass
 		if (map[tempI][tempJ].equals("G")){ 
 			// pokemon spawn chance is 10%.
 			Random generator = new Random(); 
@@ -288,7 +289,6 @@ public class Map extends Observable implements Serializable{
 		
 		// the mapFog (foreground) will have the trainer
 		mapFog[tempI][tempJ] = "T";
-		
 		
 		// update gui
 	    setChanged();

@@ -44,8 +44,10 @@ public class BattleView extends JPanel implements Observer{
 
 	  // make a battle with the pokeman
 	  public BattleView(Pokemon thePokemon, Trainer theTrainer) {
+		  
 		  this.pokemon = thePokemon;
 		  this.trainer = theTrainer;
+		  this.battleComplete = false;
 		  
 		  this.setLayout(new FlowLayout());
 		  
@@ -85,7 +87,7 @@ public class BattleView extends JPanel implements Observer{
 	    	  pokemon.baitThrown();
 			  battleLabel.setText(pokemon.getName() + " eats the bait!");
 	    	  if (pokemon.willRunAway(new Random(0))){
-				  battleLabel.setText(pokemon.getName() + " ran away! Press backspace to return.");
+				  battleLabel.setText(pokemon.getName() + " ran away!");
 	    		  setBattleComplete(true);
 	    	  }
 	      }
@@ -97,7 +99,7 @@ public class BattleView extends JPanel implements Observer{
 	    	  pokemon.rockThrown();
 			  battleLabel.setText(pokemon.getName() + " is pissed!");
 	    	  if (pokemon.willRunAway(new Random(0))){
-				  battleLabel.setText(pokemon.getName() + " ran away! Press backspace to return.");
+				  battleLabel.setText(pokemon.getName() + " ran away!");
 	    		  setBattleComplete(true);
 	    	  }
 	      }
@@ -108,7 +110,7 @@ public class BattleView extends JPanel implements Observer{
 	      public void actionPerformed(ActionEvent evt) { 
 			  battleLabel.setText(pokemon.getName() + " bursts free from the ball!");
 	    	  if (pokemon.isCaught(new Random(0))){
-				  battleLabel.setText("You caught " + pokemon.getName() + "! Press backspace to return.");
+				  battleLabel.setText("You caught " + pokemon.getName() + "!");
 	    		  trainer.addToPokemonList(pokemon);
 	    		  setBattleComplete(true);
 	    	  }
