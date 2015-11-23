@@ -1,8 +1,10 @@
 package model.pokemon;
 
+import java.io.Serializable;
+
 import model.Pokemon;
 
-public class Venomoth extends Pokemon{
+public class Venomoth extends Pokemon implements Serializable{
 	
 	private static final int RARITY = 6;
 	private static final int DURATION = 10;

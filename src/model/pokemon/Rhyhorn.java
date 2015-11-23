@@ -1,8 +1,10 @@
 package model.pokemon;
 
+import java.io.Serializable;
+
 import model.Pokemon;
 
-public class Rhyhorn extends Pokemon{
+public class Rhyhorn extends Pokemon implements Serializable{
 	
 	private static final int RARITY = 4;
 	private static final int DURATION = 10;

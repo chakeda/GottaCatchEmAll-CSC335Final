@@ -80,6 +80,7 @@ public class PlayerView extends JFrame {
 		/***
 		 * TO-FUCKING-DO: listeners do not function on BattleView
 		 */
+		
 		this.addKeyListener(new ArrowKeyListener());
 		this.addWindowListener(new CloseButtonListener());
 		this.setFocusable(true);

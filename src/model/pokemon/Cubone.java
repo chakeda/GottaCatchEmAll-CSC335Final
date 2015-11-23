@@ -1,8 +1,10 @@
 package model.pokemon;
 
+import java.io.Serializable;
+
 import model.Pokemon;
 
-public class Cubone extends Pokemon{
+public class Cubone extends Pokemon implements Serializable{
 	
 	private static final int RARITY = 3; 
 	private static final int DURATION = 15; 

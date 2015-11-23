@@ -1,8 +1,10 @@
 package model.pokemon;
 
+import java.io.Serializable;
+
 import model.Pokemon;
 
-public class Scyther extends Pokemon{
+public class Scyther extends Pokemon implements Serializable{
 	
 	private static final int RARITY = 7; // 1-10
 	private static final int DURATION = 5; //5 minutes, after five minutes, pokemon will flee
