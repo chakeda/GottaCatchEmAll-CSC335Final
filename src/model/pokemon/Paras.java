@@ -1,8 +1,10 @@
 package model.pokemon;
 
+import java.io.Serializable;
+
 import model.Pokemon;
 
-public class Paras extends Pokemon{
+public class Paras extends Pokemon implements Serializable{
 	
 	private static final int RARITY = 2;
 	private static final int DURATION = 15; 

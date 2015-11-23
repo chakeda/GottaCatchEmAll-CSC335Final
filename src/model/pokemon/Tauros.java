@@ -1,8 +1,10 @@
 package model.pokemon;
 
+import java.io.Serializable;
+
 import model.Pokemon;
 
-public class Tauros extends Pokemon{
+public class Tauros extends Pokemon implements Serializable{
 	
 	private static final int RARITY = 5;
 	private static final int DURATION = 7;

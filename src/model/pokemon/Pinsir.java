@@ -1,8 +1,10 @@
 package model.pokemon;
 
+import java.io.Serializable;
+
 import model.Pokemon;
 
-public class Pinsir extends Pokemon{
+public class Pinsir extends Pokemon implements Serializable{
 	
 	private static final int RARITY = 7; 
 	private static final int DURATION = 5; 

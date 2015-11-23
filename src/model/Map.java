@@ -2,11 +2,21 @@ package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Observable;
 import java.util.Random;
 
+import model.pokemon.Chansey;
+import model.pokemon.Cubone;
+import model.pokemon.Kangaskhan;
 import model.pokemon.Nidoran;
+import model.pokemon.Paras;
+import model.pokemon.Pinsir;
+import model.pokemon.Rhyhorn;
 import model.pokemon.Scyther;
+import model.pokemon.Tauros;
+import model.pokemon.Venomoth;
 
 public class Map extends Observable implements Serializable{
 	
@@ -22,6 +32,7 @@ public class Map extends Observable implements Serializable{
 	private String[][] map;
 	private String[][] mapFog;
 	private Item[][] mapItems;
+
 	
 	// instantiate
 	public Map(){
@@ -89,6 +100,20 @@ public class Map extends Observable implements Serializable{
 		setBush(20,21);
 		setBush(22,21);
 		setBush(22,21);
+	}
+	
+	private List<Pokemon> initializePokemonList(){
+		List<Pokemon> allPokemon = new ArrayList<Pokemon>();
+		allPokemon.add(new Chansey());
+		allPokemon.add(new Cubone());
+		allPokemon.add(new Kangaskhan());
+		allPokemon.add(new Nidoran());
+		allPokemon.add(new Paras());
+		allPokemon.add(new Pinsir());
+		allPokemon.add(new Rhyhorn());
+		allPokemon.add(new Tauros());
+		allPokemon.add(new Venomoth());
+		return allPokemon;
 	}
 	
 	// This is map #2. Built with any string as parameter
@@ -216,8 +241,8 @@ public class Map extends Observable implements Serializable{
 		if (map[tempI][tempJ].equals("G")){ 
 			// pokemon spawn chance is 10%.
 			Random generator = new Random(); 
-			int random = generator.nextInt(10) + 1; // 1-11
-			if (random == 1){
+			int random = generator.nextInt(10) + 1; // 1-10
+			if (random % 3 == 0){
 				return true;
 			}
 		}
@@ -227,16 +252,16 @@ public class Map extends Observable implements Serializable{
 	// return which pokemon
 	public Pokemon whoToBattle(){
 		Random generator = new Random(); 
-		int random = generator.nextInt(10) + 1; // 1-11	
+		ArrayList<Pokemon> allPokemon = (ArrayList<Pokemon>)initializePokemonList();
+		Collections.shuffle(allPokemon);
 		
-		// TODO: placeholders. should utilize Pokemon.RARITY
-		if (random < 3){
-			Pokemon thePokemon = new Scyther();
-			return thePokemon;
-		}else{
-			Pokemon thePokemon = new Nidoran();
-			return thePokemon;
+		int random = generator.nextInt(10) + 1; // 1-10	
+		for(Pokemon p: allPokemon){
+			if(p.getRarity() == random){
+				return p;
+			}
 		}
+		return new Nidoran();
 	}
 	
 	// sees if the movement is within bounds, used in moveable()

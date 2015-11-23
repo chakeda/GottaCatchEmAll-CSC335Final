@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public abstract class Pokemon {
+public abstract class Pokemon implements Serializable{
 	
 	private int rarity; // rarity, 0-10
 	private int duration; //max duration of battle before escaping
