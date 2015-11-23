@@ -119,7 +119,7 @@ public class BattleView extends JPanel {
 				pokemon.baitThrown();
 				battleLabel.setText(pokemon.getName() + " eats the bait!");
 				if (pokemon.willRunAway(new Random(0))) {
-					battleLabel.setText(pokemon.getName() + " ran away!");
+					battleLabel.setText(pokemon.getName() + " ran aways!");
 					setBattleComplete();
 				}
 			}

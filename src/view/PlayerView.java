@@ -159,14 +159,12 @@ public class PlayerView extends JFrame {
 
 			// take inputs only 330ms at a time. 320ms to complete animation (I
 			// think.)
-			if (System.currentTimeMillis() - lastPressProcessed > 330) {
+			if (System.currentTimeMillis() - lastPressProcessed > 100) {
 
 				if (ke.getKeyCode() == KeyEvent.VK_UP) {
 					if (map.moveable("up")) {
 						map.moveTrainer(Direction.NORTH);
 						checkSteps();
-						checkOutOfBalls();
-						checkPokemonMaster();
 						checkBattle();
 					}
 				}
@@ -175,8 +173,6 @@ public class PlayerView extends JFrame {
 					if (map.moveable("down")) {
 						map.moveTrainer(Direction.SOUTH);
 						checkSteps();
-						checkOutOfBalls();
-						checkPokemonMaster();
 						checkBattle();
 					}
 				}
@@ -185,8 +181,6 @@ public class PlayerView extends JFrame {
 					if (map.moveable("left")) {
 						map.moveTrainer(Direction.WEST);
 						checkSteps();
-						checkOutOfBalls();
-						checkPokemonMaster();
 						checkBattle();
 					}
 					
@@ -196,8 +190,6 @@ public class PlayerView extends JFrame {
 					if (map.moveable("right")) {
 						map.moveTrainer(Direction.EAST);
 						checkSteps();
-						checkOutOfBalls();
-						checkPokemonMaster();
 						checkBattle();
 					}
 				}
@@ -221,6 +213,8 @@ public class PlayerView extends JFrame {
 				if (ke.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
 					CardLayout cardLayout = (CardLayout) bothViews.getLayout();
 					cardLayout.show(bothViews, "overworld");
+					checkPokemonMaster();
+					checkOutOfBalls();
 				}
 
 				lastPressProcessed = System.currentTimeMillis();
