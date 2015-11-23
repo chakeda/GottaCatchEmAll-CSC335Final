@@ -106,7 +106,7 @@ public class RunPokemon extends JFrame{
 		    map = new Map("map2");
 	    }else{
 	    	System.exit(0);
-	    }
+	    } 
 	    
 	    // build trainer and map and battle
 	    trainer = new Trainer("Testy");

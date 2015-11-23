@@ -16,6 +16,7 @@ import java.util.Observer;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -47,19 +48,69 @@ public class BattleView extends JPanel {
 	private JPanel buttons;
 	private JTextArea exitScreen;
 	private boolean battleComplete;
-
+	private Image chansey, cubone, kangaskhan, nidoran, paras, pinsir, rhyhorn, scyther, tauros, venomoth;
+	private Image pokemonImage;
+	
 	// make a battle with the pokeman
 	public BattleView(Pokemon thePokemon, Trainer theTrainer) {
 		this.pokemon = thePokemon;
 		this.trainer = theTrainer;
+		
+	    try {
+	      chansey = ImageIO.read(new File("./images/pokemonImages/chansey.png"));
+	      cubone = ImageIO.read(new File("./images/pokemonImages/cubone.png"));
+	      kangaskhan = ImageIO.read(new File("./images/pokemonImages/kangaskhan.png"));
+	      nidoran = ImageIO.read(new File("./images/pokemonImages/nidoran.png"));
+	      paras = ImageIO.read(new File("./images/pokemonImages/paras.png"));
+	      pinsir = ImageIO.read(new File("./images/pokemonImages/pinsir.png"));
+	      rhyhorn = ImageIO.read(new File("./images/pokemonImages/rhyhorn.png"));
+	      scyther = ImageIO.read(new File("./images/pokemonImages/scyther.png"));
+	      tauros = ImageIO.read(new File("./images/pokemonImages/tauros.png"));
+	      venomoth = ImageIO.read(new File("./images/pokemonImages/venomoth.png"));
+	    } catch (IOException e) {
+	      e.printStackTrace();
+	    }
+	    if (thePokemon.getName().equals("Chansey")){
+	    	pokemonImage = chansey;
+	    }
+	    if (thePokemon.getName().equals("Cubone")){
+	    	pokemonImage = cubone;
+	    }
+	    if (thePokemon.getName().equals("Kangaskhan")){
+	    	pokemonImage = kangaskhan;
+	    }
+	    if (thePokemon.getName().equals("Nidoran")){
+	    	pokemonImage = nidoran;
+	    }
+	    if (thePokemon.getName().equals("Paras")){
+	    	pokemonImage = paras;
+	    }
+	    if (thePokemon.getName().equals("Pinsir")){
+	    	pokemonImage = pinsir;
+	    }
+	    if (thePokemon.getName().equals("Rhyhorn")){
+	    	pokemonImage = rhyhorn;
+	    }
+	    if (thePokemon.getName().equals("Scyther")){
+	    	pokemonImage = scyther;
+	    }
+	    if (thePokemon.getName().equals("Tauros")){
+	    	pokemonImage = tauros;
+	    }
+	    if (thePokemon.getName().equals("Venomoth")){
+	    	pokemonImage = venomoth;
+	    }
 
 		battleLabel = new JTextArea("Placeholder");
 		battleLabel.setText("Wild " + pokemon.getName() + " appeared!");
 		battleLabel.setFont(new Font("Courier", Font.BOLD, 16));
 		battleLabel.setBackground(getBackground());
+		
+		JLabel pokemonImageLabel = new JLabel(new ImageIcon(pokemonImage));
+		this.add(pokemonImageLabel);
 
 		bait = new JButton("Throw Bait");
-		bait.addActionListener(new BaitListener());
+		bait.addActionListener(new BaitListener()); 
 		bait.setFocusable(false);
 		rock = new JButton("Throw Rock");
 		rock.addActionListener(new RockListener());

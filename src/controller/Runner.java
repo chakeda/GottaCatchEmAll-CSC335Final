@@ -23,7 +23,7 @@ public class Runner {
 					FileInputStream fis1 = new FileInputStream("mapSave.txt");
 					ObjectInputStream ois1 = new ObjectInputStream(fis1);
 					Map savedMap = (Map) ois1.readObject();
-					ois1.close();
+					ois1.close(); 
 					fis1.close();
 					
 					FileInputStream fis2 = new FileInputStream("trainerSave.txt");
