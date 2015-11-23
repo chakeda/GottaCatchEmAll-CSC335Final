@@ -132,11 +132,14 @@ public class BattleView extends JPanel {
 	private class BallListener implements ActionListener {
 		public void actionPerformed(ActionEvent evt) {
 			if (!battleComplete) {
-				battleLabel.setText(pokemon.getName() + " bursts free!");
-				if (pokemon.isCaught(new Random(0))) {
+				trainer.throwPokeball();
+				if (pokemon.isCaught(new Random())) {
 					battleLabel.setText("You caught " + pokemon.getName() + "!");
 					trainer.addToPokemonList(pokemon);
 					setBattleComplete();
+				}
+				else{
+					battleLabel.setText(pokemon.getName() + " bursts free!");
 				}
 			}
 		}

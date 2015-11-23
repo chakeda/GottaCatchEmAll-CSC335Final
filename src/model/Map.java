@@ -238,7 +238,7 @@ public class Map extends Observable implements Serializable{
 	// computes probability, returns true if an encounter occurs.
 	public boolean beginPokemonBattle(int tempI, int tempJ){
 		if (map[tempI][tempJ].equals("G")){ 
-			// pokemon spawn chance is 10%.
+			// pokemon spawn chance is 30%.
 			Random generator = new Random(); 
 			int random = generator.nextInt(10) + 1; // 1-10
 			if (random % 3 == 0){
@@ -256,7 +256,7 @@ public class Map extends Observable implements Serializable{
 		
 		int random = generator.nextInt(10) + 1; // 1-10	
 		for(Pokemon p: allPokemon){
-			if(p.getRarity() == random){
+			if(p.getRarity() <= random){
 				return p;
 			}
 		}

@@ -35,7 +35,7 @@ public class PlayerView extends JFrame {
 	*/
 	private static final long serialVersionUID = 1L;
 	
-	private static final int NUMBER_OF_STEPS_ALLOWED = 50;
+	private static final int NUMBER_OF_STEPS_ALLOWED = 5000;
 
 	private MapView mapPanel;
 	private BattleView battlePanel;
@@ -167,7 +167,7 @@ public class PlayerView extends JFrame {
 									+ trainer.getPokemonList() + "</p><p><br />Pokeballs Remaining: "
 									+ trainer.getPokeballsRemaining() + "</p><br /></body></html>",
 							"Menu", JOptionPane.INFORMATION_MESSAGE, null, possibleValues, possibleValues[0]);
-					if (selectedValue.equals("Quit Game")) {
+					if (selectedValue!= null && selectedValue.equals("Quit Game")) {
 						System.exit(0);
 					}
 				}
