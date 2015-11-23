@@ -46,7 +46,7 @@ public class MapView extends JPanel implements Observer {
 	      fishingPole = ImageIO.read(new File("./images/fishingPole.png"));
 	      costumeChange = ImageIO.read(new File("./images/costumeChange.png"));
 	      pokeball = ImageIO.read(new File("./images/pokeball.png"));
-	    } catch (IOException e) {
+	    } catch (IOException e) { 
 	      e.printStackTrace();
 	    }
 	    // call it to initiate

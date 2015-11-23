@@ -102,7 +102,7 @@ public class Map extends Observable implements Serializable{
 		setBush(22,21);
 	}
 	
-	private List<Pokemon> initializePokemonList(){
+	public List<Pokemon> initializePokemonList(){
 		List<Pokemon> allPokemon = new ArrayList<Pokemon>();
 		allPokemon.add(new Chansey());
 		allPokemon.add(new Cubone());
@@ -233,10 +233,11 @@ public class Map extends Observable implements Serializable{
 			return false;
 		}
 		return true;
-	}
+	} 
 	
 	// computes probability, returns true if an encounter occurs.
 	public boolean beginPokemonBattle(int tempI, int tempJ){
+		// only called in grass
 		if (map[tempI][tempJ].equals("G")){ 
 			// pokemon spawn chance is 30%.
 			Random generator = new Random(); 
@@ -316,7 +317,6 @@ public class Map extends Observable implements Serializable{
 		
 		// the mapFog (foreground) will have the trainer
 		mapFog[tempI][tempJ] = "T";
-		
 		
 		// update gui
 	    setChanged();

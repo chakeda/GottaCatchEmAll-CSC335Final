@@ -16,6 +16,7 @@ import java.util.Observer;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -47,19 +48,30 @@ public class BattleView extends JPanel {
 	private JPanel buttons;
 	private JTextArea exitScreen;
 	private boolean battleComplete;
-
+	private Image pokemonImage;
+	
 	// make a battle with the pokeman
 	public BattleView(Pokemon thePokemon, Trainer theTrainer) {
 		this.pokemon = thePokemon;
 		this.trainer = theTrainer;
-
+		
+		String pokemonFileName = thePokemon.getName().toLowerCase() + ".png";
+		
+	    try {
+	      pokemonImage = ImageIO.read(new File("./images/pokemonImages/" + pokemonFileName));
+	    } catch (IOException e) {
+	      e.printStackTrace();
+	    }
 		battleLabel = new JTextArea("Placeholder");
 		battleLabel.setText("Wild " + pokemon.getName() + " appeared!");
 		battleLabel.setFont(new Font("Courier", Font.BOLD, 16));
 		battleLabel.setBackground(getBackground());
+		
+		JLabel pokemonImageLabel = new JLabel(new ImageIcon(pokemonImage));
+		this.add(pokemonImageLabel);
 
 		bait = new JButton("Throw Bait");
-		bait.addActionListener(new BaitListener());
+		bait.addActionListener(new BaitListener()); 
 		bait.setFocusable(false);
 		rock = new JButton("Throw Rock");
 		rock.addActionListener(new RockListener());

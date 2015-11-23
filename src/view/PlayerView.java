@@ -16,6 +16,10 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -35,7 +39,8 @@ public class PlayerView extends JFrame {
 	*/
 	private static final long serialVersionUID = 1L;
 	
-	private static final int NUMBER_OF_STEPS_ALLOWED = 5000;
+	private static final int NUMBER_OF_STEPS_ALLOWED = 100;
+
 
 	private MapView mapPanel;
 	private BattleView battlePanel;
@@ -76,11 +81,8 @@ public class PlayerView extends JFrame {
 			mapPanel = new MapView(aMap);
 			battlePanel = new BattleView(new Scyther(), trainer);
 		}
-		// listeners
-		/***
-		 * TO-FUCKING-DO: listeners do not function on BattleView
-		 */
 		
+		// listeners
 		this.addKeyListener(new ArrowKeyListener());
 		this.addWindowListener(new CloseButtonListener());
 		this.setFocusable(true);
@@ -101,7 +103,11 @@ public class PlayerView extends JFrame {
 	private void checkSteps() {
 		trainer.incrementSteps(1);
 		if (trainer.getSteps() == NUMBER_OF_STEPS_ALLOWED) {
-			JOptionPane.showMessageDialog(null, "Game Over. You walked " + NUMBER_OF_STEPS_ALLOWED + " steps");
+			JOptionPane.showMessageDialog(null, "<html><body><p>Game Over. You walked " + NUMBER_OF_STEPS_ALLOWED + " steps</p><br />"
+		            + "<p>Steps Taken: " + trainer.getSteps() + "</p><p><br />Pokemon Caught: "
+					+ trainer.getPokemonList() + "</p><p><br />Items in Bag:"
+					+ trainer.getItemList() + "</p><p><br />Pokeballs Remaining: "
+					+ trainer.getPokeballsRemaining() + "</p><br /></body></html>");
 			System.exit(0);
 		}
 	}
@@ -115,6 +121,35 @@ public class PlayerView extends JFrame {
 		}
 	} 
 	
+	private void checkOutOfBalls(){
+		if (trainer.getPokeballsRemaining() == 0) {
+			JOptionPane.showMessageDialog(null, "<html><body><p>Game Over. You are out of pokeballs.</p><br />"
+		            + "<p>Steps Taken: " + trainer.getSteps() + "</p><p><br />Pokemon Caught: "
+					+ trainer.getPokemonList() + "</p><p><br />Items in Bag:"
+					+ trainer.getItemList() + "</p><p><br />Pokeballs Remaining: "
+					+ trainer.getPokeballsRemaining() + "</p><br /></body></html>");
+			System.exit(0);
+		}
+	}
+	
+	private void checkPokemonMaster(){
+		// get distinct pokemons
+		ArrayList<String> pokemons = trainer.getPokemonList();
+		Set<String> uniquePokemons = new HashSet<String>();
+		uniquePokemons.addAll(pokemons);
+		pokemons.clear();
+		pokemons.addAll(uniquePokemons);
+		// caught all pokemons?
+		if (pokemons.size() == 10) {
+			JOptionPane.showMessageDialog(null, "<html><body><p>Congratulations! You caught all the pokemon.</p><br />"
+		            + "<p>Steps Taken: " + trainer.getSteps() + "</p><p><br />Pokemon Caught: "
+					+ trainer.getPokemonList() + "</p><p><br />Items in Bag:"
+					+ trainer.getItemList() + "</p><p><br />Pokeballs Remaining: "
+					+ trainer.getPokeballsRemaining() + "</p><br /></body></html>");
+			System.exit(0);
+		}
+	}
+	 
 	private class ArrowKeyListener implements KeyListener {
 
 		long lastPressProcessed = 0;
@@ -130,6 +165,8 @@ public class PlayerView extends JFrame {
 					if (map.moveable("up")) {
 						map.moveTrainer(Direction.NORTH);
 						checkSteps();
+						checkOutOfBalls();
+						checkPokemonMaster();
 						checkBattle();
 					}
 				}
@@ -138,6 +175,8 @@ public class PlayerView extends JFrame {
 					if (map.moveable("down")) {
 						map.moveTrainer(Direction.SOUTH);
 						checkSteps();
+						checkOutOfBalls();
+						checkPokemonMaster();
 						checkBattle();
 					}
 				}
@@ -146,8 +185,10 @@ public class PlayerView extends JFrame {
 					if (map.moveable("left")) {
 						map.moveTrainer(Direction.WEST);
 						checkSteps();
+						checkOutOfBalls();
+						checkPokemonMaster();
 						checkBattle();
-						}
+					}
 					
 				}
 
@@ -155,18 +196,22 @@ public class PlayerView extends JFrame {
 					if (map.moveable("right")) {
 						map.moveTrainer(Direction.EAST);
 						checkSteps();
+						checkOutOfBalls();
+						checkPokemonMaster();
 						checkBattle();
 					}
 				}
 
 				// check things - TODO: this is a stub
 				else if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
-					Object[] possibleValues = { "Quit Game" };
+					Object[] possibleValues = { "Back to Game" };
 					Object selectedValue = JOptionPane.showInputDialog(null,
 							"<html><body><p>Steps Taken: " + trainer.getSteps() + "</p><p><br />Pokemon Caught: "
-									+ trainer.getPokemonList() + "</p><p><br />Pokeballs Remaining: "
+									+ trainer.getPokemonList() + "</p><p><br />Items in Bag:"
+									+ trainer.getItemList() + "</p><p><br />Pokeballs Remaining: "
 									+ trainer.getPokeballsRemaining() + "</p><br /></body></html>",
 							"Menu", JOptionPane.INFORMATION_MESSAGE, null, possibleValues, possibleValues[0]);
+
 					if (selectedValue!= null && selectedValue.equals("Quit Game")) {
 						System.exit(0);
 					}

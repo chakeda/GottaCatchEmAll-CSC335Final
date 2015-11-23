@@ -66,6 +66,15 @@ public class MapTest {
 			map.moveTrainer(Direction.EAST); 	
 		}
 		assertFalse(map.moveable("right"));
+		
+		// initialize pokemon
+		map.initializePokemonList();
+		
+		// make map 2
+		Map map2 = new Map("map2");
+		assertFalse(map2.beginPokemonBattle(20,20)); // false-- not on grass
+		assertEquals(map2.whoToBattle().getName(), "Nidoran"); 
+		
 	
 	}	
 
