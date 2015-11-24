@@ -1,7 +1,13 @@
 package model;
 
-public class FishingPole extends Item{
+import java.io.Serializable;
 
+public class FishingPole extends Item implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public FishingPole(String name, Category catagory){
 		super(name, catagory); 
 	}

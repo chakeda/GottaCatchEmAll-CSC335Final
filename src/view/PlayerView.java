@@ -19,16 +19,20 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.locks.ReentrantLock;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 import model.Direction;
+import model.Item;
 import model.Map;
 import model.Pokemon;
 import model.Trainer;
 import model.pokemon.Scyther;
+import sun.misc.Lock;
 
 // this file plays the game.
 
@@ -149,23 +153,44 @@ public class PlayerView extends JFrame {
 			System.exit(0);
 		}
 	}
+	
+	private void checkItem(){
+		Item i = map.getItemAt(map.getTrainerX(), map.getTrainerY());
+		if(i != null){
+			JOptionPane.showMessageDialog(null, "You have found the " + i.getName() + " item! Press Enter to go to the menu to equip.");
+			trainer.addToItemList(i);
+			map.removeItemAt(map.getTrainerX(), map.getTrainerY());
+			if(i.getName().equals("Running Shoes")){
+				possibleValues[1] = "Equip Running Shoes";
+			}
+			else if(i.getName().equals("Fishing Pole")){
+				possibleValues[2] = "Use Fishing Pole";
+			}
+			else{
+				possibleValues[3] = "Change Costume";
+			}
+		}
+	}
+	
+	Object[] possibleValues = { "Back to Game", "", "", "" };
 	 
 	private class ArrowKeyListener implements KeyListener {
 
 		long lastPressProcessed = 0;
-
+		
 		@Override
 		public void keyPressed(KeyEvent ke) {
 
 			// take inputs only 330ms at a time. 320ms to complete animation (I
 			// think.)
-			if (System.currentTimeMillis() - lastPressProcessed > 100) {
+			if (System.currentTimeMillis() - lastPressProcessed > 330) {
 
 				if (ke.getKeyCode() == KeyEvent.VK_UP) {
 					if (map.moveable("up")) {
 						map.moveTrainer(Direction.NORTH);
 						checkSteps();
 						checkBattle();
+						checkItem();
 					}
 				}
 
@@ -174,6 +199,7 @@ public class PlayerView extends JFrame {
 						map.moveTrainer(Direction.SOUTH);
 						checkSteps();
 						checkBattle();
+						checkItem();
 					}
 				}
 
@@ -182,6 +208,7 @@ public class PlayerView extends JFrame {
 						map.moveTrainer(Direction.WEST);
 						checkSteps();
 						checkBattle();
+						checkItem();
 					}
 					
 				}
@@ -191,12 +218,12 @@ public class PlayerView extends JFrame {
 						map.moveTrainer(Direction.EAST);
 						checkSteps();
 						checkBattle();
+						checkItem();
 					}
 				}
 
 				// check things - TODO: this is a stub
 				else if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
-					Object[] possibleValues = { "Back to Game" };
 					Object selectedValue = JOptionPane.showInputDialog(null,
 							"<html><body><p>Steps Taken: " + trainer.getSteps() + "</p><p><br />Pokemon Caught: "
 									+ trainer.getPokemonList() + "</p><p><br />Items in Bag:"
@@ -218,7 +245,6 @@ public class PlayerView extends JFrame {
 				}
 
 				lastPressProcessed = System.currentTimeMillis();
-
 			}
 		}
 		@Override

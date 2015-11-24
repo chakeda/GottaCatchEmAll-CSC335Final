@@ -118,7 +118,7 @@ public class BattleView extends JPanel {
 			if (!battleComplete) {
 				pokemon.baitThrown();
 				battleLabel.setText(pokemon.getName() + " eats the bait!");
-				if (pokemon.willRunAway(new Random(0))) {
+				if (pokemon.willRunAway(new Random())) {
 					battleLabel.setText(pokemon.getName() + " ran away!");
 					setBattleComplete();
 				}
@@ -132,7 +132,7 @@ public class BattleView extends JPanel {
 			if (!battleComplete) {
 				pokemon.rockThrown();
 				battleLabel.setText(pokemon.getName() + " is pissed!");
-				if (pokemon.willRunAway(new Random(0))) {
+				if (pokemon.willRunAway(new Random())) {
 					battleLabel.setText(pokemon.getName() + " ran away!");
 					setBattleComplete();
 				}
@@ -141,6 +141,7 @@ public class BattleView extends JPanel {
 	}
 
 	// throw ball
+	Timer t;
 	private class BallListener implements ActionListener {
 		public void actionPerformed(ActionEvent evt) {
 			if (!battleComplete) {

@@ -1,7 +1,13 @@
 package model;
 
-public class CostumeChange extends Item{
+import java.io.Serializable;
 
+public class CostumeChange extends Item implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public CostumeChange(String name, Category category){
 		super(name, category); 
 	}

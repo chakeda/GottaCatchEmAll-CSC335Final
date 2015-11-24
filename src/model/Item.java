@@ -1,7 +1,12 @@
 package model;
 
+import java.io.Serializable;
 
-public abstract class Item {
+public abstract class Item implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String name; 
 	private Category category; 
 	public boolean foundByTrainer; 

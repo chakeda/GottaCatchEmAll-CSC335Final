@@ -159,6 +159,7 @@ public class Map extends Observable implements Serializable{
 	// another parallel map exists to store items
 	public void setItem(Item item, int k, int j){
 		map[k][j] = "I"; // add to map
+		mapItems[k][j] = item;
 	}
 	
 	// sets a hunter
@@ -227,7 +228,7 @@ public class Map extends Observable implements Serializable{
 			if (map[tempI][tempJ].equals("I")){
 				map[tempI][tempJ] = ""; // turn ball to plain
 				// TODO: somehow add the item into the inventory...
-				return false;
+				return true;
 			}
 		}else{
 			return false;
@@ -375,5 +376,9 @@ public class Map extends Observable implements Serializable{
 	// get itemMap unit
 	public Item getItemAt(int i, int j){
 		return mapItems[i][j];
+	}
+	
+	public void removeItemAt(int i, int j){
+		mapItems[i][j] = null;
 	}
 }
