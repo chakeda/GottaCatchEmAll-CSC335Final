@@ -64,7 +64,7 @@ public class BattleView extends JPanel {
 	    }
 		battleLabel = new JTextArea("Placeholder");
 		battleLabel.setText("Wild " + pokemon.getName() + " appeared!");
-		battleLabel.setFont(new Font("Courier", Font.BOLD, 16));
+		battleLabel.setFont(new Font("Courier", Font.BOLD, 14));
 		battleLabel.setBackground(getBackground());
 		
 		JLabel pokemonImageLabel = new JLabel(new ImageIcon(pokemonImage));

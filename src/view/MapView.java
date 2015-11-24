@@ -29,7 +29,8 @@ public class MapView extends JPanel implements Observer {
 	 * 
 	 */
 	  private Map map;
-	  private Image player, plain, grass, bush, pokeball, runningShoes, fishingPole, costumeChange;
+	  private Image plain, grass, bush, pokeball, runningShoes, fishingPole, costumeChange;
+	  private Image player, player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11;
 	  private int X, Y, tic, n;
 	  private Direction direction;
 	  private Timer timer;
@@ -39,7 +40,18 @@ public class MapView extends JPanel implements Observer {
 	    X = this.map.getTrainerX() * 16;
 	    Y = this.map.getTrainerY() * 16;
 	    try {
-	      player = ImageIO.read(new File("./images/trainer.gif"));
+	      player = ImageIO.read(new File("./images/trainerImages/trainerForward1.png"));
+	      player1 = ImageIO.read(new File("./images/trainerImages/trainerForward2.png"));
+	      player2 = ImageIO.read(new File("./images/trainerImages/trainerForward3.png"));
+	      player3 = ImageIO.read(new File("./images/trainerImages/trainerLeft1.png"));
+	      player4 = ImageIO.read(new File("./images/trainerImages/trainerLeft2.png"));
+	      player5 = ImageIO.read(new File("./images/trainerImages/trainerLeft3.png"));
+	      player6 = ImageIO.read(new File("./images/trainerImages/trainerBack1.png"));
+	      player7 = ImageIO.read(new File("./images/trainerImages/trainerBack2.png"));
+	      player8 = ImageIO.read(new File("./images/trainerImages/trainerBack3.png"));
+	      player9 = ImageIO.read(new File("./images/trainerImages/trainerRight1.png"));
+	      player10 = ImageIO.read(new File("./images/trainerImages/trainerRight2.png"));
+	      player11 = ImageIO.read(new File("./images/trainerImages/trainerRight3.png"));
 	      plain = ImageIO.read(new File("./images/plain.png"));
 	      grass = ImageIO.read(new File("./images/grass.png"));
 	      bush = ImageIO.read(new File("./images/bush.png"));
@@ -115,7 +127,41 @@ public class MapView extends JPanel implements Observer {
 			    		  g2.drawImage(imageGrid[c/16][r/16], r, c, null);
 					}		
 				}
-			    g2.drawImage(player, X, Y, null);
+				if (direction == Direction.SOUTH){						
+					if (tic < 4){
+						g2.drawImage(player1, X, Y, null);
+					}else if (tic > 4 && tic < 8){
+						g2.drawImage(player2, X, Y, null);
+					}else{
+						g2.drawImage(player, X, Y, null);
+					}
+				}else if (direction == Direction.EAST){
+					if (tic < 4){
+						g2.drawImage(player10, X, Y, null);
+					}else if (tic > 4 && tic < 8){
+						g2.drawImage(player11, X, Y, null);
+					}else{
+						g2.drawImage(player9, X, Y, null);
+					}
+				}else if (direction == Direction.NORTH){
+					if (tic < 4){
+						g2.drawImage(player7, X, Y, null);
+					}else if (tic > 4 && tic < 8){
+						g2.drawImage(player8, X, Y, null);
+					}else{
+						g2.drawImage(player6, X, Y, null);
+					}
+				}else if (direction == Direction.WEST){
+					if (tic < 4){
+						g2.drawImage(player4, X, Y, null);
+					}else if (tic > 4 && tic < 8){
+						g2.drawImage(player5, X, Y, null);
+					}else{
+						g2.drawImage(player3, X, Y, null);
+					}
+				}else{
+					g2.drawImage(player, X, Y, null);
+				}
 			    
 			}else if(X > 256 && Y < 256){
 				// top right
@@ -124,7 +170,41 @@ public class MapView extends JPanel implements Observer {
 			    		  g2.drawImage(imageGrid[c/16][r/16], r-256, c, null);
 					}		
 				}
-			    g2.drawImage(player, X-256, Y, null);
+				if (direction == Direction.SOUTH){
+					if (tic < 4){
+						g2.drawImage(player1, X-256, Y, null);
+					}else if (tic > 4 && tic < 8){
+						g2.drawImage(player2, X-256, Y, null);
+					}else{
+						g2.drawImage(player, X-256, Y, null);
+					}
+				}else if (direction == Direction.EAST){
+					if (tic < 4){
+						g2.drawImage(player10, X-256, Y, null);
+					}else if (tic > 4 && tic < 8){
+						g2.drawImage(player11, X-256, Y, null);
+					}else{
+						g2.drawImage(player9, X-256, Y, null);
+					}
+				}else if (direction == Direction.NORTH){
+					if (tic < 4){
+						g2.drawImage(player7, X-256, Y, null);
+					}else if (tic > 4 && tic < 8){
+						g2.drawImage(player8, X-256, Y, null);
+					}else{
+						g2.drawImage(player6, X-256, Y, null);
+					}
+				}else if (direction == Direction.WEST){
+					if (tic < 4){
+						g2.drawImage(player4, X-256, Y, null);
+					}else if (tic > 4 && tic < 8){
+						g2.drawImage(player5, X-256, Y, null);
+					}else{
+						g2.drawImage(player3, X-256, Y, null);
+					}
+				}else{
+					g2.drawImage(player, X, Y, null);
+				}
 			    
 			}else if(X < 256 && Y > 256){
 				// bottom left
@@ -133,7 +213,41 @@ public class MapView extends JPanel implements Observer {
 			    		  g2.drawImage(imageGrid[c/16][r/16], r, c-256, null);
 					}		
 				}
-			    g2.drawImage(player, X, Y-256, null);
+				if (direction == Direction.SOUTH){
+					if (tic < 4){
+						g2.drawImage(player1, X, Y-256, null);
+					}else if (tic > 4 && tic < 8){
+						g2.drawImage(player2, X, Y-256, null);
+					}else{
+						g2.drawImage(player, X, Y-256, null);
+					}
+				}else if (direction == Direction.EAST){
+					if (tic < 4){
+						g2.drawImage(player10, X, Y-256, null);
+					}else if (tic > 4 && tic < 8){
+						g2.drawImage(player11, X, Y-256, null);
+					}else{
+						g2.drawImage(player9, X, Y-256, null);
+					}
+				}else if (direction == Direction.NORTH){
+					if (tic < 4){
+						g2.drawImage(player7, X, Y-256, null);
+					}else if (tic > 4 && tic < 8){
+						g2.drawImage(player8, X, Y-256, null);
+					}else{
+						g2.drawImage(player6, X, Y-256, null);
+					}
+				}else if (direction == Direction.WEST){
+					if (tic < 4){
+						g2.drawImage(player4, X, Y-256, null);
+					}else if (tic > 4 && tic < 8){
+						g2.drawImage(player5, X, Y-256, null);
+					}else{
+						g2.drawImage(player3, X, Y-256, null);
+					}
+				}else{
+					g2.drawImage(player, X, Y, null);
+				}
 			    
 			}else if(X > 256 && Y > 256){
 				// bottom right
@@ -142,8 +256,43 @@ public class MapView extends JPanel implements Observer {
 			    		  g2.drawImage(imageGrid[c/16][r/16], r-256, c-256, null);
 					}		
 				}
-			    g2.drawImage(player, X-256, Y-256, null);
+				if (direction == Direction.SOUTH){
+					if (tic < 4){
+						g2.drawImage(player1, X-256, Y-256, null);
+					}else if (tic > 4 && tic < 8){
+						g2.drawImage(player2, X-256, Y-256, null);
+					}else{
+						g2.drawImage(player, X-256, Y-256, null);
+					}
+				}else if (direction == Direction.EAST){
+					if (tic < 4){
+						g2.drawImage(player10, X-256, Y-256, null);
+					}else if (tic > 4 && tic < 8){
+						g2.drawImage(player11, X-256, Y-256, null);
+					}else{
+						g2.drawImage(player9, X-256, Y-256, null);
+					}
+				}else if (direction == Direction.NORTH){
+					if (tic < 4){
+						g2.drawImage(player7, X-256, Y-256, null);
+					}else if (tic > 4 && tic < 8){
+						g2.drawImage(player8, X-256, Y-256, null);
+					}else{
+						g2.drawImage(player6, X-256, Y-256, null);
+					}
+				}else if (direction == Direction.WEST){
+					if (tic < 4){
+						g2.drawImage(player4, X-256, Y-256, null);
+					}else if (tic > 4 && tic < 8){
+						g2.drawImage(player5, X-256, Y-256, null);
+					}else{
+						g2.drawImage(player3, X-256, Y-256, null);
+					}
+				}else{
+					g2.drawImage(player, X, Y, null);
+				}
 			    
+
 			}
 			
 	    }

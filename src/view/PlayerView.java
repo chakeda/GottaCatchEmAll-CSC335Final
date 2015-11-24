@@ -32,7 +32,6 @@ import model.Map;
 import model.Pokemon;
 import model.Trainer;
 import model.pokemon.Scyther;
-import sun.misc.Lock;
 
 // this file plays the game.
 
@@ -52,7 +51,6 @@ public class PlayerView extends JFrame {
 	private Map map;
 	private Trainer trainer;
 
-	// Constructor overload: this one takes the save state
 	public PlayerView(Map aMap, Trainer aTrainer) {
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setSize(256, 256 + 20); // +20 for title etc
@@ -172,7 +170,7 @@ public class PlayerView extends JFrame {
 		}
 	}
 	
-	Object[] possibleValues = { "Back to Game", "", "", "" };
+	Object[] possibleValues = { "Select Action...", "", "", "" };
 	 
 	private class ArrowKeyListener implements KeyListener {
 
@@ -236,7 +234,7 @@ public class PlayerView extends JFrame {
 					}
 				}
 
-				// return to overworld. should require an event trigger
+				// return to overworld via backspace. should require an event trigger
 				if (ke.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
 					CardLayout cardLayout = (CardLayout) bothViews.getLayout();
 					cardLayout.show(bothViews, "overworld");
