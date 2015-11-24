@@ -29,7 +29,7 @@ public class MapView extends JPanel implements Observer {
 	 * 
 	 */
 	  private Map map;
-	  private Image player, plain, grass, bush, pokeball, runningShoes, fishingPole, costumeChange;
+	  private Image player, plain, grass, bush, pokeball, fishingPole, costumeChange;
 	  private int X, Y, tic, n;
 	  private Direction direction;
 	  private Timer timer;
@@ -44,7 +44,6 @@ public class MapView extends JPanel implements Observer {
 	      grass = ImageIO.read(new File("./images/grass.png"));
 	      bush = ImageIO.read(new File("./images/bush.png"));
 	      pokeball = ImageIO.read(new File("./images/pokeball.png"));
-	      runningShoes = ImageIO.read(new File("./images/runningShoes.jpe"));
 	      fishingPole = ImageIO.read(new File("./images/fishingPole.png"));
 	      costumeChange = ImageIO.read(new File("./images/costumeChange.png"));
 	      pokeball = ImageIO.read(new File("./images/pokeball.png"));
@@ -52,6 +51,7 @@ public class MapView extends JPanel implements Observer {
 	      e.printStackTrace();
 	    }
 	    // call it to initiate
+	    timer = new Timer(40, new TimerListener());
 	    repaint();
 	  }
 
@@ -67,7 +67,6 @@ public class MapView extends JPanel implements Observer {
 	  private void drawBoardWithAnimation() {
 		n = 8; 
 		tic = 1;
-		timer = new Timer(40, new TimerListener());
 		timer.start();
 	  }
 
@@ -181,4 +180,17 @@ public class MapView extends JPanel implements Observer {
 			}
 		}
 
+	    
+	    public void speedUpTrainer(){
+	    	timer = new Timer(1, new TimerListener());
+	    }
+	    
+	    public void changeCostume(){
+	    	try {
+				player = ImageIO.read(new File("./images/trainerRuby.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	    	repaint();
+	    }
 }

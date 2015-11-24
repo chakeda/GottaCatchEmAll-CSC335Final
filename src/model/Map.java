@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Random;
 
+import model.items.CostumeChange;
+import model.items.FishingPole;
+import model.items.RunningShoes;
 import model.pokemon.Chansey;
 import model.pokemon.Cubone;
 import model.pokemon.Kangaskhan;
@@ -68,6 +71,7 @@ public class Map extends Observable implements Serializable{
 		setBush(11,21);
 		setBush(12,22);
 		setBush(13,23);
+		setItem(new FishingPole("Fishing Pole", Category.HOLD_ITEM), 20,12); 
 		
 		// map1.3: bottom left (17,32), (0, 16)
 		setGrass(29,2);
@@ -100,6 +104,7 @@ public class Map extends Observable implements Serializable{
 		setBush(20,21);
 		setBush(22,21);
 		setBush(22,21);
+		setItem(new CostumeChange("Costume Change", Category.HOLD_ITEM), 25, 25);
 	}
 	
 	public List<Pokemon> initializePokemonList(){
@@ -375,7 +380,7 @@ public class Map extends Observable implements Serializable{
 	
 	// get itemMap unit
 	public Item getItemAt(int i, int j){
-		return mapItems[i][j];
+		return mapItems[j][i];
 	}
 	
 	public void removeItemAt(int i, int j){

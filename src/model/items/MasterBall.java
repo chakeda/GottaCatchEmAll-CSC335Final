@@ -1,4 +1,7 @@
-package model;
+package model.items;
+
+import model.Category;
+import model.Item;
 
 public class MasterBall extends Item{
 

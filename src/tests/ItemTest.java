@@ -2,12 +2,12 @@ package tests;
 
 import static org.junit.Assert.*;
 import model.Category;
-import model.CostumeChange;
-import model.FishingPole;
 import model.Item;
-import model.MasterBall;
-import model.RunningShoes;
 import model.Trainer;
+import model.items.CostumeChange;
+import model.items.FishingPole;
+import model.items.MasterBall;
+import model.items.RunningShoes;
 
 import org.junit.Test;
 
