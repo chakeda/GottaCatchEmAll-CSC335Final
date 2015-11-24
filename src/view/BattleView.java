@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -9,6 +10,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Ellipse2D;
 import java.io.File;
 import java.io.IOException;
 import java.util.Observable;
@@ -50,10 +52,15 @@ public class BattleView extends JPanel {
 	private boolean battleComplete;
 	private Image pokemonImage;
 	
+	private int projectileX, projectileY, tic, n;
+	private Timer timer;
+	private Color projectileColor;
+	
 	// make a battle with the pokeman
 	public BattleView(Pokemon thePokemon, Trainer theTrainer) {
 		this.pokemon = thePokemon;
 		this.trainer = theTrainer;
+	    timer = new Timer(40, new ProjectileListener());
 		
 		String pokemonFileName = thePokemon.getName().toLowerCase() + ".png";
 		
@@ -67,6 +74,7 @@ public class BattleView extends JPanel {
 		battleLabel.setFont(new Font("Courier", Font.BOLD, 14));
 		battleLabel.setBackground(getBackground());
 		
+		// poke image
 		JLabel pokemonImageLabel = new JLabel(new ImageIcon(pokemonImage));
 		this.add(pokemonImageLabel);
 
@@ -97,24 +105,74 @@ public class BattleView extends JPanel {
 		exitScreen.setBackground(getBackground());
 		this.add(exitScreen);
 		
+		projectileY = 500; // off screen at first
 
 		this.battleComplete = false;
 	}
+	
+	/************
+	 * Projectile Animation Methods
+	 ************/
+	
+	// launch projectile
+	private void drawProjectileWithAnimation() {
+		// set projectile initial position
+		projectileX = 0;
+		projectileY = 35;
+		n = 10; 
+		tic = 1;
+		timer.start();
+	}
+	
+	// projectile animation
+	public void paintComponent(Graphics g) {
+	    super.paintComponent(g);
+	    Graphics2D g2 = (Graphics2D) g;
+	    g2.setColor(projectileColor);
+		Ellipse2D.Double oval = new Ellipse2D.Double(
+				projectileX, projectileY, 10, 10);
+		g2.fill(oval);
+		
+	}
+	
+	// move around
+    private class ProjectileListener implements ActionListener{
 
-	// unused
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			if (tic <= n){
+				projectileX = projectileX + 5;
+				repaint();
+				tic++;
+			}else{
+				timer.stop();
+			}
+			
+		}
+	}
+    
+	/************
+	 * Messages
+	 ************/
+
 	public void setBattleComplete() {
 		this.battleComplete = true;
 		exitScreen.setText("Press BackSpace to exit.");
 	}
 
-	// unused
 	public boolean getBattleComplete() {
 		return this.battleComplete;
 	}
+	
+	/************
+	 * Button Listeners
+	 ************/
 
 	// throw bait
 	private class BaitListener implements ActionListener {
 		public void actionPerformed(ActionEvent evt) {
+			projectileColor = Color.PINK;
+			drawProjectileWithAnimation();
 			if (!battleComplete) {
 				pokemon.baitThrown();
 				battleLabel.setText(pokemon.getName() + " eats the bait!");
@@ -129,6 +187,8 @@ public class BattleView extends JPanel {
 	// throw rock
 	private class RockListener implements ActionListener {
 		public void actionPerformed(ActionEvent evt) {
+			projectileColor = Color.GRAY;
+			drawProjectileWithAnimation();
 			if (!battleComplete) {
 				pokemon.rockThrown();
 				battleLabel.setText(pokemon.getName() + " is pissed!");
@@ -144,6 +204,8 @@ public class BattleView extends JPanel {
 	Timer t;
 	private class BallListener implements ActionListener {
 		public void actionPerformed(ActionEvent evt) {
+			projectileColor = Color.GREEN;
+			drawProjectileWithAnimation();
 			if (!battleComplete) {
 				trainer.throwPokeball();
 				if (pokemon.isCaught(new Random())) {
@@ -160,6 +222,7 @@ public class BattleView extends JPanel {
 	
 	private class runAwayListener implements ActionListener {
 		public void actionPerformed(ActionEvent evt) {
+			drawProjectileWithAnimation();
 			if (!battleComplete) {
 				battleLabel.setText("Ran away safely!");
 				setBattleComplete();

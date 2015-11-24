@@ -42,7 +42,7 @@ public class PlayerView extends JFrame {
 	*/
 	private static final long serialVersionUID = 1L;
 	
-	private static final int NUMBER_OF_STEPS_ALLOWED = 100;
+	private static final int NUMBER_OF_STEPS_ALLOWED = 5000;
 
 
 	private MapView mapPanel;
@@ -115,7 +115,7 @@ public class PlayerView extends JFrame {
 	}
 	
 	private void checkBattle(){
-		if (map.beginPokemonBattle(map.getTrainerX(), map.getTrainerY()) == true) {
+		if (map.beginPokemonBattle(map.getTrainerY(), map.getTrainerX()) == true) {
 			battlePanel = new BattleView(map.whoToBattle(), trainer);
 			bothViews.add(battlePanel, "battle");
 			CardLayout cardLayout = (CardLayout) bothViews.getLayout();
@@ -154,14 +154,20 @@ public class PlayerView extends JFrame {
 	
 	private void checkItem(){
 		Item i = map.getItemAt(map.getTrainerX(), map.getTrainerY());
+		//System.out.println(map.getTrainerX() + " " + map.getTrainerY());
 		if(i != null){
 			JOptionPane.showMessageDialog(null, "You have found the " + i.getName() + " item! Press Enter to go to the menu to equip.");
 			trainer.addToItemList(i);
 			map.removeItemAt(map.getTrainerX(), map.getTrainerY());
-			if(i.getName().equals("Running Shoes")){
+		}
+	}
+	
+	private void setMenuPossibleValues(){
+		for(String i: trainer.getItemList()){
+			if(i.equals("Running Shoes")){
 				possibleValues[1] = "Equip Running Shoes";
 			}
-			else if(i.getName().equals("Fishing Pole")){
+			else if(i.equals("Fishing Pole")){
 				possibleValues[2] = "Use Fishing Pole";
 			}
 			else{
@@ -171,6 +177,7 @@ public class PlayerView extends JFrame {
 	}
 	
 	Object[] possibleValues = { "Select Action...", "", "", "" };
+	private int processingSpeed = 330;
 	 
 	private class ArrowKeyListener implements KeyListener {
 
@@ -181,7 +188,7 @@ public class PlayerView extends JFrame {
 
 			// take inputs only 330ms at a time. 320ms to complete animation (I
 			// think.)
-			if (System.currentTimeMillis() - lastPressProcessed > 330) {
+			if (System.currentTimeMillis() - lastPressProcessed > processingSpeed) {
 
 				if (ke.getKeyCode() == KeyEvent.VK_UP) {
 					if (map.moveable("up")) {
@@ -222,6 +229,7 @@ public class PlayerView extends JFrame {
 
 				// check things - TODO: this is a stub
 				else if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
+					setMenuPossibleValues();
 					Object selectedValue = JOptionPane.showInputDialog(null,
 							"<html><body><p>Steps Taken: " + trainer.getSteps() + "</p><p><br />Pokemon Caught: "
 									+ trainer.getPokemonList() + "</p><p><br />Items in Bag:"
@@ -231,6 +239,13 @@ public class PlayerView extends JFrame {
 
 					if (selectedValue!= null && selectedValue.equals("Quit Game")) {
 						System.exit(0);
+					}
+					else if (selectedValue!= null && selectedValue.equals("Equip Running Shoes")) {
+						mapPanel.speedUpTrainer();
+						processingSpeed = 50;
+					}
+					else if (selectedValue!= null && selectedValue.equals("Change Costume")) {
+						mapPanel.changeCostume();
 					}
 				}
 

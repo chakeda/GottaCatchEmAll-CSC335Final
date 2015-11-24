@@ -6,8 +6,8 @@ import org.junit.Test;
 
 import model.Category;
 import model.Direction;
-import model.FishingPole;
 import model.Trainer;
+import model.items.FishingPole;
 import model.pokemon.Scyther;
 
 public class TrainerTest {

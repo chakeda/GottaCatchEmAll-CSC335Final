@@ -1,6 +1,9 @@
-package model;
+package model.items;
 
 import java.io.Serializable;
+
+import model.Category;
+import model.Item;
 
 public class FishingPole extends Item implements Serializable{
 
