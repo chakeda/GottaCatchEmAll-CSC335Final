@@ -29,9 +29,6 @@ import model.Trainer;
 
 public class RunPokemon extends JFrame{
 
-	  /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	// main game loop
@@ -123,15 +120,6 @@ public class RunPokemon extends JFrame{
 		     * Instantiate the juicy, delicious objects
 		     */
 		    map = aMap;
-		   /* 
-		    for (int i=0; i<map.getMapLength(); i++){
-			    for (int j=0; j<map.getMapLength(); j++){
-			    	System.out.print(map.getTileAt(i, j));
-			    }
-		    	System.out.println();
-
-		    }
-		    */
 		    trainer = aTrainer;
 		    mapPanel = new MapView(map);
 		    
