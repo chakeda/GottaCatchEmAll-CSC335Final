@@ -171,9 +171,9 @@ public class BattleView extends JPanel {
 	// throw bait
 	private class BaitListener implements ActionListener {
 		public void actionPerformed(ActionEvent evt) {
-			projectileColor = Color.PINK;
-			drawProjectileWithAnimation();
 			if (!battleComplete) {
+				projectileColor = Color.PINK;
+				drawProjectileWithAnimation();
 				pokemon.baitThrown();
 				battleLabel.setText(pokemon.getName() + " eats the bait!");
 				if (pokemon.willRunAway(new Random())) {
@@ -187,9 +187,9 @@ public class BattleView extends JPanel {
 	// throw rock
 	private class RockListener implements ActionListener {
 		public void actionPerformed(ActionEvent evt) {
-			projectileColor = Color.GRAY;
-			drawProjectileWithAnimation();
 			if (!battleComplete) {
+				projectileColor = Color.GRAY;
+				drawProjectileWithAnimation();
 				pokemon.rockThrown();
 				battleLabel.setText(pokemon.getName() + " is pissed!");
 				if (pokemon.willRunAway(new Random())) {
@@ -204,9 +204,9 @@ public class BattleView extends JPanel {
 	Timer t;
 	private class BallListener implements ActionListener {
 		public void actionPerformed(ActionEvent evt) {
-			projectileColor = Color.GREEN;
-			drawProjectileWithAnimation();
 			if (!battleComplete) {
+				projectileColor = Color.GREEN;
+				drawProjectileWithAnimation();
 				trainer.throwPokeball();
 				if (pokemon.isCaught(new Random())) {
 					battleLabel.setText("You caught " + pokemon.getName() + "!");
@@ -222,7 +222,7 @@ public class BattleView extends JPanel {
 	
 	private class runAwayListener implements ActionListener {
 		public void actionPerformed(ActionEvent evt) {
-			drawProjectileWithAnimation();
+			//drawProjectileWithAnimation();
 			if (!battleComplete) {
 				battleLabel.setText("Ran away safely!");
 				setBattleComplete();

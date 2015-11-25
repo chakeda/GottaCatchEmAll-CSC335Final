@@ -30,7 +30,7 @@ public class MapView extends JPanel implements Observer {
 	 */
 	  private Map map;
 	  private Image plain, grass, bush, pokeball, runningShoes, fishingPole, costumeChange;
-	  private Image player, player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11;
+	  private Image playerForward1, playerForward2, playerForward3, playerLeft1, playerLeft2, playerLeft3, playerBack1, playerBack2, playerBack3, playerRight1, playerRight2, playerRight3;
 	  private int X, Y, tic, n;
 	  private Direction direction;
 	  private Timer timer;
@@ -40,18 +40,18 @@ public class MapView extends JPanel implements Observer {
 	    X = this.map.getTrainerX() * 16;
 	    Y = this.map.getTrainerY() * 16;
 	    try {
-	      player = ImageIO.read(new File("./images/trainerImages/trainerForward1.png"));
-	      player1 = ImageIO.read(new File("./images/trainerImages/trainerForward2.png"));
-	      player2 = ImageIO.read(new File("./images/trainerImages/trainerForward3.png"));
-	      player3 = ImageIO.read(new File("./images/trainerImages/trainerLeft1.png"));
-	      player4 = ImageIO.read(new File("./images/trainerImages/trainerLeft2.png"));
-	      player5 = ImageIO.read(new File("./images/trainerImages/trainerLeft3.png"));
-	      player6 = ImageIO.read(new File("./images/trainerImages/trainerBack1.png"));
-	      player7 = ImageIO.read(new File("./images/trainerImages/trainerBack2.png"));
-	      player8 = ImageIO.read(new File("./images/trainerImages/trainerBack3.png"));
-	      player9 = ImageIO.read(new File("./images/trainerImages/trainerRight1.png"));
-	      player10 = ImageIO.read(new File("./images/trainerImages/trainerRight2.png"));
-	      player11 = ImageIO.read(new File("./images/trainerImages/trainerRight3.png"));
+	      playerForward1 = ImageIO.read(new File("./images/trainerImages/trainerForward1.png"));
+	      playerForward2 = ImageIO.read(new File("./images/trainerImages/trainerForward2.png"));
+	      playerForward3 = ImageIO.read(new File("./images/trainerImages/trainerForward3.png"));
+	      playerLeft1 = ImageIO.read(new File("./images/trainerImages/trainerLeft1.png"));
+	      playerLeft2 = ImageIO.read(new File("./images/trainerImages/trainerLeft2.png"));
+	      playerLeft3 = ImageIO.read(new File("./images/trainerImages/trainerLeft3.png"));
+	      playerBack1 = ImageIO.read(new File("./images/trainerImages/trainerBack1.png"));
+	      playerBack2 = ImageIO.read(new File("./images/trainerImages/trainerBack2.png"));
+	      playerBack3 = ImageIO.read(new File("./images/trainerImages/trainerBack3.png"));
+	      playerRight1 = ImageIO.read(new File("./images/trainerImages/trainerRight1.png"));
+	      playerRight2 = ImageIO.read(new File("./images/trainerImages/trainerRight2.png"));
+	      playerRight3 = ImageIO.read(new File("./images/trainerImages/trainerRight3.png"));
 	      plain = ImageIO.read(new File("./images/plain.png"));
 	      grass = ImageIO.read(new File("./images/grass.png"));
 	      bush = ImageIO.read(new File("./images/bush.png"));
@@ -128,38 +128,38 @@ public class MapView extends JPanel implements Observer {
 				}
 				if (direction == Direction.SOUTH){						
 					if (tic < 4){
-						g2.drawImage(player1, X, Y, null);
+						g2.drawImage(playerForward2, X, Y, null);
 					}else if (tic > 4 && tic < 8){
-						g2.drawImage(player2, X, Y, null);
+						g2.drawImage(playerForward3, X, Y, null);
 					}else{
-						g2.drawImage(player, X, Y, null);
+						g2.drawImage(playerForward1, X, Y, null);
 					}
 				}else if (direction == Direction.EAST){
 					if (tic < 4){
-						g2.drawImage(player10, X, Y, null);
+						g2.drawImage(playerRight2, X, Y, null);
 					}else if (tic > 4 && tic < 8){
-						g2.drawImage(player11, X, Y, null);
+						g2.drawImage(playerRight3, X, Y, null);
 					}else{
-						g2.drawImage(player9, X, Y, null);
+						g2.drawImage(playerRight1, X, Y, null);
 					}
 				}else if (direction == Direction.NORTH){
 					if (tic < 4){
-						g2.drawImage(player7, X, Y, null);
+						g2.drawImage(playerBack2, X, Y, null);
 					}else if (tic > 4 && tic < 8){
-						g2.drawImage(player8, X, Y, null);
+						g2.drawImage(playerBack3, X, Y, null);
 					}else{
-						g2.drawImage(player6, X, Y, null);
+						g2.drawImage(playerBack1, X, Y, null);
 					}
 				}else if (direction == Direction.WEST){
 					if (tic < 4){
-						g2.drawImage(player4, X, Y, null);
+						g2.drawImage(playerLeft2, X, Y, null);
 					}else if (tic > 4 && tic < 8){
-						g2.drawImage(player5, X, Y, null);
+						g2.drawImage(playerLeft3, X, Y, null);
 					}else{
-						g2.drawImage(player3, X, Y, null);
+						g2.drawImage(playerLeft1, X, Y, null);
 					}
 				}else{
-					g2.drawImage(player, X, Y, null);
+					g2.drawImage(playerForward1, X, Y, null);
 				}
 			    
 			}else if(X > 256 && Y < 256){
@@ -171,38 +171,38 @@ public class MapView extends JPanel implements Observer {
 				}
 				if (direction == Direction.SOUTH){
 					if (tic < 4){
-						g2.drawImage(player1, X-256, Y, null);
+						g2.drawImage(playerForward2, X-256, Y, null);
 					}else if (tic > 4 && tic < 8){
-						g2.drawImage(player2, X-256, Y, null);
+						g2.drawImage(playerForward3, X-256, Y, null);
 					}else{
-						g2.drawImage(player, X-256, Y, null);
+						g2.drawImage(playerForward1, X-256, Y, null);
 					}
 				}else if (direction == Direction.EAST){
 					if (tic < 4){
-						g2.drawImage(player10, X-256, Y, null);
+						g2.drawImage(playerRight2, X-256, Y, null);
 					}else if (tic > 4 && tic < 8){
-						g2.drawImage(player11, X-256, Y, null);
+						g2.drawImage(playerRight3, X-256, Y, null);
 					}else{
-						g2.drawImage(player9, X-256, Y, null);
+						g2.drawImage(playerRight1, X-256, Y, null);
 					}
 				}else if (direction == Direction.NORTH){
 					if (tic < 4){
-						g2.drawImage(player7, X-256, Y, null);
+						g2.drawImage(playerBack2, X-256, Y, null);
 					}else if (tic > 4 && tic < 8){
-						g2.drawImage(player8, X-256, Y, null);
+						g2.drawImage(playerBack3, X-256, Y, null);
 					}else{
-						g2.drawImage(player6, X-256, Y, null);
+						g2.drawImage(playerBack1, X-256, Y, null);
 					}
 				}else if (direction == Direction.WEST){
 					if (tic < 4){
-						g2.drawImage(player4, X-256, Y, null);
+						g2.drawImage(playerLeft2, X-256, Y, null);
 					}else if (tic > 4 && tic < 8){
-						g2.drawImage(player5, X-256, Y, null);
+						g2.drawImage(playerLeft3, X-256, Y, null);
 					}else{
-						g2.drawImage(player3, X-256, Y, null);
+						g2.drawImage(playerLeft1, X-256, Y, null);
 					}
 				}else{
-					g2.drawImage(player, X, Y, null);
+					g2.drawImage(playerForward1, X, Y, null);
 				}
 			    
 			}else if(X < 256 && Y > 256){
@@ -214,38 +214,38 @@ public class MapView extends JPanel implements Observer {
 				}
 				if (direction == Direction.SOUTH){
 					if (tic < 4){
-						g2.drawImage(player1, X, Y-256, null);
+						g2.drawImage(playerForward2, X, Y-256, null);
 					}else if (tic > 4 && tic < 8){
-						g2.drawImage(player2, X, Y-256, null);
+						g2.drawImage(playerForward3, X, Y-256, null);
 					}else{
-						g2.drawImage(player, X, Y-256, null);
+						g2.drawImage(playerForward1, X, Y-256, null);
 					}
 				}else if (direction == Direction.EAST){
 					if (tic < 4){
-						g2.drawImage(player10, X, Y-256, null);
+						g2.drawImage(playerRight2, X, Y-256, null);
 					}else if (tic > 4 && tic < 8){
-						g2.drawImage(player11, X, Y-256, null);
+						g2.drawImage(playerRight3, X, Y-256, null);
 					}else{
-						g2.drawImage(player9, X, Y-256, null);
+						g2.drawImage(playerRight1, X, Y-256, null);
 					}
 				}else if (direction == Direction.NORTH){
 					if (tic < 4){
-						g2.drawImage(player7, X, Y-256, null);
+						g2.drawImage(playerBack2, X, Y-256, null);
 					}else if (tic > 4 && tic < 8){
-						g2.drawImage(player8, X, Y-256, null);
+						g2.drawImage(playerBack3, X, Y-256, null);
 					}else{
-						g2.drawImage(player6, X, Y-256, null);
+						g2.drawImage(playerBack1, X, Y-256, null);
 					}
 				}else if (direction == Direction.WEST){
 					if (tic < 4){
-						g2.drawImage(player4, X, Y-256, null);
+						g2.drawImage(playerLeft2, X, Y-256, null);
 					}else if (tic > 4 && tic < 8){
-						g2.drawImage(player5, X, Y-256, null);
+						g2.drawImage(playerLeft3, X, Y-256, null);
 					}else{
-						g2.drawImage(player3, X, Y-256, null);
+						g2.drawImage(playerLeft1, X, Y-256, null);
 					}
 				}else{
-					g2.drawImage(player, X, Y, null);
+					g2.drawImage(playerForward1, X, Y, null);
 				}
 			    
 			}else if(X > 256 && Y > 256){
@@ -257,38 +257,38 @@ public class MapView extends JPanel implements Observer {
 				}
 				if (direction == Direction.SOUTH){
 					if (tic < 4){
-						g2.drawImage(player1, X-256, Y-256, null);
+						g2.drawImage(playerForward2, X-256, Y-256, null);
 					}else if (tic > 4 && tic < 8){
-						g2.drawImage(player2, X-256, Y-256, null);
+						g2.drawImage(playerForward3, X-256, Y-256, null);
 					}else{
-						g2.drawImage(player, X-256, Y-256, null);
+						g2.drawImage(playerForward1, X-256, Y-256, null);
 					}
 				}else if (direction == Direction.EAST){
 					if (tic < 4){
-						g2.drawImage(player10, X-256, Y-256, null);
+						g2.drawImage(playerRight2, X-256, Y-256, null);
 					}else if (tic > 4 && tic < 8){
-						g2.drawImage(player11, X-256, Y-256, null);
+						g2.drawImage(playerRight3, X-256, Y-256, null);
 					}else{
-						g2.drawImage(player9, X-256, Y-256, null);
+						g2.drawImage(playerRight1, X-256, Y-256, null);
 					}
 				}else if (direction == Direction.NORTH){
 					if (tic < 4){
-						g2.drawImage(player7, X-256, Y-256, null);
+						g2.drawImage(playerBack2, X-256, Y-256, null);
 					}else if (tic > 4 && tic < 8){
-						g2.drawImage(player8, X-256, Y-256, null);
+						g2.drawImage(playerBack3, X-256, Y-256, null);
 					}else{
-						g2.drawImage(player6, X-256, Y-256, null);
+						g2.drawImage(playerBack1, X-256, Y-256, null);
 					}
 				}else if (direction == Direction.WEST){
 					if (tic < 4){
-						g2.drawImage(player4, X-256, Y-256, null);
+						g2.drawImage(playerLeft2, X-256, Y-256, null);
 					}else if (tic > 4 && tic < 8){
-						g2.drawImage(player5, X-256, Y-256, null);
+						g2.drawImage(playerLeft3, X-256, Y-256, null);
 					}else{
-						g2.drawImage(player3, X-256, Y-256, null);
+						g2.drawImage(playerLeft1, X-256, Y-256, null);
 					}
 				}else{
-					g2.drawImage(player, X, Y, null);
+					g2.drawImage(playerForward1, X, Y, null);
 				}
 			    
 
@@ -336,7 +336,7 @@ public class MapView extends JPanel implements Observer {
 	    
 	    public void changeCostume(){
 	    	try {
-				player = ImageIO.read(new File("./images/trainerRuby.png"));
+				playerForward1 = ImageIO.read(new File("./images/trainerRuby.png"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
