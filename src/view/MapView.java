@@ -72,29 +72,29 @@ public class MapView extends JPanel implements Observer {
 					"./images/trainerImages/trainerRight3.png"));
 
 			playerChange = ImageIO.read(new File(
-					"./images/trainerImages/rubyFront1.png"));
+					"./images/costumeChange/rubyFront1.png"));
 			playerChange1 = ImageIO.read(new File(
-					"./images/trainerImages/rubyFront2.png"));
+					"./images/costumeChange/rubyFront2.png"));
 			playerChange2 = ImageIO.read(new File(
-					"./images/trainerImages/rubyFront3.png"));
+					"./images/costumeChange/rubyFront3.png"));
 			playerChange3 = ImageIO.read(new File(
-					"./images/trainerImages/rubyLeft1.png"));
+					"./images/costumeChange/rubyLeft1.png"));
 			playerChange4 = ImageIO.read(new File(
-					"./images/trainerImages/rubyLeft2.png"));
+					"./images/costumeChange/rubyLeft2.png"));
 			playerChange5 = ImageIO.read(new File(
-					"./images/trainerImages/rubyLeft3.png"));
+					"./images/costumeChange/rubyLeft3.png"));
 			playerChange6 = ImageIO.read(new File(
-					"./images/trainerImages/rubyBack1.png"));
+					"./images/costumeChange/rubyBack1.png"));
 			playerChange7 = ImageIO.read(new File(
-					"./images/trainerImages/rubyBack2.png"));
+					"./images/costumeChange/rubyBack2.png"));
 			playerChange8 = ImageIO.read(new File(
-					"./images/trainerImages/rubyBack3.png"));
+					"./images/costumeChange/rubyBack3.png"));
 			playerChange9 = ImageIO.read(new File(
-					"./images/trainerImages/rubyRight1.png"));
+					"./images/costumeChange/rubyRight1.png"));
 			playerChange10 = ImageIO.read(new File(
-					"./images/trainerImages/rubyRight2.png"));
+					"./images/costumeChange/rubyRight2.png"));
 			playerChange11 = ImageIO.read(new File(
-					"./images/trainerImages/rubyRight3.png"));
+					"./images/costumeChange/rubyRight3.png"));
 			plain = ImageIO.read(new File("./images/plain.png"));
 			grass = ImageIO.read(new File("./images/grass.png"));
 			bush = ImageIO.read(new File("./images/bush.png"));
