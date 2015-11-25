@@ -71,7 +71,7 @@ public class Map extends Observable implements Serializable{
 		setBush(11,21);
 		setBush(12,22);
 		setBush(13,23);
-		setItem(new FishingPole("Fishing Pole", Category.HOLD_ITEM), 20,12); 
+		setItem(new FishingPole("Fishing Pole", Category.HOLD_ITEM), 30,30); 
 		
 		// map1.3: bottom left (17,32), (0, 16)
 		setGrass(29,2);
