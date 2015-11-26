@@ -2,7 +2,24 @@ package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Observable;
+import java.util.Random;
+
+import model.items.CostumeChange;
+import model.items.FishingPole;
+import model.items.RunningShoes;
+import model.pokemon.Chansey;
+import model.pokemon.Cubone;
+import model.pokemon.Kangaskhan;
+import model.pokemon.Nidoran;
+import model.pokemon.Paras;
+import model.pokemon.Pinsir;
+import model.pokemon.Rhyhorn;
+import model.pokemon.Scyther;
+import model.pokemon.Tauros;
+import model.pokemon.Venomoth;
 
 public class Map extends Observable implements Serializable{
 	
@@ -18,124 +35,32 @@ public class Map extends Observable implements Serializable{
 	private String[][] map;
 	private String[][] mapFog;
 	private Item[][] mapItems;
-	private ArrayList<Item> mapItemList;
+
 	
 	// instantiate
 	public Map(){
 		map = new String[32][32]; // background
 		mapFog = new String[32][32]; // foreground
 		mapItems = new Item[32][32];
-		mapItemList = new ArrayList<Item>();
 		
 		cleanNulls();
 		
 		//// statically generate map 
 		
-		// map1: top left (0,16), (0,16)
-		setTrainer(0,5); // trainer starts here
-		setGrass(0,0);
-		setGrass(0,1);
-		setGrass(1,0);
-		setGrass(2,0);
-		setGrass(2,1);
-		setGrass(4,0);
-		setGrass(5,0);
-		setGrass(4,1);
-		setGrass(5,1);
-		setGrass(4,2);
-		setGrass(5,2);
-		setGrass(4,3);
-		setGrass(5,3);
+		// map1.1: top left (0,16), (0,16)
+		setTrainer(3,3); // trainer starts here
 		setGrass(4,4);
 		setGrass(5,5);
 		setGrass(4,5);
 		setGrass(5,4);
-		setGrass(6,0);
-		setGrass(6,1);
-		setGrass(7,0);
-		setGrass(7,1);
-		setGrass(8,0);
-		setGrass(8,1);
-		setGrass(9,0);
-		setGrass(6,2);
-		setGrass(7,2);
-		setGrass(8,2);
-		setGrass(9,2);
-		setGrass(6,3);
-		setGrass(7,3);
-		setGrass(8,3);
-		setGrass(9,3);
-		setGrass(6,4);
-		setGrass(7,4);
-		setGrass(8,4);
-		setGrass(9,4);
-		setGrass(6,5);
-		setGrass(7,5);
-		setGrass(8,5);
-		setGrass(9,5);
-		setGrass(6,6);
-		setGrass(7,6);
-		setGrass(8,6);
-		setGrass(9,6);
-		setGrass(6,6);
-		setGrass(9,1);
-		setGrass(4,6);
-		setGrass(5,6);
-		setBush(3,0);
-		setBush(3,1);
-		setBush(3,2);
-		setBush(3,3);
-		setBush(3,4);
-		setBush(3,5);
-		setBush(3,6);
-		setBush(3,7);
 		setBush(7,7);
-		setBush(3,7);
-		setBush(4,7);
-		setBush(5,7);
-		setBush(6,7);
-		setBush(7,7);
-		setBush(8,7);
-		setBush(9,7);
-		setBush(10,7);
-		setBush(11,7);
-		setBush(12,7);
-		setBush(13,7);
-		
 		setBush(1,1);
 		setBush(1,2);
 		setBush(0,2);
 		setBush(0,7);
-		setGrass(10,0);
-		setGrass(11,0);
-		setGrass(12,0);
-		setGrass(13,0);
-		setGrass(10,1);
-		setGrass(11,1);
-		setGrass(12,1);
-		setGrass(13,1);
-		setGrass(10,2);
-		setGrass(11,2);
-		setGrass(12,2);
-		setGrass(13,2);
-		setGrass(10,3);
-		setGrass(11,3);
-		setGrass(12,3);
-		setGrass(13,3);
-		setGrass(10,4);
-		setGrass(11,4);
-		setGrass(12,4);
-		setGrass(13,4);
-		setGrass(10,5);
-		setGrass(11,5);
-		setGrass(12,5);
-		setGrass(13,5);
-		setGrass(10,6);
-		setGrass(11,6);
-		setGrass(12,6);
-		setGrass(13,6);
+		setItem(new RunningShoes("Running Shoes", Category.HOLD_ITEM), 10,10); 
 		
-		// map2: top right (0,16), (17,32)
+		// map1.2: top right (0,16), (17,32)
 		setGrass(0,19);
 		setGrass(1,19);
 		setGrass(2,19);
@@ -146,55 +71,9 @@ public class Map extends Observable implements Serializable{
 		setBush(11,21);
 		setBush(12,22);
 		setBush(13,23);
-		setGrass(0,17);
-		setGrass(0,18);
-		setGrass(0,21);
-		setGrass(0,22);
-		setGrass(0,23);
-		setGrass(0,24);
-		setGrass(0,25);
-		setGrass(0,26);
-		setGrass(0,27);
-		setGrass(0,28);
-		setGrass(0,29);
-		setGrass(0,30);
-		setGrass(0,31);
-		setGrass(1,17);
-		setGrass(1,18);
-		setGrass(1,19);
-		setGrass(1,22);
-		setGrass(1,21);
-		setGrass(1,23);
-		setGrass(1,24);
-		setGrass(1,25);
-		setGrass(1,26);
-		setGrass(1,27);
-		setGrass(1,28);
-		setGrass(1,29);
-		setGrass(1,30);
-		setGrass(1,31);
-		setGrass(2,17);
-		setGrass(2,18);
-		setGrass(2,21);
-		setGrass(2,22);
-		setGrass(2,23);
-		setGrass(2,24);
-		setGrass(2,25);
-		setGrass(2,26);
-		setGrass(2,27);
-		setGrass(2,28);
-		setGrass(2,29);
-		setGrass(2,30);
-		setGrass(2,31);
-		setWater(10,22);
-		setWater(9,22);
-		setWater(10,23);
-		setWater(9,23);
+		setItem(new FishingPole("Fishing Pole", Category.HOLD_ITEM), 30,30); 
 		
-		
-		// setItem(new RunningShoes("Running Shoes", Category.HOLD_ITEM), 4,20); // breaks serialization
-		
-		// map3: bottom left (17,32), (0, 16)
+		// map1.3: bottom left (17,32), (0, 16)
 		setGrass(29,2);
 		setGrass(30,2);
 		setGrass(31,2);
@@ -207,43 +86,8 @@ public class Map extends Observable implements Serializable{
 		setBush(18,12);
 		setBush(25,5);
 		setBush(31,9);
-		setWater(31,11);
-		setWater(30,11);
-		setWater(30,12);
-		setWater(31,12);
-		setWater(30,13);
-		setWater(31,13);
-		setWater(30,14);
-		setWater(31,14);
-		setWater(30,15);
-		setWater(31,15);
-		setWater(30,16);
-		setWater(31,16);
-		setWater(30,17);
-		setWater(31,17);
-		setWater(30,18);
-		setWater(31,18);
-		setWater(30,19);
-		setWater(31,19);
-		setWater(30,20);
-		setWater(31,20);
-		setWater(30,21);
-		setWater(31,21);
-		setWater(29,11);
-		setWater(29,12);
-		setWater(29,13);
-		setWater(29,14);
-		setWater(29,15);
-		setWater(29,16);
-		setWater(29,17);
-		setWater(29,18);
-		setWater(29,19);
-		setWater(29,20);
-		setWater(29,21);
-	
 		
-		
-		// map4: bottom right (17,32),(17,32)
+		// map1.4: bottom right (17,32),(17,32)
 		setGrass(18,18);
 		setGrass(20,18);
 		setGrass(22,18);
@@ -260,10 +104,50 @@ public class Map extends Observable implements Serializable{
 		setBush(20,21);
 		setBush(22,21);
 		setBush(22,21);
-		setWater(22,31);
-		setWater(23,31);
-		setWater(22,30);
-		setWater(23,30);
+		setItem(new CostumeChange("Costume Change", Category.HOLD_ITEM), 25, 25);
+	}
+	
+	public List<Pokemon> initializePokemonList(){
+		List<Pokemon> allPokemon = new ArrayList<Pokemon>();
+		allPokemon.add(new Chansey());
+		allPokemon.add(new Cubone());
+		allPokemon.add(new Kangaskhan());
+		allPokemon.add(new Nidoran());
+		allPokemon.add(new Paras());
+		allPokemon.add(new Pinsir());
+		allPokemon.add(new Rhyhorn());
+		allPokemon.add(new Tauros());
+		allPokemon.add(new Venomoth());
+		return allPokemon;
+	}
+	
+	// This is map #2. Built with any string as parameter
+	public Map(String anyString){
+		map = new String[32][32]; // background
+		mapFog = new String[32][32]; // foreground
+		mapItems = new Item[32][32];
+		
+		cleanNulls();
+		
+		//// statically generate map 
+		
+		// map2.1: top left (0,16), (0,16) - just make loads of grass
+		setTrainer(8,8); // trainer starts here
+		for (int i=0; i<16; i++){
+			for (int j=0; j<16; j++){
+				if (i==8 && j==8){
+					// do nothing
+				}else{
+					setGrass(i, j);					
+				}
+			}
+		}
+		
+		// map2.2: top right (0,16), (17,32)
+		
+		// map2.3: bottom left (17,32), (0, 16)
+
+		// map2.4: bottom right (17,32),(17,32)
 	}
 	
 	// sets grass
@@ -276,18 +160,11 @@ public class Map extends Observable implements Serializable{
 		map[k][j] = "B";
 	}
 	
-	public void setWater(int k, int j){
-		map[k][j]= "W";
-	}
-	
 	// sets an Item (unwalkable terrain)
 	// another parallel map exists to store items
 	public void setItem(Item item, int k, int j){
 		map[k][j] = "I"; // add to map
-		
-		// add to parallel item map, store the item
-		mapItemList.add(item); // add item to top
-		mapItems[k][j] = mapItemList.get(mapItemList.size()-1); // get the top item
+		mapItems[k][j] = item;
 	}
 	
 	// sets a hunter
@@ -325,75 +202,72 @@ public class Map extends Observable implements Serializable{
 					if (direction.equals("up")){
 						tempI = i - 1;
 						tempJ = j;
-						if (movementIsWithinBounds(tempI,tempJ)){ 
-							if (map[tempI][tempJ].equals("B")){ 
-								return false;
-							}
-							if(map[tempI][tempJ].equals("W")){
-								return false;
-							}
-							if (map[tempI][tempJ].equals("I")){
-								map[tempI][tempJ] = ""; // turn ball to plain
-								// TODO: somehow add the item into the inventory...
-								return false;
-							}
-						}else{
-							return false;
-						}
 					}
 					if (direction.equals("right")){
 						tempI = i;
 						tempJ = j + 1;
-						if (movementIsWithinBounds(tempI,tempJ)){
-							if (map[tempI][tempJ].equals("B")){
-								return false;
-							}
-							if (map[tempI][tempJ].equals("I")){
-								map[tempI][tempJ] = ""; // turn ball to plain
-								// TODO: somehow add the item into the inventory...
-								return false;
-							}
-						}else{
-							return false;
-						}
 					}
 					if (direction.equals("down")){
 						tempI = i + 1;
-						tempJ = j;
-						if (movementIsWithinBounds(tempI,tempJ)){
-							if (map[tempI][tempJ].equals("B")){
-								return false;
-							}
-							if (map[tempI][tempJ].equals("I")){
-								map[tempI][tempJ] = ""; // turn ball to plain
-								// TODO: somehow add the item into the inventory...
-								return false;
-							}
-						}else{
-							return false;
-						}
+						tempJ = j;	
 					}
 					if (direction == "left"){
 						tempI = i;
 						tempJ = j - 1;
-						if (movementIsWithinBounds(tempI,tempJ)){
-							if (map[tempI][tempJ].equals("B")){
-								return false;
-							}
-							if (map[tempI][tempJ].equals("I")){
-								map[tempI][tempJ] = "G"; // turn ball to plain
-								// TODO: somehow add the item into the inventory...
-								return false;
-							}
-						}else{
-							return false;
-						}
-					} 
+					}
+					if(!checkMoveable(tempI, tempJ)){
+						return false;
+					}
 				}
 			}
 		}
-		// shouldn't get here.
 		return true;
+	}
+	
+	// can I move there
+	private boolean checkMoveable(int tempI, int tempJ){
+		if (movementIsWithinBounds(tempI,tempJ)){ 
+			if (map[tempI][tempJ].equals("B")){ 
+				return false;
+			}
+			if (map[tempI][tempJ].equals("I")){
+				map[tempI][tempJ] = ""; // turn ball to plain
+				// TODO: somehow add the item into the inventory...
+				return true;
+			}
+		}else{
+			return false;
+		}
+		return true;
+	} 
+	
+	// computes probability, returns true if an encounter occurs.
+	public boolean beginPokemonBattle(int tempI, int tempJ){
+		// only called in grass
+		if (map[tempI][tempJ].equals("G")){ 
+			// pokemon spawn chance is 30%.
+			Random generator = new Random(); 
+			int random = generator.nextInt(10) + 1; // 1-10
+			if (random % 3 == 0){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	// return which pokemon
+	public Pokemon whoToBattle(){
+		Random generator = new Random(); 
+		ArrayList<Pokemon> allPokemon = (ArrayList<Pokemon>)initializePokemonList();
+		Collections.shuffle(allPokemon);
+		
+		int random = generator.nextInt(10) + 1; // 1-10	
+		for(Pokemon p: allPokemon){
+			if(p.getRarity() <= random){
+				return p;
+			}
+		}
+		return new Nidoran();
 	}
 	
 	// sees if the movement is within bounds, used in moveable()
@@ -450,7 +324,6 @@ public class Map extends Observable implements Serializable{
 		// the mapFog (foreground) will have the trainer
 		mapFog[tempI][tempJ] = "T";
 		
-		
 		// update gui
 	    setChanged();
 	    notifyObservers(dir);
@@ -464,28 +337,30 @@ public class Map extends Observable implements Serializable{
 
 	// get X location
 	public int getTrainerX(){
+		int xlocation = 0;
 		for (int i=0; i<map.length; i++){
 			for (int j=0; j<map.length; j++){
 				if (mapFog[i][j]!=null && mapFog[i][j].equals("T")){
-					return j;
+					xlocation = j;
 				}
 			}
 		}
-		// shouldnt happen
-		return 0;
+		
+		return xlocation;
 	}
 	
 	// get Y location
 	public int getTrainerY(){
+		int ylocation = 0;
 		for (int i=0; i<map.length; i++){
 			for (int j=0; j<map.length; j++){
 				if (mapFog[i][j]!=null && mapFog[i][j].equals("T")){
-					return i;
+					ylocation = i;
 				}
 			}
 		}
-		// shouldnt happen
-		return 0;
+		
+		return ylocation;
 	}
 	
 	// get map length
@@ -505,6 +380,10 @@ public class Map extends Observable implements Serializable{
 	
 	// get itemMap unit
 	public Item getItemAt(int i, int j){
-		return mapItems[i][j];
+		return mapItems[j][i];
+	}
+	
+	public void removeItemAt(int i, int j){
+		mapItems[i][j] = null;
 	}
 }

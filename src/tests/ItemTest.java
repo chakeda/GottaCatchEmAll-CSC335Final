@@ -2,7 +2,6 @@ package tests;
 
 import static org.junit.Assert.*;
 import model.Category;
-import model.Direction;
 import model.Item;
 import model.Trainer;
 import model.items.CostumeChange;
@@ -38,15 +37,19 @@ public class ItemTest {
 		//set the trainers item and test to make sure it is true
 		trainer.setItemUsing(mb);
 		trainer.addToItemList(mb);
+		mb.update();
 		assertTrue(trainer.getItemUsing().equals(mb));
 		trainer.setItemUsing(fp);
 		trainer.addToItemList(fp);
+		fp.update();
 		assertTrue(trainer.getItemUsing().equals(fp));
 		trainer.setItemUsing(rs);
 		trainer.addToItemList(rs);
+		rs.update();
 		assertTrue(trainer.getItemUsing().equals(rs));
 		trainer.setItemUsing(cc);
 		trainer.addToItemList(cc);
+		cc.update();
 		assertTrue(trainer.getItemUsing().equals(cc));
 		
 		//iterate through items list and make sure that all items have been found
@@ -67,12 +70,5 @@ public class ItemTest {
 		assertEquals(mb.getName(), "MASTER");
 		assertEquals(mb.getCategory(), Category.HOLD_ITEM);
 	}
-	
-	@Test
-	public void testEnums(){
-		System.out.println(Category.values());
-		System.out.println(Direction.values());
-	}
-	
 
 }

@@ -31,13 +31,13 @@ public class TrainerTest {
 		Scyther s = new Scyther();
 		trainer.addToPokemonList(s);
 		assertEquals(trainer.getPokemonList().size(), 1);
-		assertEquals(trainer.getPokemonList().get(0), s.getName());
+		assertEquals(trainer.getPokemonList().get(0), s);
 		assertEquals(trainer.getPokemonCaught(), 1);
 		
 		FishingPole fp = new FishingPole("fishPole", Category.HOLD_ITEM);
 		trainer.addToItemList(fp);
 		assertEquals(trainer.getItemList().size(), 1);
-		assertEquals(trainer.getItemList().get(0), fp.getName());
+		assertEquals(trainer.getItemList().get(0), fp);
 		trainer.setItemUsing(fp);
 		assertEquals(fp, trainer.getItemUsing());
 		
@@ -51,10 +51,10 @@ public class TrainerTest {
 		
 		
 		//*****steps test
-		assertFalse(trainer.gameOver());	
-		for(int i=0; i<=501; i++){
+		assertTrue(trainer.gameOver()==false);	
+		for(int i=0; i<50; i++){
 			trainer.incrementSteps(1);
 		}
-		assertTrue(trainer.gameOver());	
+		assertTrue(trainer.gameOver()==true);	
 	}
 }

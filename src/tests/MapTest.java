@@ -61,6 +61,7 @@ public class MapTest {
 		assertEquals(map.getFogAt(0, 0), "T");
 		assertFalse(map.moveable("up"));
 
+		// try to get more code coverage
 		for(int i=0; i<map.getMapLength()-1; i++){
 			map.moveTrainer(Direction.EAST); 	
 		}
@@ -72,6 +73,7 @@ public class MapTest {
 		// make map 2
 		Map map2 = new Map("map2");
 		assertFalse(map2.beginPokemonBattle(20,20)); // false-- not on grass
+		assertEquals(map2.whoToBattle().getName(), "Nidoran"); 
 		
 	
 	}	

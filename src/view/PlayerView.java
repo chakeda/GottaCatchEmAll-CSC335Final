@@ -42,7 +42,7 @@ public class PlayerView extends JFrame {
 	*/
 	private static final long serialVersionUID = 1L;
 	
-	private static final int NUMBER_OF_STEPS_ALLOWED = 500;
+	private static final int NUMBER_OF_STEPS_ALLOWED = 5000;
 
 
 	private MapView mapPanel;
@@ -99,7 +99,7 @@ public class PlayerView extends JFrame {
 		bothViews.addKeyListener(new ArrowKeyListener());
 		bothViews.setFocusable(true);
 		this.add(bothViews, BorderLayout.CENTER);
- 
+
 	}
 
 	private void checkSteps() {
