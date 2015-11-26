@@ -1,8 +1,12 @@
 package model;
 
-import java.awt.Graphics;
+import java.io.Serializable;
 
-public abstract class Item {
+public abstract class Item implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String name; 
 	private Category category; 
 	public boolean foundByTrainer; 
@@ -30,5 +34,6 @@ public abstract class Item {
 	}
 	
 	abstract public void update();//will be used when the object is found
+	abstract public void execute();//execute will be the method that call animation for the individual items
 
 }

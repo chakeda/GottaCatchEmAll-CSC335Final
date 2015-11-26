@@ -33,8 +33,8 @@ public class MapTest {
 		// test one movement
 		map.moveTrainer(Direction.NORTH); 
 		assertEquals(map.getFogAt(2, 3), "T");
-		assertEquals(map.getTrainerX(), 2); 
-		assertEquals(map.getTrainerY(), 3);
+		assertEquals(map.getTrainerX(), 3); 
+		assertEquals(map.getTrainerY(), 2);
 		
 		// just test this too
 		assertEquals(map.getMapLength(), 32);
@@ -66,13 +66,16 @@ public class MapTest {
 			map.moveTrainer(Direction.EAST); 	
 		}
 		assertFalse(map.moveable("right"));
-
 		
-
-
-
+		// initialize pokemon
+		map.initializePokemonList();
 		
+		// make map 2
+		Map map2 = new Map("map2");
+		assertFalse(map2.beginPokemonBattle(20,20)); // false-- not on grass
+		assertEquals(map2.whoToBattle().getName(), "Nidoran"); 
 		
+	
 	}	
 
 }

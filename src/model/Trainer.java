@@ -43,11 +43,19 @@ public class Trainer implements Serializable {
 	public int getPokemonCaught(){
 		return pokemonCaught;
 	}
-	public ArrayList<Pokemon> getPokemonList(){
-		return caughtPokemon;
+	public ArrayList<String> getPokemonList(){
+		ArrayList<String> pokemon = new ArrayList<String>();
+		for (Pokemon p: caughtPokemon){
+			pokemon.add(p.getName());
+		}
+		return pokemon; 
 	}
-	public ArrayList<Item> getItemList(){
-		return itemList;
+	public ArrayList<String> getItemList(){
+		ArrayList<String> items = new ArrayList<String>();
+		for (Item i: itemList){
+			items.add(i.getName());
+		}
+		return items; 
 	}
 	public Item getItemUsing(){
 		return usingItem;
@@ -62,9 +70,6 @@ public class Trainer implements Serializable {
 	//******SETTERS*************************************
 	public void setItemUsing(Item item){
 		usingItem = item;
-	}
-	public void setDirectionFacing(Direction d){
-		dir = d;
 	}
 	
 	//******GAMEPLAY METHODS***********************************
@@ -98,6 +103,9 @@ public class Trainer implements Serializable {
 			}
 		}
 		if(pokemonCaught==MAX_POKEMON_CAUGHT){
+			return true;
+		}
+		if(numberOfSteps==100){
 			return true;
 		}
 		else{

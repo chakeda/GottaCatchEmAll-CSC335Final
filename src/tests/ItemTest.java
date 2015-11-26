@@ -1,18 +1,13 @@
 package tests;
 
 import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-
 import model.Category;
-import model.CostumeChange;
-import model.Direction;
-import model.FishingPole;
 import model.Item;
-import model.MasterBall;
-import model.Pokemon;
-import model.RunningShoes;
 import model.Trainer;
+import model.items.CostumeChange;
+import model.items.FishingPole;
+import model.items.MasterBall;
+import model.items.RunningShoes;
 
 import org.junit.Test;
 
@@ -25,7 +20,7 @@ public class ItemTest {
 		FishingPole fp = new FishingPole("fishPole", Category.HOLD_ITEM);
 		RunningShoes rs = new RunningShoes("flash", Category.HOLD_ITEM);
 		CostumeChange cc = new CostumeChange("change", Category.HOLD_ITEM);
-		
+		 
 		//Test all of the individual items
 		assertEquals(mb.getName(), "master");
 		assertEquals(mb.getCategory(), Category.POKEBALLS);
@@ -58,9 +53,22 @@ public class ItemTest {
 		assertTrue(trainer.getItemUsing().equals(cc));
 		
 		//iterate through items list and make sure that all items have been found
+		/** Changed getItemList() to return List<String>
 		for(Item items:trainer.getItemList()){
 				assertTrue(items.isFound());
 		}
+		**/
+	}
+	
+	@Test
+	public void testAbstractItemSetters(){
+		MasterBall mb = new MasterBall("master", Category.POKEBALLS);
+		assertEquals(mb.getName(), "master");
+		assertEquals(mb.getCategory(), Category.POKEBALLS);
+		mb.setName("MASTER");
+		mb.setCategory(Category.HOLD_ITEM);
+		assertEquals(mb.getName(), "MASTER");
+		assertEquals(mb.getCategory(), Category.HOLD_ITEM);
 	}
 
 }

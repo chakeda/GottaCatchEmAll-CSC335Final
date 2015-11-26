@@ -2,26 +2,20 @@ package tests;
 
 import static org.junit.Assert.*;
 
-import java.awt.Point;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
 import org.junit.Test;
 
 import model.Category;
 import model.Direction;
-import model.FishingPole;
-import model.Scyther;
 import model.Trainer;
+import model.items.FishingPole;
+import model.pokemon.Scyther;
 
 public class TrainerTest {
 	@Test
 	public void test() {
 		
 		Trainer trainer = new Trainer("Ash");
+		assertEquals("Ash", trainer.getPlayerName());
 		
 		//****Initialization tests
 		assertEquals(trainer.getSteps(),0);
@@ -57,14 +51,10 @@ public class TrainerTest {
 		
 		
 		//*****steps test
-		
-		
-		assertTrue(trainer.gameOver()==false);
-		
-		
-		
-		
-		
+		assertTrue(trainer.gameOver()==false);	
+		for(int i=0; i<50; i++){
+			trainer.incrementSteps(1);
+		}
+		assertTrue(trainer.gameOver()==true);	
 	}
-
 }
