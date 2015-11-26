@@ -16,16 +16,5 @@ public class RunningShoes extends Item implements Serializable{
 		super(name, catagory); 
 	}
 
-	@Override
-	public void update() {
-		this.foundByTrainer = true; 
-	}
-
-	@Override
-	public void execute() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
     

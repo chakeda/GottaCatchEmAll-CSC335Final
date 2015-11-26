@@ -29,7 +29,7 @@ public class MapView extends JPanel implements Observer {
 	 * 
 	 */
 	private Map map;
-	private Image plain, grass, bush, pokeball, runningShoes, fishingPole, costumeChange;
+	private Image plain, grass, bush, pokeball;
 	private Image playerForward1, playerForward2, playerForward3, playerLeft1, playerLeft2, playerLeft3, playerBack1,
 			playerBack2, playerBack3, playerRight1, playerRight2, playerRight3;
 	private Image costumeForward1, costumeForward2, costumeForward3, costumeLeft1, costumeLeft2, costumeLeft3,
@@ -58,9 +58,6 @@ public class MapView extends JPanel implements Observer {
 			plain = ImageIO.read(new File("./images/plain.png"));
 			grass = ImageIO.read(new File("./images/grass.png"));
 			bush = ImageIO.read(new File("./images/bush.png"));
-			pokeball = ImageIO.read(new File("./images/pokeball.png"));
-			fishingPole = ImageIO.read(new File("./images/fishingPole.png"));
-			costumeChange = ImageIO.read(new File("./images/costumeChange.png"));
 			pokeball = ImageIO.read(new File("./images/pokeball.png"));
 
 			costumeForward1 = ImageIO.read(new File("./images/costumeChange/rubyFront1.png"));
@@ -182,6 +179,7 @@ public class MapView extends JPanel implements Observer {
 					g2.drawImage(imageGrid[c / 16][r / 16], r - 256, c, null);
 				}
 			}
+			
 			if (direction == Direction.SOUTH) {
 				if (tic < 4) {
 					g2.drawImage(playerForward2, X - 256, Y, null);
@@ -215,7 +213,7 @@ public class MapView extends JPanel implements Observer {
 					g2.drawImage(playerLeft1, X - 256, Y, null);
 				}
 			} else {
-				g2.drawImage(playerForward1, X, Y, null);
+				g2.drawImage(playerForward1, X - 256, Y, null);
 			}
 
 		} else if (X < 256 && Y > 256) {
@@ -258,7 +256,7 @@ public class MapView extends JPanel implements Observer {
 					g2.drawImage(playerLeft1, X, Y - 256, null);
 				}
 			} else {
-				g2.drawImage(playerForward1, X, Y, null);
+				g2.drawImage(playerForward1, X, Y - 256, null);
 			}
 
 		} else if (X > 256 && Y > 256) {
@@ -301,7 +299,7 @@ public class MapView extends JPanel implements Observer {
 					g2.drawImage(playerLeft1, X - 256, Y - 256, null);
 				}
 			} else {
-				g2.drawImage(playerForward1, X, Y, null);
+				g2.drawImage(playerForward1, X - 256, Y - 256, null);
 			}
 
 		}
