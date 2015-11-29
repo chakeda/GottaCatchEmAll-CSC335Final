@@ -18,6 +18,7 @@ import javax.swing.Timer;
 
 import model.Direction;
 import model.Map;
+import songplayer.PlayOneSong;
 
 public class MapView extends JPanel implements Observer {
 
@@ -55,6 +56,7 @@ public class MapView extends JPanel implements Observer {
 			playerRight1 = ImageIO.read(new File("./images/trainerImages/trainerRight1.png"));
 			playerRight2 = ImageIO.read(new File("./images/trainerImages/trainerRight2.png"));
 			playerRight3 = ImageIO.read(new File("./images/trainerImages/trainerRight3.png"));
+			
 			plain = ImageIO.read(new File("./images/plain.png"));
 			grass = ImageIO.read(new File("./images/grass.png"));
 			bush = ImageIO.read(new File("./images/bush.png"));
@@ -78,6 +80,7 @@ public class MapView extends JPanel implements Observer {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 		// call it to initiate
 		timer = new Timer(40, new TimerListener());
 		repaint();

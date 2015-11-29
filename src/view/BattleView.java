@@ -33,6 +33,7 @@ import model.Trainer;
 import model.pokemon.Nidoran;
 import model.pokemon.Scyther;
 import model.pokemon.Tauros;
+import songplayer.PlayOneSong;
 
 public class BattleView extends JPanel {
 
@@ -108,6 +109,7 @@ public class BattleView extends JPanel {
 		projectileY = 500; // off screen at first
 
 		this.battleComplete = false;
+		
 	}
 	
 	/************
@@ -209,6 +211,8 @@ public class BattleView extends JPanel {
 				drawProjectileWithAnimation();
 				trainer.throwPokeball();
 				if (pokemon.isCaught(new Random())) {
+					// play congrats
+					PlayOneSong.main("./sounds/congrats.wav");
 					battleLabel.setText("You caught " + pokemon.getName() + "!");
 					trainer.addToPokemonList(pokemon);
 					setBattleComplete();

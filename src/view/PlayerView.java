@@ -32,6 +32,7 @@ import model.Map;
 import model.Pokemon;
 import model.Trainer;
 import model.pokemon.Scyther;
+import songplayer.PlayOneSong;
 
 // this file plays the game.
 
@@ -99,6 +100,9 @@ public class PlayerView extends JFrame {
 		bothViews.addKeyListener(new ArrowKeyListener());
 		bothViews.setFocusable(true);
 		this.add(bothViews, BorderLayout.CENTER);
+		
+		// play background music? 
+		PlayOneSong.main("./sounds/main.mp3");
 
 	}
 
@@ -156,6 +160,8 @@ public class PlayerView extends JFrame {
 		Item i = map.getItemAt(map.getTrainerX(), map.getTrainerY());
 		//System.out.println(map.getTrainerX() + " " + map.getTrainerY());
 		if(i != null){
+			// play congrats
+			PlayOneSong.main("./sounds/congrats.wav");
 			JOptionPane.showMessageDialog(null, "You have found the " + i.getName() + " item! Press Enter to go to the menu to equip.");
 			trainer.addToItemList(i);
 			map.removeItemAt(map.getTrainerX(), map.getTrainerY());
@@ -176,7 +182,7 @@ public class PlayerView extends JFrame {
 		}
 	}
 	
-	Object[] possibleValues = { "Select Action...", "", "", "" };
+	Object[] possibleValues = { "Select Action...", "", "", "", "Forfeit" };
 	private int processingSpeed = 330;
 	 
 	private class ArrowKeyListener implements KeyListener {
@@ -246,6 +252,9 @@ public class PlayerView extends JFrame {
 					}
 					else if (selectedValue!= null && selectedValue.equals("Change Costume")) {
 						mapPanel.changeCostume();
+					}
+					else if (selectedValue!= null && selectedValue.equals("Forfeit")){
+						System.exit(0);
 					}
 				}
 
