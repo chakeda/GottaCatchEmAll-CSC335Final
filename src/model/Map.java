@@ -48,16 +48,28 @@ public class Map extends Observable implements Serializable{
 		//// statically generate map 
 		
 		// map1.1: top left (0,16), (0,16)
-		setTrainer(3,3); // trainer starts here
+		setTrainer(0,7); // trainer starts here
 		setGrass(4,4);
 		setGrass(5,5);
 		setGrass(4,5);
 		setGrass(5,4);
+		setGrass(0,2);
+		setGrass(0,3);
+		setGrass(0,4);
+		setGrass(0,5);
+		setGrass(2,4);
+		setGrass(2,3);
+		setGrass(3,3);
+		setGrass(3,4);
+		
 		setBush(7,7);
 		setBush(1,1);
 		setBush(1,2);
-		setBush(0,2);
-		setBush(0,7);
+		setBush(1,3);
+		setBush(1,4);
+		setBush(1,5);
+		setBush(1,6);
+		setBush(0,6);
 		setItem(new RunningShoes("Running Shoes", Category.HOLD_ITEM), 10,10); 
 		
 		// map1.2: top right (0,16), (17,32)
@@ -105,6 +117,66 @@ public class Map extends Observable implements Serializable{
 		setBush(22,21);
 		setBush(22,21);
 		setItem(new CostumeChange("Costume Change", Category.HOLD_ITEM), 25, 25);
+		
+		for(int i=0; i<7; i++){
+			setBush(4,i);
+		}
+		for(int i=5; i<14; i++){
+			setBush(i,6);
+		}
+		for(int i=5; i<14; i++){
+			for(int j = 0; j<6; j++){
+				setGrass(i,j);
+			}
+		}
+		setGrass(0,0);
+		setGrass(0,1);
+		setGrass(0,0);
+		setGrass(1,0);
+		setGrass(2,0);
+		setGrass(2,1);
+		setGrass(2,2);
+		setGrass(3,0);
+		setGrass(3,1);
+		setGrass(3,2);
+		
+		for(int i=0; i<3; i++){
+			for(int j=12; j<26; j++){
+				setGrass(i,j);
+			}
+		}
+		
+		for(int i=0; i<12; i++){
+			for(int j=31; j>28; j--){
+				setWater(i,j);
+			}
+		}
+		
+		setBush(31,17);
+		setBush(30,17);
+		setBush(29,17);
+		setBush(28,17);
+		setBush(31,31);
+		setBush(30,31);
+		setBush(29,31);
+		setBush(28,31);
+		for(int i = 19; i<31; i++){
+			setBush(28, i);
+		}
+		for(int i=20; i<30; i++){
+			setWater(30, i);
+		}
+		for(int i=19; i<31; i++){
+			setGrass(29, i);
+		}
+		for(int i=19; i<31; i++){
+			setGrass(31, i);
+		}
+		setGrass(30,30);
+		setGrass(30,19);
+		setGrass(30,18);
+		setGrass(31,18);
+		setGrass(29,18);
 	}
 	
 	public List<Pokemon> initializePokemonList(){
@@ -170,6 +242,10 @@ public class Map extends Observable implements Serializable{
 	// sets a hunter
 	public void setTrainer(int k, int j){
 		mapFog[k][j] = "T";
+	}
+	
+	public void setWater(int k, int j){
+		map[k][j] = "W";
 	}
 
 	/***
