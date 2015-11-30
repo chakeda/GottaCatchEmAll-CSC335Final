@@ -116,11 +116,12 @@ public class PlayerView extends JFrame {
 	
 	private void checkBattle(){
 		if (map.beginPokemonBattle(map.getTrainerY(), map.getTrainerX()) == true) {
+			songplayer.playBattleMusic();
+			//mapPanel.beginBattleAnimation(); <- TODO make screen flash a few times
 			battlePanel = new BattleView(map.whoToBattle(), trainer, songplayer);
 			bothViews.add(battlePanel, "battle");
 			CardLayout cardLayout = (CardLayout) bothViews.getLayout();
 			cardLayout.show(bothViews, "battle");
-			songplayer.playBattleMusic();
 		}
 	} 
 	

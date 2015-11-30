@@ -1,11 +1,15 @@
 package controller;
 
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import sun.audio.AudioData;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
+import sun.audio.ContinuousAudioDataStream;
 
 public class SongPlayer {
 	
@@ -21,6 +25,10 @@ public class SongPlayer {
 		playSong("congrats.wav");
 	}
 	
+	public void playPokemonCaughtMusic(){
+		playSong("pokemonCaught.mp3");
+	}
+	
 	public void playBattleMusic(){
 		playSong("battle.mp3");
 	}
@@ -30,6 +38,10 @@ public class SongPlayer {
 		try {
 			in = new FileInputStream(songName);
 			audioStream = new AudioStream(in);
+			
+			AudioData audiodata = audioStream.getData();
+			ContinuousAudioDataStream cas = new ContinuousAudioDataStream (audiodata);
+			
 			AudioPlayer.player.start(audioStream);
 		} catch (IOException e) {
 			e.printStackTrace();
