@@ -29,7 +29,7 @@ public class MapView extends JPanel implements Observer {
 	 * 
 	 */
 	private Map map;
-	private Image plain, grass, bush, pokeball, runningShoes, fishingPole, costumeChange;
+	private Image plain, grass, bush, pokeball;
 	private Image playerForward1, playerForward2, playerForward3, playerLeft1, playerLeft2, playerLeft3, playerBack1,
 			playerBack2, playerBack3, playerRight1, playerRight2, playerRight3;
 	private Image costumeForward1, costumeForward2, costumeForward3, costumeLeft1, costumeLeft2, costumeLeft3,
@@ -37,6 +37,7 @@ public class MapView extends JPanel implements Observer {
 	private int X, Y, tic, n;
 	private Direction direction;
 	private Timer timer;
+	private boolean costumeFlag = true;
 
 	public MapView(Map map) {
 		this.map = map;
@@ -55,13 +56,10 @@ public class MapView extends JPanel implements Observer {
 			playerRight1 = ImageIO.read(new File("./images/trainerImages/trainerRight1.png"));
 			playerRight2 = ImageIO.read(new File("./images/trainerImages/trainerRight2.png"));
 			playerRight3 = ImageIO.read(new File("./images/trainerImages/trainerRight3.png"));
-			
+
 			plain = ImageIO.read(new File("./images/plain.png"));
 			grass = ImageIO.read(new File("./images/grass.png"));
 			bush = ImageIO.read(new File("./images/bush.png"));
-			pokeball = ImageIO.read(new File("./images/pokeball.png"));
-			fishingPole = ImageIO.read(new File("./images/fishingPole.png"));
-			costumeChange = ImageIO.read(new File("./images/costumeChange.png"));
 			pokeball = ImageIO.read(new File("./images/pokeball.png"));
 
 			costumeForward1 = ImageIO.read(new File("./images/costumeChange/rubyFront1.png"));
@@ -79,7 +77,7 @@ public class MapView extends JPanel implements Observer {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		// call it to initiate
 		timer = new Timer(40, new TimerListener());
 		repaint();
@@ -217,7 +215,7 @@ public class MapView extends JPanel implements Observer {
 					g2.drawImage(playerLeft1, X - 256, Y, null);
 				}
 			} else {
-				g2.drawImage(playerForward1, X, Y, null);
+				g2.drawImage(playerForward1, X - 256, Y, null);
 			}
 
 		} else if (X < 256 && Y > 256) {
@@ -260,7 +258,7 @@ public class MapView extends JPanel implements Observer {
 					g2.drawImage(playerLeft1, X, Y - 256, null);
 				}
 			} else {
-				g2.drawImage(playerForward1, X, Y, null);
+				g2.drawImage(playerForward1, X, Y - 256, null);
 			}
 
 		} else if (X > 256 && Y > 256) {
@@ -303,7 +301,7 @@ public class MapView extends JPanel implements Observer {
 					g2.drawImage(playerLeft1, X - 256, Y - 256, null);
 				}
 			} else {
-				g2.drawImage(playerForward1, X, Y, null);
+				g2.drawImage(playerForward1, X - 256, Y - 256, null);
 			}
 
 		}
@@ -348,19 +346,41 @@ public class MapView extends JPanel implements Observer {
 	}
 
 	public void changeCostume() {
-		playerForward1 = costumeForward1;
-		playerForward2 = costumeForward2;
-		playerForward3 = costumeForward3;
-		playerLeft1 = costumeLeft1;
-		playerLeft2 = costumeLeft2;
-		playerLeft3 = costumeLeft3;
-		playerBack1 = costumeBack1;
-		playerBack2 = costumeBack2;
-		playerBack3 = costumeBack3;
-		playerRight1 = costumeRight1;
-		playerRight2 = costumeRight2;
-		playerRight3 = costumeRight3;
+		if (costumeFlag) {
+			playerForward1 = costumeForward1;
+			playerForward2 = costumeForward2;
+			playerForward3 = costumeForward3;
+			playerLeft1 = costumeLeft1;
+			playerLeft2 = costumeLeft2;
+			playerLeft3 = costumeLeft3;
+			playerBack1 = costumeBack1;
+			playerBack2 = costumeBack2;
+			playerBack3 = costumeBack3;
+			playerRight1 = costumeRight1;
+			playerRight2 = costumeRight2;
+			playerRight3 = costumeRight3;
+
+		} else {
+			try {
+				playerForward1 = ImageIO.read(new File("./images/trainerImages/trainerForward1.png"));
+				playerForward2 = ImageIO.read(new File("./images/trainerImages/trainerForward2.png"));
+				playerForward3 = ImageIO.read(new File("./images/trainerImages/trainerForward3.png"));
+				playerLeft1 = ImageIO.read(new File("./images/trainerImages/trainerLeft1.png"));
+				playerLeft2 = ImageIO.read(new File("./images/trainerImages/trainerLeft2.png"));
+				playerLeft3 = ImageIO.read(new File("./images/trainerImages/trainerLeft3.png"));
+				playerBack1 = ImageIO.read(new File("./images/trainerImages/trainerBack1.png"));
+				playerBack2 = ImageIO.read(new File("./images/trainerImages/trainerBack2.png"));
+				playerBack3 = ImageIO.read(new File("./images/trainerImages/trainerBack3.png"));
+				playerRight1 = ImageIO.read(new File("./images/trainerImages/trainerRight1.png"));
+				playerRight2 = ImageIO.read(new File("./images/trainerImages/trainerRight2.png"));
+				playerRight3 = ImageIO.read(new File("./images/trainerImages/trainerRight3.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		costumeFlag = !costumeFlag;
 
 		repaint();
 	}
+
 }

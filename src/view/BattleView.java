@@ -214,8 +214,7 @@ public class BattleView extends JPanel {
 				drawProjectileWithAnimation();
 				trainer.throwPokeball();
 				if (pokemon.isCaught(new Random())) {
-					// play congrats
-					songplayer.playCongratsMusic();
+					songplayer.playPokemonCaughtMusic();
 					battleLabel.setText("You caught " + pokemon.getName() + "!");
 					trainer.addToPokemonList(pokemon);
 					setBattleComplete();
