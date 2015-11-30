@@ -124,7 +124,7 @@ public class Map extends Observable implements Serializable{
 		for(int i=5; i<14; i++){
 			setBush(i,6);
 		}
-		for(int i=5; i<14; i++){
+		for(int i=5; i<22; i++){
 			for(int j = 0; j<6; j++){
 				setGrass(i,j);
 			}
@@ -177,6 +177,34 @@ public class Map extends Observable implements Serializable{
 		setGrass(30,18);
 		setGrass(31,18);
 		setGrass(29,18);
+		
+		for(int i=8; i<18; i++){
+			for(int j=7; j<18; j++)
+			setGrass(i, j);
+		}
+		for(int i=7; i<18; i++){
+			setBush(18, i);
+		}
+		for(int i=7; i<18; i++){
+			setWater(19, i);
+		}
+		for(int i=14; i<22;i++){
+			setGrass(i,6);
+		}
+		for(int i=26; i<32; i++){
+			setBush(i, 5);
+		}
+		for(int i=25; i<30; i++){
+			for(int j=0; j<5; j++){
+				setGrass(i,j);
+			}
+		}
+		setWater(31,0);
+		setWater(31,1);
+		setWater(30,0);
+		setWater(30,1);
+		setWater(29,0);
+		setWater(29,1);
 	}
 	
 	public List<Pokemon> initializePokemonList(){
