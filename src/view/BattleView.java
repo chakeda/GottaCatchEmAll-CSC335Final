@@ -52,7 +52,7 @@ public class BattleView extends JPanel {
 	private JPanel buttons;
 	private JTextArea exitScreen;
 	private boolean battleComplete;
-	private Image pokemonImage;
+	private Image pokemonImage, trainerImage;
 	
 	private int projectileX, projectileY, tic, n;
 	private Timer timer;
@@ -72,10 +72,21 @@ public class BattleView extends JPanel {
 	    } catch (IOException e) {
 	      e.printStackTrace();
 	    }
+	    
+	    try {
+	      trainerImage = ImageIO.read(new File("./images/trainerBattleImages/trainerNeutral.png"));
+	    } catch (IOException e) {
+	      e.printStackTrace();
+	    }
+	    
 		battleLabel = new JTextArea("Placeholder");
 		battleLabel.setText("Wild " + pokemon.getName() + " appeared!");
 		battleLabel.setFont(new Font("Courier", Font.BOLD, 14));
 		battleLabel.setBackground(getBackground());
+		
+		// trainer image
+		JLabel trainerImageLabel = new JLabel(new ImageIcon(trainerImage));
+		this.add(trainerImageLabel);
 		
 		// poke image
 		JLabel pokemonImageLabel = new JLabel(new ImageIcon(pokemonImage));
@@ -122,7 +133,7 @@ public class BattleView extends JPanel {
 	// launch projectile
 	private void drawProjectileWithAnimation() {
 		// set projectile initial position
-		projectileX = 0;
+		projectileX = 100;
 		projectileY = 35;
 		n = 10; 
 		tic = 1;
