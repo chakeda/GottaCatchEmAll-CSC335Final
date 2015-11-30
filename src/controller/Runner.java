@@ -17,8 +17,8 @@ public class Runner {
 		int reload = JOptionPane.OK_OPTION;
 		File f = new File("trainerSave.txt");
 		if(f.exists() && !f.isDirectory()) {
-            reload = JOptionPane.showConfirmDialog(null, "Would you like to start from your previous save?", "Reload?", JOptionPane.OK_CANCEL_OPTION);
-            if (reload == JOptionPane.OK_OPTION){
+            reload = JOptionPane.showConfirmDialog(null, "Would you like to start from your previous save?", "Reload?", JOptionPane.YES_NO_OPTION);
+            if (reload == JOptionPane.YES_OPTION){
 				try{
 					FileInputStream fis1 = new FileInputStream("mapSave.txt");
 					ObjectInputStream ois1 = new ObjectInputStream(fis1);

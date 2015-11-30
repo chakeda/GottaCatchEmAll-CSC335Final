@@ -20,12 +20,14 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.Timer;
 
+import controller.SongPlayer;
 import model.Direction;
 import model.Map;
 import model.Pokemon;
@@ -33,7 +35,6 @@ import model.Trainer;
 import model.pokemon.Nidoran;
 import model.pokemon.Scyther;
 import model.pokemon.Tauros;
-import songplayer.PlayOneSong;
 
 public class BattleView extends JPanel {
 
@@ -56,9 +57,10 @@ public class BattleView extends JPanel {
 	private int projectileX, projectileY, tic, n;
 	private Timer timer;
 	private Color projectileColor;
+	private SongPlayer songplayer;
 	
 	// make a battle with the pokeman
-	public BattleView(Pokemon thePokemon, Trainer theTrainer) {
+	public BattleView(Pokemon thePokemon, Trainer theTrainer, SongPlayer sp) {
 		this.pokemon = thePokemon;
 		this.trainer = theTrainer;
 	    timer = new Timer(40, new ProjectileListener());
@@ -109,6 +111,7 @@ public class BattleView extends JPanel {
 		projectileY = 500; // off screen at first
 
 		this.battleComplete = false;
+		this.songplayer = sp;
 		
 	}
 	
@@ -212,7 +215,7 @@ public class BattleView extends JPanel {
 				trainer.throwPokeball();
 				if (pokemon.isCaught(new Random())) {
 					// play congrats
-					PlayOneSong.main("./sounds/congrats.wav");
+					songplayer.playCongratsMusic();
 					battleLabel.setText("You caught " + pokemon.getName() + "!");
 					trainer.addToPokemonList(pokemon);
 					setBattleComplete();

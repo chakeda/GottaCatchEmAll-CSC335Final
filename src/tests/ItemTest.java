@@ -2,6 +2,7 @@ package tests;
 
 import static org.junit.Assert.*;
 import model.Category;
+import model.Direction;
 import model.Item;
 import model.Trainer;
 import model.items.CostumeChange;
@@ -20,8 +21,8 @@ public class ItemTest {
 		FishingPole fp = new FishingPole("fishPole", Category.HOLD_ITEM);
 		RunningShoes rs = new RunningShoes("flash", Category.HOLD_ITEM);
 		CostumeChange cc = new CostumeChange("change", Category.HOLD_ITEM);
-		 
-		//Test all of the individual items
+
+		// Test all of the individual items
 		assertEquals(mb.getName(), "master");
 		assertEquals(mb.getCategory(), Category.POKEBALLS);
 		assertFalse(mb.getCategory().equals(Category.BERRIES));
@@ -31,10 +32,10 @@ public class ItemTest {
 		assertEquals(rs.getCategory(), Category.HOLD_ITEM);
 		assertEquals(cc.getName(), "change");
 		assertEquals(cc.getCategory(), Category.HOLD_ITEM);
-		
-		//ArrayList<Item> itemList = new ArrayList<Item>();
-		
-		//set the trainers item and test to make sure it is true
+
+		// ArrayList<Item> itemList = new ArrayList<Item>();
+
+		// set the trainers item and test to make sure it is true
 		trainer.setItemUsing(mb);
 		trainer.addToItemList(mb);
 		mb.update();
@@ -51,17 +52,17 @@ public class ItemTest {
 		trainer.addToItemList(cc);
 		cc.update();
 		assertTrue(trainer.getItemUsing().equals(cc));
-		
-		//iterate through items list and make sure that all items have been found
-		/** Changed getItemList() to return List<String>
-		for(Item items:trainer.getItemList()){
-				assertTrue(items.isFound());
-		}
-		**/
+
+		// iterate through items list and make sure that all items have been
+		// found
+		/**
+		 * Changed getItemList() to return List<String> for(Item
+		 * items:trainer.getItemList()){ assertTrue(items.isFound()); }
+		 **/
 	}
-	
+
 	@Test
-	public void testAbstractItemSetters(){
+	public void testAbstractItemSetters() {
 		MasterBall mb = new MasterBall("master", Category.POKEBALLS);
 		assertEquals(mb.getName(), "master");
 		assertEquals(mb.getCategory(), Category.POKEBALLS);
@@ -69,6 +70,12 @@ public class ItemTest {
 		mb.setCategory(Category.HOLD_ITEM);
 		assertEquals(mb.getName(), "MASTER");
 		assertEquals(mb.getCategory(), Category.HOLD_ITEM);
+	}
+
+	@Test
+	public void testEnums() {
+		System.out.println(Category.values());
+		System.out.println(Direction.values());
 	}
 
 }

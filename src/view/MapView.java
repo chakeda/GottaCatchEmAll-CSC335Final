@@ -18,7 +18,6 @@ import javax.swing.Timer;
 
 import model.Direction;
 import model.Map;
-import songplayer.PlayOneSong;
 
 public class MapView extends JPanel implements Observer {
 
