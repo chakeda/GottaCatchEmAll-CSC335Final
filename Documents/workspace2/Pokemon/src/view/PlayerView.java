@@ -63,21 +63,41 @@ public class PlayerView extends JFrame {
 
 		// set map and trainer
 		if (aMap == null && aTrainer == null) {
-			Object[] possibleValues = { "Easy Map", "Hard Map" };
-			Object selectedValue = JOptionPane.showInputDialog(null, "Which map do you want to play?",
-					"Welcome to Pokeman", JOptionPane.INFORMATION_MESSAGE, null, possibleValues, possibleValues[0]);
-			if (selectedValue.equals("Easy Map")) {
-				map = new Map();
-			} else if (selectedValue.equals("Hard Map")) {
-				map = new Map("map2");
-			} else {
+			/*TODO adding in ability to choose win conditions: 
+			 * 500 steps, catch MercerMaid, don't know what else?
+			 */
+			///// Begin new changes
+			Object[] possibleValues1 = { "Traditional Safari Zone", "Catch the MercerMaid" };
+			Object selectedValue1 = JOptionPane.showInputDialog(null, "Select Win Condition:",
+					"Welcome to Pokeman", JOptionPane.INFORMATION_MESSAGE, null, possibleValues1, possibleValues1[0]);
+			if(selectedValue1 == null) {
 				System.exit(0);
+			}
+			else if (selectedValue1.equals("Traditional Safari Zone")) {
+				//do something
+			} else if (selectedValue1.equals("Catch the MercerMaid")) {
+				//do something
+			}
+			
+			///// End new changes
+			Object[] possibleValues2 = { "Easy Map", "Hard Map" };
+			Object selectedValue2 = JOptionPane.showInputDialog(null, "Which map do you want to play?",
+					"Welcome to Pokeman", JOptionPane.INFORMATION_MESSAGE, null, possibleValues2, possibleValues2[0]);
+			if(selectedValue2 == null) {
+				System.exit(0);
+			}
+			else if (selectedValue2.equals("Easy Map")) {
+				map = new Map();
+			} else if (selectedValue2.equals("Hard Map")) {
+				map = new Map("map2");
 			}
 			// build trainer and map and battle
 			trainer = new Trainer("Testy");
 			mapPanel = new MapView(map);
 			battlePanel = new BattleView(new Scyther(), trainer);
-		} else {
+		} 
+		
+		else {
 			map = aMap;
 			trainer = aTrainer;
 			mapPanel = new MapView(aMap);
@@ -117,11 +137,13 @@ public class PlayerView extends JFrame {
 	private void checkBattle(){
 		if (map.beginPokemonBattle(map.getTrainerY(), map.getTrainerX()) == true) {
 			battlePanel = new BattleView(map.whoToBattle(), trainer);
+			mapPanel.beginBattleAnimation();
 			bothViews.add(battlePanel, "battle");
 			CardLayout cardLayout = (CardLayout) bothViews.getLayout();
 			cardLayout.show(bothViews, "battle");			
 		}
 	} 
+	
 	
 	private void checkOutOfBalls(){
 		if (trainer.getPokeballsRemaining() == 0) {
@@ -176,7 +198,44 @@ public class PlayerView extends JFrame {
 		}
 	}
 	
-	Object[] possibleValues = { "Select Action...", "", "", "" };
+	private void askToSave(){
+		int reply = JOptionPane.showConfirmDialog(null, "Do you want to save your progress?", null,
+				JOptionPane.YES_NO_CANCEL_OPTION);
+		if (reply == JOptionPane.YES_OPTION) {
+			// write trainer
+			File f = new File("trainerSave.txt");
+			f.delete();
+			try {
+				FileOutputStream fos = new FileOutputStream(f, false);
+				ObjectOutputStream oos = new ObjectOutputStream(fos);
+				oos.writeObject(trainer);
+				oos.close();
+				fos.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			// write map
+			File f2 = new File("mapSave.txt");
+			f2.delete();
+			try {
+				FileOutputStream fos = new FileOutputStream(f2, false);
+				ObjectOutputStream oos = new ObjectOutputStream(fos);
+				oos.writeObject(map);
+				oos.close();
+				fos.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			// exit
+			System.exit(0);
+		}
+		if (reply == JOptionPane.NO_OPTION) {
+			// exit
+			System.exit(0);
+		}
+	}
+	
+	Object[] possibleValues = { "Select Action...", "", "", "", "Quit Game"};
 	private int processingSpeed = 330;
 	 
 	private class ArrowKeyListener implements KeyListener {
@@ -238,7 +297,7 @@ public class PlayerView extends JFrame {
 							"Menu", JOptionPane.INFORMATION_MESSAGE, null, possibleValues, possibleValues[0]);
 
 					if (selectedValue!= null && selectedValue.equals("Quit Game")) {
-						System.exit(0);
+						askToSave();
 					}
 					else if (selectedValue!= null && selectedValue.equals("Equip Running Shoes")) {
 						mapPanel.speedUpTrainer();
@@ -278,40 +337,7 @@ public class PlayerView extends JFrame {
 
 		@Override
 		public void windowClosing(WindowEvent arg0) {
-			int reply = JOptionPane.showConfirmDialog(null, "Do you want to save your progress?", null,
-					JOptionPane.YES_NO_CANCEL_OPTION);
-			if (reply == JOptionPane.YES_OPTION) {
-				// write trainer
-				File f = new File("trainerSave.txt");
-				f.delete();
-				try {
-					FileOutputStream fos = new FileOutputStream(f, false);
-					ObjectOutputStream oos = new ObjectOutputStream(fos);
-					oos.writeObject(trainer);
-					oos.close();
-					fos.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				// write map
-				File f2 = new File("mapSave.txt");
-				f2.delete();
-				try {
-					FileOutputStream fos = new FileOutputStream(f2, false);
-					ObjectOutputStream oos = new ObjectOutputStream(fos);
-					oos.writeObject(map);
-					oos.close();
-					fos.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				// exit
-				System.exit(0);
-			}
-			if (reply == JOptionPane.NO_OPTION) {
-				// exit
-				System.exit(0);
-			}
+			askToSave();
 		}
 
 		@Override

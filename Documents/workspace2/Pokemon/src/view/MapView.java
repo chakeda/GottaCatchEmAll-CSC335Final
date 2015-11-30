@@ -76,7 +76,7 @@ public class MapView extends JPanel implements Observer {
 			e.printStackTrace();
 		}
 		// call it to initiate
-		timer = new Timer(40, new TimerListener());
+		timer = new Timer(40, new MoveListener());
 		repaint();
 	}
 
@@ -179,7 +179,7 @@ public class MapView extends JPanel implements Observer {
 					g2.drawImage(imageGrid[c / 16][r / 16], r - 256, c, null);
 				}
 			}
-			
+
 			if (direction == Direction.SOUTH) {
 				if (tic < 4) {
 					g2.drawImage(playerForward2, X - 256, Y, null);
@@ -307,7 +307,7 @@ public class MapView extends JPanel implements Observer {
 	}
 
 	// move around
-	private class TimerListener implements ActionListener {
+	private class MoveListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
@@ -340,7 +340,7 @@ public class MapView extends JPanel implements Observer {
 	}
 
 	public void speedUpTrainer() {
-		timer = new Timer(1, new TimerListener());
+		timer = new Timer(1, new MoveListener());
 	}
 
 	public void changeCostume() {
@@ -356,7 +356,24 @@ public class MapView extends JPanel implements Observer {
 		playerRight1 = costumeRight1;
 		playerRight2 = costumeRight2;
 		playerRight3 = costumeRight3;
-
 		repaint();
+	}
+
+	int battleAnimationTic;
+	Timer battleAnimationTimer = new Timer(250, new BattleAnimationListener());
+	public void beginBattleAnimation() {
+		battleAnimationTic = 0;
+		battleAnimationTimer.start();
+	}
+	
+	private class BattleAnimationListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO grey screen flashes a few times
+			
+			
+		}
+		
 	}
 }
