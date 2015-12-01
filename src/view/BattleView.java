@@ -2,6 +2,7 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -18,6 +19,7 @@ import java.util.Observer;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -52,7 +54,10 @@ public class BattleView extends JPanel {
 	private JPanel buttons;
 	private JTextArea exitScreen;
 	private boolean battleComplete;
-	private Image pokemonImage;
+	
+	private JPanel imagePanel;
+	private Image pokemonImage, trainerImage, trainerImage2, pokeball;
+	private JLabel pokemonImageLabel, trainerImageLabel;
 	
 	private int projectileX, projectileY, tic, n;
 	private Timer timer;
@@ -72,13 +77,36 @@ public class BattleView extends JPanel {
 	    } catch (IOException e) {
 	      e.printStackTrace();
 	    }
+	    
+	    try {
+	      trainerImage = ImageIO.read(new File("./images/trainerBattleImages/trainerNeutral.png"));
+	    } catch (IOException e) {
+	      e.printStackTrace();
+	    }
+	    
+	    try {
+	      trainerImage2 = ImageIO.read(new File("./images/trainerBattleImages/trainerThrow.png"));
+	    } catch (IOException e) {
+	      e.printStackTrace();
+	    }
+	    
+	    try {
+	      pokeball = ImageIO.read(new File("./images/pokeball.png"));
+	    } catch (IOException e) {
+	      e.printStackTrace();
+	    }
+	    
 		battleLabel = new JTextArea("Placeholder");
 		battleLabel.setText("Wild " + pokemon.getName() + " appeared!");
 		battleLabel.setFont(new Font("Courier", Font.BOLD, 14));
 		battleLabel.setBackground(getBackground());
+
+		// trainer image
+		trainerImageLabel = new JLabel(new ImageIcon(trainerImage));
+		this.add(trainerImageLabel);
 		
 		// poke image
-		JLabel pokemonImageLabel = new JLabel(new ImageIcon(pokemonImage));
+		pokemonImageLabel = new JLabel(new ImageIcon(pokemonImage));
 		this.add(pokemonImageLabel);
 
 		bait = new JButton("Throw Bait");
@@ -113,6 +141,27 @@ public class BattleView extends JPanel {
 		this.battleComplete = false;
 		this.songplayer = sp;
 		
+		// TODO: this does not set them off the screen as intended.
+		pokemonImageLabel.setLocation(pokemonImageLabel.getLocation().x-500, pokemonImageLabel.getLocation().y);
+		trainerImageLabel.setLocation(pokemonImageLabel.getLocation().x+756, trainerImageLabel.getLocation().y);
+		
+		// initial slide in anime
+		ActionListener initialAnimationPerformer = new ActionListener(){
+			int count = 0;
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (count == 20){
+					((Timer)e.getSource()).stop();
+				}else{
+					// and down
+					pokemonImageLabel.setLocation(pokemonImageLabel.getLocation().x+5, pokemonImageLabel.getLocation().y);
+					trainerImageLabel.setLocation(trainerImageLabel.getLocation().x-5, trainerImageLabel.getLocation().y);
+					count++;	
+				}
+			}
+		};
+		new Timer(100, initialAnimationPerformer).start();
+		
 	}
 	
 	/************
@@ -122,7 +171,7 @@ public class BattleView extends JPanel {
 	// launch projectile
 	private void drawProjectileWithAnimation() {
 		// set projectile initial position
-		projectileX = 0;
+		projectileX = 100;
 		projectileY = 35;
 		n = 10; 
 		tic = 1;
@@ -177,12 +226,42 @@ public class BattleView extends JPanel {
 	private class BaitListener implements ActionListener {
 		public void actionPerformed(ActionEvent evt) {
 			if (!battleComplete) {
+				
 				projectileColor = Color.PINK;
 				drawProjectileWithAnimation();
+				
+				// animate pokemon
+				ActionListener animationPerformer = new ActionListener(){
+					int count = 0;
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						
+						// trainer throws 
+						Icon trainerImage2Icon = new ImageIcon(trainerImage2);
+						trainerImageLabel.setIcon(trainerImage2Icon);
+						
+						if (count == 10){
+							// trainer normal 
+							Icon trainerImageIcon = new ImageIcon(trainerImage);
+							trainerImageLabel.setIcon(trainerImageIcon);
+							((Timer)e.getSource()).stop();
+						}else if (count % 2 == 0){
+							// up
+							pokemonImageLabel.setLocation(pokemonImageLabel.getLocation().x, pokemonImageLabel.getLocation().y+5);
+							count++;	
+						}else{
+							// and down
+							pokemonImageLabel.setLocation(pokemonImageLabel.getLocation().x, pokemonImageLabel.getLocation().y-5);
+							count++;	
+						}
+					}
+				};
+				new Timer(100, animationPerformer).start();
+	
 				pokemon.baitThrown();
-				battleLabel.setText(pokemon.getName() + " eats the bait!");
+				battleLabel.setText("     " + pokemon.getName() + " eats the bait!     ");
 				if (pokemon.willRunAway(new Random())) {
-					battleLabel.setText(pokemon.getName() + " ran away!");
+					battleLabel.setText("     " + pokemon.getName() + " ran away!     ");
 					setBattleComplete();
 				}
 			}
@@ -195,10 +274,39 @@ public class BattleView extends JPanel {
 			if (!battleComplete) {
 				projectileColor = Color.GRAY;
 				drawProjectileWithAnimation();
+				
+				// animate pokemon
+				ActionListener animationPerformer = new ActionListener(){
+					int count = 0;
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						
+						// trainer throws 
+						Icon trainerImage2Icon = new ImageIcon(trainerImage2);
+						trainerImageLabel.setIcon(trainerImage2Icon);
+						
+						if (count == 10){
+							// trainer normal 
+							Icon trainerImageIcon = new ImageIcon(trainerImage);
+							trainerImageLabel.setIcon(trainerImageIcon);
+							((Timer)e.getSource()).stop();
+						}else if (count % 2 == 0){
+							// left
+							pokemonImageLabel.setLocation(pokemonImageLabel.getLocation().x+5, pokemonImageLabel.getLocation().y);
+							count++;	
+						}else{
+							// and right
+							pokemonImageLabel.setLocation(pokemonImageLabel.getLocation().x-5, pokemonImageLabel.getLocation().y);
+							count++;	
+						}
+					}
+				};
+				new Timer(100, animationPerformer).start();
+				
 				pokemon.rockThrown();
-				battleLabel.setText(pokemon.getName() + " is pissed!");
+				battleLabel.setText("     " + pokemon.getName() + " is pissed!     ");
 				if (pokemon.willRunAway(new Random())) {
-					battleLabel.setText(pokemon.getName() + " ran away!");
+					battleLabel.setText("     " + pokemon.getName() + " ran away!     ");
 					setBattleComplete();
 				}
 			}
@@ -212,16 +320,50 @@ public class BattleView extends JPanel {
 			if (!battleComplete) {
 				projectileColor = Color.GREEN;
 				drawProjectileWithAnimation();
+				
+				// animate pokemon
+				ActionListener animationPerformer = new ActionListener(){
+					int count = 0;
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						
+						// trainer throws 
+						Icon trainerImage2Icon = new ImageIcon(trainerImage2);
+						trainerImageLabel.setIcon(trainerImage2Icon);
+						
+						if (count == 10){
+							// trainer normal 
+							Icon trainerImageIcon = new ImageIcon(trainerImage);
+							trainerImageLabel.setIcon(trainerImageIcon);
+							((Timer)e.getSource()).stop();
+						}else{
+							// turn pokemon to ball
+							Icon pokemonBallImageIcon = new ImageIcon(pokeball);
+							pokemonImageLabel.setIcon(pokemonBallImageIcon);
+							
+							count++;	
+						}
+					}
+				};
+				new Timer(100, animationPerformer).start();
+				
 				trainer.throwPokeball();
 				if (pokemon.isCaught(new Random())) {
+					
+					// TODO: keep the pokemon in a ball state
+					//     somehow this doesnt work... it gets called when not supposed to
+					
+					//Icon pokemonBallImageIcon = new ImageIcon(pokeball);
+					//pokemonImageLabel.setIcon(pokemonBallImageIcon);
+					
 					songplayer.playPokemonCaughtMusic();
-					battleLabel.setText("You caught " + pokemon.getName() + "!");
+					battleLabel.setText("     You caught " + pokemon.getName() + "!     ");
 					trainer.addToPokemonList(pokemon);
 					setBattleComplete();
 				}
 				else{
-					battleLabel.setText(pokemon.getName() + " bursts free!");
-				}
+					battleLabel.setText("     " + pokemon.getName() + " bursts free!     ");
+				} 
 			}
 		}
 	}
@@ -230,7 +372,7 @@ public class BattleView extends JPanel {
 		public void actionPerformed(ActionEvent evt) {
 			//drawProjectileWithAnimation();
 			if (!battleComplete) {
-				battleLabel.setText("Ran away safely!");
+				battleLabel.setText("     Ran away safely!     ");
 				setBattleComplete();
 			}
 		}

@@ -29,7 +29,7 @@ public class MapView extends JPanel implements Observer {
 	 * 
 	 */
 	private Map map;
-	private Image plain, grass, bush, pokeball;
+	private Image plain, grass, bush, pokeball, water;
 	private Image playerForward1, playerForward2, playerForward3, playerLeft1, playerLeft2, playerLeft3, playerBack1,
 			playerBack2, playerBack3, playerRight1, playerRight2, playerRight3;
 	private Image costumeForward1, costumeForward2, costumeForward3, costumeLeft1, costumeLeft2, costumeLeft3,
@@ -61,6 +61,7 @@ public class MapView extends JPanel implements Observer {
 			grass = ImageIO.read(new File("./images/grass.png"));
 			bush = ImageIO.read(new File("./images/bush.png"));
 			pokeball = ImageIO.read(new File("./images/pokeball.png"));
+			water = ImageIO.read(new File("./images/water.gif"));
 
 			costumeForward1 = ImageIO.read(new File("./images/costumeChange/rubyFront1.png"));
 			costumeForward2 = ImageIO.read(new File("./images/costumeChange/rubyFront2.png"));
@@ -106,6 +107,14 @@ public class MapView extends JPanel implements Observer {
 		// we're going to build and draw this.
 		Image[][] imageGrid = new Image[map.getMapLength()][map.getMapLength()];
 
+		// tester
+		for(int i = 0; i<map.getMapLength(); i++){
+			for(int j=0; j<map.getMapLength(); j++){
+				//System.out.print(map.getTileAt(i, j));
+			}
+			//System.out.println();
+		}
+		
 		// start with terrain. find terrain
 		for (int i = 0; i < map.getMapLength(); i++) {
 			for (int j = 0; j < map.getMapLength(); j++) {
@@ -116,7 +125,11 @@ public class MapView extends JPanel implements Observer {
 					imageGrid[i][j] = bush;
 				} else if (map.getTileAt(i, j).equals("I")) {
 					imageGrid[i][j] = pokeball;
-				} else {
+				} 
+				else if (map.getTileAt(i, j).equals("W")) {
+					imageGrid[i][j] = water;
+				} 
+				else {
 					imageGrid[i][j] = plain;
 				}
 			}
