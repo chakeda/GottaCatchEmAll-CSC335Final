@@ -7,7 +7,7 @@ import model.Item;
 import model.Trainer;
 import model.items.CostumeChange;
 import model.items.FishingPole;
-import model.items.MasterBall;
+import model.items.SafariBall;
 import model.items.RunningShoes;
 
 import org.junit.Test;
@@ -17,7 +17,7 @@ public class ItemTest {
 	@Test
 	public void test() {
 		Trainer trainer = new Trainer("Ash");
-		MasterBall mb = new MasterBall("master", Category.POKEBALLS);
+		SafariBall mb = new SafariBall("master", Category.POKEBALLS);
 		FishingPole fp = new FishingPole("fishPole", Category.HOLD_ITEM);
 		RunningShoes rs = new RunningShoes("flash", Category.HOLD_ITEM);
 		CostumeChange cc = new CostumeChange("change", Category.HOLD_ITEM);
@@ -63,7 +63,7 @@ public class ItemTest {
 
 	@Test
 	public void testAbstractItemSetters() {
-		MasterBall mb = new MasterBall("master", Category.POKEBALLS);
+		SafariBall mb = new SafariBall("master", Category.POKEBALLS);
 		assertEquals(mb.getName(), "master");
 		assertEquals(mb.getCategory(), Category.POKEBALLS);
 		mb.setName("MASTER");

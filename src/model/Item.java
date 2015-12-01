@@ -34,6 +34,6 @@ public abstract class Item implements Serializable{
 	}
 	
 	abstract public void update();//will be used when the object is found
-	abstract public void execute();//execute will be the method that call animation for the individual items
+	//abstract public void execute();//execute will be the method that call animation for the individual items
 
 }

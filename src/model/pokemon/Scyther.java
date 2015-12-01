@@ -12,13 +12,14 @@ public class Scyther extends Pokemon implements Serializable{
 	private static final int CATCHABILITY = 75; //out of a possible 100, the higher the number = harder to catch
 	private static final int ESCAPABILITYCONSTANT = 10;
 	private static final int CATCHABILITYCONSTANT = 5;
-	
+	private static final int HP = 70;
 	
 	public Scyther(){ 
 		this.setCatchability(CATCHABILITY);
 		this.setDuration(DURATION);
 		this.setEscapability(ESCAPABILITY);
 		this.setRarity(RARITY); //took out battle image
+		this.setHP(HP);
 		this.setName("Scyther");
 	}
 	

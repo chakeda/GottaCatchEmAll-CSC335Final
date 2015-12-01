@@ -10,6 +10,14 @@ public abstract class Pokemon implements Serializable{
 	private int escapability; //likelihood to escape (higher for more rare pokemon) 
 	private int catchability; //likelihood to be caught
 	private String name; // pokemon name for views, added by Kite
+	private int HP; 
+	
+	public void setHP(int hp){
+		HP = hp; 
+	}
+	public int getHP(){
+		return HP;
+	}
 	
 	public void setRarity(int r){
 		rarity = r;

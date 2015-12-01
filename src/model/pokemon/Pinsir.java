@@ -12,6 +12,7 @@ public class Pinsir extends Pokemon implements Serializable{
 	private static final int CATCHABILITY = 90; 
 	private static final int ESCAPABILITYCONSTANT = 15;
 	private static final int CATCHABILITYCONSTANT = 10;
+	private static final int HP = 65;
 	
 	
 	public Pinsir(){ 
@@ -19,6 +20,7 @@ public class Pinsir extends Pokemon implements Serializable{
 		this.setDuration(DURATION);
 		this.setEscapability(ESCAPABILITY);
 		this.setRarity(RARITY); //took out battle image
+		this.setHP(HP);
 		this.setName("Pinsir");
 	}
 	

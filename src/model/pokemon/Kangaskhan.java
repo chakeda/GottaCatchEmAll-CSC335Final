@@ -12,6 +12,7 @@ public class Kangaskhan extends Pokemon implements Serializable{
 	private static final int CATCHABILITY = 85; 
 	private static final int ESCAPABILITYCONSTANT = 15;
 	private static final int CATCHABILITYCONSTANT = 5;
+	private static final int HP = 105;
 	
 	
 	public Kangaskhan(){ 
@@ -19,6 +20,7 @@ public class Kangaskhan extends Pokemon implements Serializable{
 		this.setDuration(DURATION);
 		this.setEscapability(ESCAPABILITY);
 		this.setRarity(RARITY); //took out battle image
+		this.setHP(HP);
 		this.setName("Kangaskhan");
 		
 	}
