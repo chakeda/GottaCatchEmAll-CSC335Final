@@ -189,8 +189,20 @@ public class PlayerView extends JFrame {
 			else if(i.equals("Fishing Pole")){
 				possibleValues[2] = "Use Fishing Pole";
 			}
-			else{
+			else if(i.equals("Costume Change")){
 				possibleValues[3] = "Change Costume";
+			}
+			else if(i.equals("Lemonade")){
+				possibleValues[4] = "Lemonade";
+			}
+			else if(i.equals("Energy")){
+				possibleValues[5] = "Energy Root";
+			}
+			else if(i.equals("Berry Juice")){
+				possibleValues[6] = "Berry Juice";
+			}
+			else if(i.equals("Water")){
+				possibleValues[7] = "Fresh Water";
 			}
 		}
 	}
@@ -232,7 +244,7 @@ public class PlayerView extends JFrame {
 		}
 	}
 	
-	Object[] possibleValues = { "Select Action...", "", "", "", "Quit Game" };
+	Object[] possibleValues = { "Select Action...", "", "", "", "", "", "", "", "Quit Game" };
 	private int processingSpeed = 330;
 	 
 	private class ArrowKeyListener implements KeyListener {
