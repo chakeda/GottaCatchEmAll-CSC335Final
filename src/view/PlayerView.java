@@ -14,13 +14,16 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
 import controller.SongPlayer;
 import model.Direction;
 import model.Item;
 import model.Map;
+import model.Pokemon;
 import model.Trainer;
 import model.pokemon.Scyther;
 
@@ -42,7 +45,7 @@ public class PlayerView extends JFrame {
 	private Map map;
 	private Trainer trainer;
 	private SongPlayer songplayer;
-
+	private Pokemon test;
 	public PlayerView(Map aMap, Trainer aTrainer) {
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setSize(256, 256 + 20); // +20 for title etc
@@ -206,7 +209,22 @@ public class PlayerView extends JFrame {
 			}
 		}
 	}
-	
+	Object[] possiblePokemon = {"","","","","","","","","",""};
+	Object selectedPokemon; 
+	private void setPossiblePokemonValues(){
+		for(int i = 0; i < trainer.getPokemonList().size(); i++){
+			possiblePokemon[i] = trainer.getPokemonList().get(i);
+		}
+	}
+	/*private void setNewHPLemonade(){
+		Pokemon test; 
+		for(int i = 0; i < trainer.getPokemonList().size(); i++){
+			if(selectedPokemon.equals(trainer.getPokemonList().get(i))){
+				test = trainer.get
+			}
+		}
+	}
+	*/
 	private void askToSave(){
 		int reply = JOptionPane.showConfirmDialog(null, "Do you want to save your progress?", null,
 				JOptionPane.YES_NO_CANCEL_OPTION);
@@ -318,7 +336,32 @@ public class PlayerView extends JFrame {
 					else if (selectedValue!= null && selectedValue.equals("Quit Game")){
 						System.exit(0);
 					}
+					else if (selectedValue != null && selectedValue.equals("Lemonade")){
+						setPossiblePokemonValues();
+						selectedPokemon = JOptionPane.showInputDialog(null, "Please select a Pokemon", "Pokemon", 
+								JOptionPane.QUESTION_MESSAGE, null, possiblePokemon, possiblePokemon[0]);
+						//setNewHPLemonade(); 
+					}
+					else if (selectedValue != null && selectedValue.equals("Energy Root")){
+						setPossiblePokemonValues();
+						selectedPokemon = JOptionPane.showInputDialog(null, "Please select a Pokemon", "Pokemon", 
+								JOptionPane.QUESTION_MESSAGE, null, possiblePokemon, possiblePokemon[0]);
+						//setNewHPEnergy();
+					}
+					else if (selectedValue != null && selectedValue.equals("Berry Juice")){
+						setPossiblePokemonValues();
+						selectedPokemon = JOptionPane.showInputDialog(null, "Please select a Pokemon", "Pokemon", 
+								JOptionPane.QUESTION_MESSAGE, null, possiblePokemon, possiblePokemon[0]);
+						//setNewHPBerry();
+					}
+					else if (selectedValue != null && selectedValue.equals("Fresh Water")){
+						setPossiblePokemonValues();
+						selectedPokemon = JOptionPane.showInputDialog(null, "Please select a Pokemon", "Pokemon", 
+								JOptionPane.QUESTION_MESSAGE, null, possiblePokemon, possiblePokemon[0]);
+						//setNewHPWater();
+					}
 				}
+					
 
 				// return to overworld via backspace. should require an event trigger
 				if (ke.getKeyCode() == KeyEvent.VK_BACK_SPACE) {

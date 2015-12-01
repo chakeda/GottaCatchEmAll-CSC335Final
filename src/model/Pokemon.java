@@ -18,7 +18,9 @@ public abstract class Pokemon implements Serializable{
 	public int getHP(){
 		return HP;
 	}
-	
+	public void updateHP(int hp){
+		HP += hp; 
+	}
 	public void setRarity(int r){
 		rarity = r;
 	}
