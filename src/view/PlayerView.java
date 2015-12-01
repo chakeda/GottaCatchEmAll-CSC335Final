@@ -33,7 +33,7 @@ public class PlayerView extends JFrame {
 	*/
 	private static final long serialVersionUID = 1L;
 	
-	private static final int NUMBER_OF_STEPS_ALLOWED = 5000;
+	private static int NUMBER_OF_STEPS_ALLOWED = 500;
 
 
 	private MapView mapPanel;
@@ -55,12 +55,26 @@ public class PlayerView extends JFrame {
 
 		// set map and trainer
 		if (aMap == null && aTrainer == null) {
-			Object[] possibleValues = { "Easy Map", "Hard Map" };
-			Object selectedValue = JOptionPane.showInputDialog(null, "Which map do you want to play?",
-					"Welcome to Pokeman", JOptionPane.INFORMATION_MESSAGE, null, possibleValues, possibleValues[0]);
-			if (selectedValue.equals("Easy Map")) {
+			
+			//select win condition
+			Object[] possibleValues1 = { "Traditional", "Catch the MercerMermaid" };
+			Object selectedValue1 = JOptionPane.showInputDialog(null, "Select your win condition: ",
+					"Welcome to Pokeman", JOptionPane.INFORMATION_MESSAGE, null, possibleValues1, possibleValues1[0]);
+			if (selectedValue1.equals("Traditional")) {
+				//do something
+			} else if (selectedValue1.equals("Catch the MercerMermaid")) {
+				//do something
+			} else {
+				System.exit(0);
+			}
+			
+			//select map
+			Object[] possibleValues2 = { "Easy Map", "Hard Map" };
+			Object selectedValue2 = JOptionPane.showInputDialog(null, "Which map do you want to play?",
+					"Welcome to Pokeman", JOptionPane.INFORMATION_MESSAGE, null, possibleValues2, possibleValues2[0]);
+			if (selectedValue2.equals("Easy Map")) {
 				map = new Map();
-			} else if (selectedValue.equals("Hard Map")) {
+			} else if (selectedValue2.equals("Hard Map")) {
 				map = new Map("map2");
 			} else {
 				System.exit(0);

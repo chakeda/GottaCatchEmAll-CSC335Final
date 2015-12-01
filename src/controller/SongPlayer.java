@@ -37,11 +37,7 @@ public class SongPlayer {
 		stopMusic();
 		try {
 			in = new FileInputStream(songName);
-			audioStream = new AudioStream(in);
-			
-			AudioData audiodata = audioStream.getData();
-			ContinuousAudioDataStream cas = new ContinuousAudioDataStream (audiodata);
-			
+			audioStream = new AudioStream(in);	
 			AudioPlayer.player.start(audioStream);
 		} catch (IOException e) {
 			e.printStackTrace();
