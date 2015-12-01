@@ -107,12 +107,14 @@ public class MapView extends JPanel implements Observer {
 		// we're going to build and draw this.
 		Image[][] imageGrid = new Image[map.getMapLength()][map.getMapLength()];
 
+		// tester
 		for(int i = 0; i<map.getMapLength(); i++){
 			for(int j=0; j<map.getMapLength(); j++){
-				System.out.print(map.getTileAt(i, j));
+				//System.out.print(map.getTileAt(i, j));
 			}
-			System.out.println();
+			//System.out.println();
 		}
+		
 		// start with terrain. find terrain
 		for (int i = 0; i < map.getMapLength(); i++) {
 			for (int j = 0; j < map.getMapLength(); j++) {

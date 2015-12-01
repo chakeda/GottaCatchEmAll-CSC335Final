@@ -83,7 +83,7 @@ public class Map extends Observable implements Serializable{
 		setBush(11,21);
 		setBush(12,22);
 		setBush(13,23);
-		setItem(new FishingPole("Fishing Pole", Category.HOLD_ITEM), 30,30); 
+		setItem(new FishingPole("Fishing Pole", Category.HOLD_ITEM), 26,26); 
 		
 		// map1.3: bottom left (17,32), (0, 16)
 		setGrass(29,2);
@@ -307,8 +307,8 @@ public class Map extends Observable implements Serializable{
 				return false;
 			}
 			if (map[tempI][tempJ].equals("I")){
+				// Added to inventory in MapView.
 				map[tempI][tempJ] = ""; // turn ball to plain
-				// TODO: somehow add the item into the inventory...
 				return true;
 			}
 		}else{
