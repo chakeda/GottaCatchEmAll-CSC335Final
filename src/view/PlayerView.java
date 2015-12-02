@@ -216,15 +216,53 @@ public class PlayerView extends JFrame {
 			possiblePokemon[i] = trainer.getPokemonList().get(i);
 		}
 	}
-	/*private void setNewHPLemonade(){
+	
+	//Update the HP of a pokemon that used one of the 4 Items
+	private void setNewHPLemonade(){
 		Pokemon test; 
-		for(int i = 0; i < trainer.getPokemonList().size(); i++){
-			if(selectedPokemon.equals(trainer.getPokemonList().get(i))){
-				test = trainer.get
+		for(int i = 0; i < trainer.getAllPokemon().size(); i++){
+			if(selectedPokemon.equals(trainer.getAllPokemon().get(i).getName())){
+				test = trainer.getAllPokemon().get(i);
+				//System.out.println(test.getHP());
+				test.updateHP(80);
+				//System.out.println(test.getHP());
 			}
 		}
 	}
-	*/
+	private void setNewHPWater(){
+		Pokemon test; 
+		for(int i = 0; i < trainer.getAllPokemon().size(); i++){
+			if(selectedPokemon.equals(trainer.getAllPokemon().get(i).getName())){
+				test = trainer.getAllPokemon().get(i);
+				//System.out.println(test.getHP());
+				test.updateHP(50);
+				//System.out.println(test.getHP());
+			}
+		}
+	}
+	private void setNewHPBerry(){
+		Pokemon test; 
+		for(int i = 0; i < trainer.getAllPokemon().size(); i++){
+			if(selectedPokemon.equals(trainer.getAllPokemon().get(i).getName())){
+				test = trainer.getAllPokemon().get(i);
+				//System.out.println(test.getHP());
+				test.updateHP(20);
+				//System.out.println(test.getHP());
+			}
+		}
+	}
+	private void setNewHPEnergy(){
+		Pokemon test; 
+		for(int i = 0; i < trainer.getAllPokemon().size(); i++){
+			if(selectedPokemon.equals(trainer.getAllPokemon().get(i).getName())){
+				test = trainer.getAllPokemon().get(i);
+				//System.out.println(test.getHP());
+				test.updateHP(200);
+				//System.out.println(test.getHP());
+			}
+		}
+	}
+	
 	private void askToSave(){
 		int reply = JOptionPane.showConfirmDialog(null, "Do you want to save your progress?", null,
 				JOptionPane.YES_NO_CANCEL_OPTION);
@@ -340,25 +378,26 @@ public class PlayerView extends JFrame {
 						setPossiblePokemonValues();
 						selectedPokemon = JOptionPane.showInputDialog(null, "Please select a Pokemon", "Pokemon", 
 								JOptionPane.QUESTION_MESSAGE, null, possiblePokemon, possiblePokemon[0]);
-						//setNewHPLemonade(); 
+						setNewHPLemonade(); 
 					}
 					else if (selectedValue != null && selectedValue.equals("Energy Root")){
 						setPossiblePokemonValues();
 						selectedPokemon = JOptionPane.showInputDialog(null, "Please select a Pokemon", "Pokemon", 
 								JOptionPane.QUESTION_MESSAGE, null, possiblePokemon, possiblePokemon[0]);
-						//setNewHPEnergy();
+						setNewHPEnergy();
 					}
 					else if (selectedValue != null && selectedValue.equals("Berry Juice")){
 						setPossiblePokemonValues();
 						selectedPokemon = JOptionPane.showInputDialog(null, "Please select a Pokemon", "Pokemon", 
 								JOptionPane.QUESTION_MESSAGE, null, possiblePokemon, possiblePokemon[0]);
-						//setNewHPBerry();
+						
+						setNewHPBerry();
 					}
 					else if (selectedValue != null && selectedValue.equals("Fresh Water")){
 						setPossiblePokemonValues();
 						selectedPokemon = JOptionPane.showInputDialog(null, "Please select a Pokemon", "Pokemon", 
 								JOptionPane.QUESTION_MESSAGE, null, possiblePokemon, possiblePokemon[0]);
-						//setNewHPWater();
+						setNewHPWater();
 					}
 				}
 					
