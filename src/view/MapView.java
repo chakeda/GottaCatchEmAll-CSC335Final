@@ -1,8 +1,10 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -13,9 +15,13 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import javax.imageio.ImageIO;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import com.sun.awt.AWTUtilities;
+
+import controller.SongPlayer;
 import model.Direction;
 import model.Map;
 
@@ -108,13 +114,13 @@ public class MapView extends JPanel implements Observer {
 		Image[][] imageGrid = new Image[map.getMapLength()][map.getMapLength()];
 
 		// tester
-		for(int i = 0; i<map.getMapLength(); i++){
-			for(int j=0; j<map.getMapLength(); j++){
-				//System.out.print(map.getTileAt(i, j));
+		for (int i = 0; i < map.getMapLength(); i++) {
+			for (int j = 0; j < map.getMapLength(); j++) {
+				// System.out.print(map.getTileAt(i, j));
 			}
-			//System.out.println();
+			// System.out.println();
 		}
-		
+
 		// start with terrain. find terrain
 		for (int i = 0; i < map.getMapLength(); i++) {
 			for (int j = 0; j < map.getMapLength(); j++) {
@@ -125,11 +131,9 @@ public class MapView extends JPanel implements Observer {
 					imageGrid[i][j] = bush;
 				} else if (map.getTileAt(i, j).equals("I")) {
 					imageGrid[i][j] = pokeball;
-				} 
-				else if (map.getTileAt(i, j).equals("W")) {
+				} else if (map.getTileAt(i, j).equals("W")) {
 					imageGrid[i][j] = water;
-				} 
-				else {
+				} else {
 					imageGrid[i][j] = plain;
 				}
 			}
@@ -318,7 +322,10 @@ public class MapView extends JPanel implements Observer {
 			}
 
 		}
-
+		
+		if(battleAnimationFlag){
+			g2.fillRect(0, 0, 256, 256);
+		}
 	}
 
 	// move around
@@ -392,8 +399,41 @@ public class MapView extends JPanel implements Observer {
 			}
 		}
 		costumeFlag = !costumeFlag;
-
 		repaint();
 	}
+	
+	/**intro battle animation stuff is below**/
 
+	private boolean battleAnimationFlag = false;
+	private Timer battleAnimationTimer = new Timer(125, new BattleAnimationListener(this));
+	private int tic2 = 0;
+	public void beginBattleAnimation(){
+		battleAnimationTimer.start();
+	}
+	
+	
+	private class BattleAnimationListener implements ActionListener{
+		MapView map;
+		
+		public BattleAnimationListener(MapView thisMap){
+			map = thisMap;
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			if(tic2 < 8){
+				battleAnimationFlag =! battleAnimationFlag;
+				tic2++;
+			}
+			else{
+				battleAnimationTimer.stop();
+				battleAnimationFlag = false;
+				tic2 = 0;
+			}
+			map.repaint();
+		}
+		
+	}
+	
 }

@@ -14,6 +14,8 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.locks.Lock;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -32,9 +34,8 @@ public class PlayerView extends JFrame {
 	* 
 	*/
 	private static final long serialVersionUID = 1L;
-	
-	private static int NUMBER_OF_STEPS_ALLOWED = 500;
 
+	private static int NUMBER_OF_STEPS_ALLOWED = 500;
 
 	private MapView mapPanel;
 	private BattleView battlePanel;
@@ -55,20 +56,20 @@ public class PlayerView extends JFrame {
 
 		// set map and trainer
 		if (aMap == null && aTrainer == null) {
-			
-			//select win condition
+
+			// select win condition
 			Object[] possibleValues1 = { "Traditional", "Catch the MercerMermaid" };
 			Object selectedValue1 = JOptionPane.showInputDialog(null, "Select your win condition: ",
 					"Welcome to Pokeman", JOptionPane.INFORMATION_MESSAGE, null, possibleValues1, possibleValues1[0]);
 			if (selectedValue1.equals("Traditional")) {
-				//do something
+				// do something
 			} else if (selectedValue1.equals("Catch the MercerMermaid")) {
-				//do something
+				// do something
 			} else {
 				System.exit(0);
 			}
-			
-			//select map
+
+			// select map
 			Object[] possibleValues2 = { "Easy Map", "Hard Map" };
 			Object selectedValue2 = JOptionPane.showInputDialog(null, "Which map do you want to play?",
 					"Welcome to Pokeman", JOptionPane.INFORMATION_MESSAGE, null, possibleValues2, possibleValues2[0]);
@@ -89,7 +90,7 @@ public class PlayerView extends JFrame {
 			mapPanel = new MapView(aMap);
 			battlePanel = new BattleView(new Scyther(), trainer, songplayer);
 		}
-		
+
 		// listeners
 		this.addKeyListener(new ArrowKeyListener());
 		this.addWindowListener(new CloseButtonListener());
@@ -105,52 +106,51 @@ public class PlayerView extends JFrame {
 		bothViews.addKeyListener(new ArrowKeyListener());
 		bothViews.setFocusable(true);
 		this.add(bothViews, BorderLayout.CENTER);
-		
-		songplayer= new SongPlayer();
-		
+
+		songplayer = new SongPlayer();
+
 		songplayer.playMainMusic();
 
-	   
 	}
-	
-	
-	
 
 	private void checkSteps() {
 		trainer.incrementSteps(1);
 		if (trainer.getSteps() == NUMBER_OF_STEPS_ALLOWED) {
-			JOptionPane.showMessageDialog(null, "<html><body><p>Game Over. You walked " + NUMBER_OF_STEPS_ALLOWED + " steps</p><br />"
-		            + "<p>Steps Taken: " + trainer.getSteps() + "</p><p><br />Pokemon Caught: "
-					+ trainer.getPokemonList() + "</p><p><br />Items in Bag:"
-					+ trainer.getItemList() + "</p><p><br />Pokeballs Remaining: "
-					+ trainer.getPokeballsRemaining() + "</p><br /></body></html>");
+			JOptionPane.showMessageDialog(null,
+					"<html><body><p>Game Over. You walked " + NUMBER_OF_STEPS_ALLOWED + " steps</p><br />"
+							+ "<p>Steps Taken: " + trainer.getSteps() + "</p><p><br />Pokemon Caught: "
+							+ trainer.getPokemonList() + "</p><p><br />Items in Bag:" + trainer.getItemList()
+							+ "</p><p><br />Pokeballs Remaining: " + trainer.getPokeballsRemaining()
+							+ "</p><br /></body></html>");
 			System.exit(0);
 		}
 	}
-	
-	private void checkBattle(){
+
+	private void checkBattle() {
 		if (map.beginPokemonBattle(map.getTrainerY(), map.getTrainerX()) == true) {
 			songplayer.playBattleMusic();
-			//mapPanel.beginBattleAnimation(); <- TODO make screen flash a few times
+			mapPanel.beginBattleAnimation();
 			battlePanel = new BattleView(map.whoToBattle(), trainer, songplayer);
 			bothViews.add(battlePanel, "battle");
 			CardLayout cardLayout = (CardLayout) bothViews.getLayout();
 			cardLayout.show(bothViews, "battle");
 		}
-	} 
-	
-	private void checkOutOfBalls(){
+	}
+
+
+	private void checkOutOfBalls() {
 		if (trainer.getPokeballsRemaining() == 0) {
-			JOptionPane.showMessageDialog(null, "<html><body><p>Game Over. You are out of pokeballs.</p><br />"
-		            + "<p>Steps Taken: " + trainer.getSteps() + "</p><p><br />Pokemon Caught: "
-					+ trainer.getPokemonList() + "</p><p><br />Items in Bag:"
-					+ trainer.getItemList() + "</p><p><br />Pokeballs Remaining: "
-					+ trainer.getPokeballsRemaining() + "</p><br /></body></html>");
+			JOptionPane.showMessageDialog(null,
+					"<html><body><p>Game Over. You are out of pokeballs.</p><br />" + "<p>Steps Taken: "
+							+ trainer.getSteps() + "</p><p><br />Pokemon Caught: " + trainer.getPokemonList()
+							+ "</p><p><br />Items in Bag:" + trainer.getItemList()
+							+ "</p><p><br />Pokeballs Remaining: " + trainer.getPokeballsRemaining()
+							+ "</p><br /></body></html>");
 			System.exit(0);
 		}
 	}
-	
-	private void checkPokemonMaster(){
+
+	private void checkPokemonMaster() {
 		// get distinct pokemons
 		ArrayList<String> pokemons = trainer.getPokemonList();
 		Set<String> uniquePokemons = new HashSet<String>();
@@ -159,43 +159,43 @@ public class PlayerView extends JFrame {
 		pokemons.addAll(uniquePokemons);
 		// caught all pokemons?
 		if (pokemons.size() == 10) {
-			JOptionPane.showMessageDialog(null, "<html><body><p>Congratulations! You caught all the pokemon.</p><br />"
-		            + "<p>Steps Taken: " + trainer.getSteps() + "</p><p><br />Pokemon Caught: "
-					+ trainer.getPokemonList() + "</p><p><br />Items in Bag:"
-					+ trainer.getItemList() + "</p><p><br />Pokeballs Remaining: "
-					+ trainer.getPokeballsRemaining() + "</p><br /></body></html>");
+			JOptionPane.showMessageDialog(null,
+					"<html><body><p>Congratulations! You caught all the pokemon.</p><br />" + "<p>Steps Taken: "
+							+ trainer.getSteps() + "</p><p><br />Pokemon Caught: " + trainer.getPokemonList()
+							+ "</p><p><br />Items in Bag:" + trainer.getItemList()
+							+ "</p><p><br />Pokeballs Remaining: " + trainer.getPokeballsRemaining()
+							+ "</p><br /></body></html>");
 			System.exit(0);
 		}
 	}
-	
-	private void checkItem(){
+
+	private void checkItem() {
 		Item i = map.getItemAt(map.getTrainerX(), map.getTrainerY());
-		//System.out.println(map.getTrainerX() + " " + map.getTrainerY());
-		if(i != null){
+		// System.out.println(map.getTrainerX() + " " + map.getTrainerY());
+		if (i != null) {
 			// play congrats
 			songplayer.playCongratsMusic();
-			JOptionPane.showMessageDialog(null, "You have found the " + i.getName() + " item! Press Enter to go to the menu to equip.");
+			JOptionPane.showMessageDialog(null,
+					"You have found the " + i.getName() + " item! Press Enter to go to the menu to equip.");
 			trainer.addToItemList(i);
 			map.removeItemAt(map.getTrainerX(), map.getTrainerY());
 			songplayer.playMainMusic();
 		}
 	}
-	
-	private void setMenuPossibleValues(){
-		for(String i: trainer.getItemList()){
-			if(i.equals("Running Shoes")){
+
+	private void setMenuPossibleValues() {
+		for (String i : trainer.getItemList()) {
+			if (i.equals("Running Shoes")) {
 				possibleValues[1] = "Equip Running Shoes";
-			}
-			else if(i.equals("Fishing Pole")){
+			} else if (i.equals("Fishing Pole")) {
 				possibleValues[2] = "Use Fishing Pole";
-			}
-			else{
+			} else {
 				possibleValues[3] = "Change Costume";
 			}
 		}
 	}
-	
-	private void askToSave(){
+
+	private void askToSave() {
 		int reply = JOptionPane.showConfirmDialog(null, "Do you want to save your progress?", null,
 				JOptionPane.YES_NO_CANCEL_OPTION);
 		if (reply == JOptionPane.YES_OPTION) {
@@ -231,14 +231,14 @@ public class PlayerView extends JFrame {
 			System.exit(0);
 		}
 	}
-	
+
 	Object[] possibleValues = { "Select Action...", "", "", "", "Quit Game" };
 	private int processingSpeed = 330;
-	 
+
 	private class ArrowKeyListener implements KeyListener {
 
 		long lastPressProcessed = 0;
-		
+
 		@Override
 		public void keyPressed(KeyEvent ke) {
 
@@ -246,6 +246,9 @@ public class PlayerView extends JFrame {
 			// think.)
 			if (System.currentTimeMillis() - lastPressProcessed > processingSpeed) {
 
+				if (ke.getKeyCode() == KeyEvent.VK_COMMA) {
+					mapPanel.beginBattleAnimation();
+				}
 				if (ke.getKeyCode() == KeyEvent.VK_UP) {
 					if (map.moveable("up")) {
 						map.moveTrainer(Direction.NORTH);
@@ -271,7 +274,7 @@ public class PlayerView extends JFrame {
 						checkBattle();
 						checkItem();
 					}
-					
+
 				}
 
 				else if (ke.getKeyCode() == KeyEvent.VK_RIGHT) {
@@ -288,27 +291,25 @@ public class PlayerView extends JFrame {
 					setMenuPossibleValues();
 					Object selectedValue = JOptionPane.showInputDialog(null,
 							"<html><body><p>Steps Taken: " + trainer.getSteps() + "</p><p><br />Pokemon Caught: "
-									+ trainer.getPokemonList() + "</p><p><br />Items in Bag:"
-									+ trainer.getItemList() + "</p><p><br />Pokeballs Remaining: "
-									+ trainer.getPokeballsRemaining() + "</p><br /></body></html>",
+									+ trainer.getPokemonList() + "</p><p><br />Items in Bag:" + trainer.getItemList()
+									+ "</p><p><br />Pokeballs Remaining: " + trainer.getPokeballsRemaining()
+									+ "</p><br /></body></html>",
 							"Menu", JOptionPane.INFORMATION_MESSAGE, null, possibleValues, possibleValues[0]);
 
-					if (selectedValue!= null && selectedValue.equals("Quit Game")) {
+					if (selectedValue != null && selectedValue.equals("Quit Game")) {
 						askToSave();
-					}
-					else if (selectedValue!= null && selectedValue.equals("Equip Running Shoes")) {
+					} else if (selectedValue != null && selectedValue.equals("Equip Running Shoes")) {
 						mapPanel.speedUpTrainer();
 						processingSpeed = 50;
-					}
-					else if (selectedValue!= null && selectedValue.equals("Change Costume")) {
+					} else if (selectedValue != null && selectedValue.equals("Change Costume")) {
 						mapPanel.changeCostume();
-					}
-					else if (selectedValue!= null && selectedValue.equals("Quit Game")){
+					} else if (selectedValue != null && selectedValue.equals("Quit Game")) {
 						System.exit(0);
 					}
 				}
 
-				// return to overworld via backspace. should require an event trigger
+				// return to overworld via backspace. should require an event
+				// trigger
 				if (ke.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
 					CardLayout cardLayout = (CardLayout) bothViews.getLayout();
 					cardLayout.show(bothViews, "overworld");
@@ -320,18 +321,17 @@ public class PlayerView extends JFrame {
 				lastPressProcessed = System.currentTimeMillis();
 			}
 		}
+
 		@Override
 		public void keyTyped(KeyEvent e) {
-			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void keyReleased(KeyEvent e) {
-			// TODO Auto-generated method stub
-			
+
 		}
-		
+
 	}
 
 	private class CloseButtonListener implements WindowListener {
