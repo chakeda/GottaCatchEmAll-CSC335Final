@@ -353,6 +353,9 @@ public class Map extends Observable implements Serializable{
 			if (map[tempI][tempJ].equals("B")){ 
 				return false;
 			}
+			if(map[tempI][tempJ].equals("W")){
+				return false;
+			}
 			if (map[tempI][tempJ].equals("I")){
 				// Added to inventory in MapView.
 				map[tempI][tempJ] = ""; // turn ball to plain
