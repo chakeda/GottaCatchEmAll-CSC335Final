@@ -1,9 +1,16 @@
 package model.items;
 
+import java.io.Serializable;
+
 import model.Category;
 import model.Item;
 
-public class EnergyRoot extends Item{
+public class EnergyRoot extends Item  implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	//increase Hp by 200
 	public EnergyRoot(String name, Category category) {
 		super(name, category);
