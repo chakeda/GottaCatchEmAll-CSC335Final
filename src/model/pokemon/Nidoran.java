@@ -17,12 +17,14 @@ public class Nidoran extends Pokemon implements Serializable{
 	private static final int CATCHABILITY = 5;
 	private static final int ESCAPABILITYCONSTANT = 5;
 	private static final int CATCHABILITYCONSTANT = 5;
+	private static final int HP = 55;
 	
 	public Nidoran(){ 
 		this.setCatchability(CATCHABILITY);
 		this.setDuration(DURATION);
 		this.setEscapability(ESCAPABILITY);
 		this.setRarity(RARITY); //took out battle image
+		this.setHP(HP);
 		this.setName("Nidoran");
 	}
 	

@@ -12,6 +12,7 @@ public class Chansey extends Pokemon implements Serializable{
 	private static final int CATCHABILITY = 50;
 	private static final int ESCAPABILITYCONSTANT = 5;
 	private static final int CATCHABILITYCONSTANT = 5;
+	private static final int HP = 250;
 	
 	
 	public Chansey(){ 
@@ -19,6 +20,7 @@ public class Chansey extends Pokemon implements Serializable{
 		this.setDuration(DURATION);
 		this.setEscapability(ESCAPABILITY);
 		this.setRarity(RARITY); //took out battle image
+		this.setHP(HP);
 		this.setName("Chansey");
 	}
 	

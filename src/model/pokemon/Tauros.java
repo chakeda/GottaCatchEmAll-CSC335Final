@@ -12,12 +12,14 @@ public class Tauros extends Pokemon implements Serializable{
 	private static final int CATCHABILITY = 60;
 	private static final int ESCAPABILITYCONSTANT = 10;
 	private static final int CATCHABILITYCONSTANT = 10;
+	private static final int HP = 75;
 	
 	public Tauros(){ 
 		this.setCatchability(CATCHABILITY);
 		this.setDuration(DURATION);
 		this.setEscapability(ESCAPABILITY);
 		this.setRarity(RARITY); //took out battle image
+		this.setHP(HP);
 		this.setName("Tauros");
 	}
 	
