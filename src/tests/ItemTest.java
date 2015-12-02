@@ -5,8 +5,12 @@ import model.Category;
 import model.Direction;
 import model.Item;
 import model.Trainer;
+import model.items.BerryJuice;
 import model.items.CostumeChange;
+import model.items.EnergyRoot;
 import model.items.FishingPole;
+import model.items.FreshWater;
+import model.items.Lemonade;
 import model.items.SafariBall;
 import model.items.RunningShoes;
 
@@ -21,7 +25,10 @@ public class ItemTest {
 		FishingPole fp = new FishingPole("fishPole", Category.HOLD_ITEM);
 		RunningShoes rs = new RunningShoes("flash", Category.HOLD_ITEM);
 		CostumeChange cc = new CostumeChange("change", Category.HOLD_ITEM);
-
+		Lemonade l = new Lemonade("Lemon", Category.BERRIES);
+		EnergyRoot e= new EnergyRoot("Energy", Category.MEDICINE);
+		FreshWater w = new FreshWater("Water", Category.MEDICINE);
+		BerryJuice b = new BerryJuice("Berry", Category.BERRIES);
 		// Test all of the individual items
 		assertEquals(mb.getName(), "master");
 		assertEquals(mb.getCategory(), Category.POKEBALLS);
@@ -36,6 +43,22 @@ public class ItemTest {
 		// ArrayList<Item> itemList = new ArrayList<Item>();
 
 		// set the trainers item and test to make sure it is true
+		trainer.setItemUsing(l);
+		trainer.addToItemList(l);
+		l.update();
+		assertTrue(trainer.getItemUsing().equals(l));
+		trainer.setItemUsing(e);
+		trainer.addToItemList(e);
+		e.update();
+		assertTrue(trainer.getItemUsing().equals(e));
+		trainer.setItemUsing(w);
+		trainer.addToItemList(w);
+		w.update();
+		assertTrue(trainer.getItemUsing().equals(w));
+		trainer.setItemUsing(b);
+		trainer.addToItemList(b);
+		b.update();
+		assertTrue(trainer.getItemUsing().equals(b));
 		trainer.setItemUsing(mb);
 		trainer.addToItemList(mb);
 		mb.update();
