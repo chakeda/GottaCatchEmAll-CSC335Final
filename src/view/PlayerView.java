@@ -3,6 +3,7 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -14,15 +15,16 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.locks.Lock;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
 import controller.SongPlayer;
 import model.Direction;
 import model.Item;
 import model.Map;
+import model.Pokemon;
 import model.Trainer;
 import model.pokemon.Scyther;
 
@@ -43,7 +45,7 @@ public class PlayerView extends JFrame {
 	private Map map;
 	private Trainer trainer;
 	private SongPlayer songplayer;
-
+	private Pokemon test;
 	public PlayerView(Map aMap, Trainer aTrainer) {
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setSize(256, 256 + 20); // +20 for title etc
@@ -126,8 +128,8 @@ public class PlayerView extends JFrame {
 		}
 	}
 
-	private void checkBattle() {
-		if (map.beginPokemonBattle(map.getTrainerY(), map.getTrainerX()) == true) {
+	private void checkBattle(Point p) {
+		if (map.beginPokemonBattle(p.y, p.x) == true) {
 			songplayer.playBattleMusic();
 			mapPanel.beginBattleAnimation();
 			battlePanel = new BattleView(map.whoToBattle(), trainer, songplayer);
@@ -189,8 +191,74 @@ public class PlayerView extends JFrame {
 				possibleValues[1] = "Equip Running Shoes";
 			} else if (i.equals("Fishing Pole")) {
 				possibleValues[2] = "Use Fishing Pole";
-			} else {
+			}
+			else if(i.equals("Costume Change")){
 				possibleValues[3] = "Change Costume";
+			}
+			else if(i.equals("Lemonade")){
+				possibleValues[4] = "Use Lemonade";
+			}
+			else if(i.equals("Energy")){
+				possibleValues[5] = "Use Energy Root";
+			}
+			else if(i.equals("Berry Juice")){
+				possibleValues[6] = "Use Berry Juice";
+			}
+			else if(i.equals("Water")){
+				possibleValues[7] = "Use Fresh Water";
+			}
+		}
+	}
+	Object[] possiblePokemon = {"","","","","","","","","",""};
+	Object selectedPokemon; 
+	private void setPossiblePokemonValues(){
+		for(int i = 0; i < trainer.getPokemonList().size(); i++){
+			possiblePokemon[i] = trainer.getPokemonList().get(i);
+		}
+	}
+	
+	//Update the HP of a pokemon that used one of the 4 Items
+	private void setNewHPLemonade(){
+		Pokemon test; 
+		for(int i = 0; i < trainer.getAllPokemon().size(); i++){
+			if(selectedPokemon.equals(trainer.getAllPokemon().get(i).getName())){
+				test = trainer.getAllPokemon().get(i);
+				//System.out.println(test.getHP());
+				test.updateHP(80);
+				//System.out.println(test.getHP());
+			}
+		}
+	}
+	private void setNewHPWater(){
+		Pokemon test; 
+		for(int i = 0; i < trainer.getAllPokemon().size(); i++){
+			if(selectedPokemon.equals(trainer.getAllPokemon().get(i).getName())){
+				test = trainer.getAllPokemon().get(i);
+				//System.out.println(test.getHP());
+				test.updateHP(50);
+				//System.out.println(test.getHP());
+			}
+		}
+	}
+	private void setNewHPBerry(){
+		Pokemon test; 
+		for(int i = 0; i < trainer.getAllPokemon().size(); i++){
+			if(selectedPokemon.equals(trainer.getAllPokemon().get(i).getName())){
+				test = trainer.getAllPokemon().get(i);
+				//System.out.println(test.getHP());
+				test.updateHP(20);
+				//System.out.println(test.getHP());
+			}
+		}
+	}
+	private void setNewHPEnergy(){
+		Pokemon test; 
+		for(int i = 0; i < trainer.getAllPokemon().size(); i++){
+			if(selectedPokemon.equals(trainer.getAllPokemon().get(i).getName())){
+				test = trainer.getAllPokemon().get(i);
+				//System.out.println(test.getHP());
+				test.updateHP(200);
+				//System.out.println(test.getHP());
 			}
 		}
 	}
@@ -231,8 +299,8 @@ public class PlayerView extends JFrame {
 			System.exit(0);
 		}
 	}
-
-	Object[] possibleValues = { "Select Action...", "", "", "", "Quit Game" };
+	
+	private Object[] possibleValues = { "Select Action...", "", "", "", "", "", "", "", "Quit Game" };
 	private int processingSpeed = 330;
 
 	private class ArrowKeyListener implements KeyListener {
@@ -250,38 +318,38 @@ public class PlayerView extends JFrame {
 					mapPanel.beginBattleAnimation();
 				}
 				if (ke.getKeyCode() == KeyEvent.VK_UP) {
-					if (map.moveable("up")) {
+					if (map.moveable(Direction.NORTH)!=null) {
 						map.moveTrainer(Direction.NORTH);
 						checkSteps();
-						checkBattle();
+						checkBattle(map.moveable(Direction.NORTH));
 						checkItem();
 					}
 				}
 
 				else if (ke.getKeyCode() == KeyEvent.VK_DOWN) {
-					if (map.moveable("down")) {
+					if (map.moveable(Direction.SOUTH)!=null) {
 						map.moveTrainer(Direction.SOUTH);
 						checkSteps();
-						checkBattle();
+						checkBattle(map.moveable(Direction.SOUTH));
 						checkItem();
 					}
 				}
 
 				else if (ke.getKeyCode() == KeyEvent.VK_LEFT) {
-					if (map.moveable("left")) {
+					if (map.moveable(Direction.WEST)!=null) {
 						map.moveTrainer(Direction.WEST);
 						checkSteps();
-						checkBattle();
+						checkBattle(map.moveable(Direction.WEST));
 						checkItem();
 					}
 
 				}
 
 				else if (ke.getKeyCode() == KeyEvent.VK_RIGHT) {
-					if (map.moveable("right")) {
+					if (map.moveable(Direction.EAST)!=null) {
 						map.moveTrainer(Direction.EAST);
 						checkSteps();
-						checkBattle();
+						checkBattle(map.moveable(Direction.EAST));
 						checkItem();
 					}
 				}
@@ -306,7 +374,33 @@ public class PlayerView extends JFrame {
 					} else if (selectedValue != null && selectedValue.equals("Quit Game")) {
 						System.exit(0);
 					}
+					else if (selectedValue != null && selectedValue.equals("Use Lemonade")){
+						setPossiblePokemonValues();
+						selectedPokemon = JOptionPane.showInputDialog(null, "Please select a Pokemon", "Pokemon", 
+								JOptionPane.QUESTION_MESSAGE, null, possiblePokemon, possiblePokemon[0]);
+						setNewHPLemonade(); 
+					}
+					else if (selectedValue != null && selectedValue.equals("Use Energy Root")){
+						setPossiblePokemonValues();
+						selectedPokemon = JOptionPane.showInputDialog(null, "Please select a Pokemon", "Pokemon", 
+								JOptionPane.QUESTION_MESSAGE, null, possiblePokemon, possiblePokemon[0]);
+						setNewHPEnergy();
+					}
+					else if (selectedValue != null && selectedValue.equals("Use Berry Juice")){
+						setPossiblePokemonValues();
+						selectedPokemon = JOptionPane.showInputDialog(null, "Please select a Pokemon", "Pokemon", 
+								JOptionPane.QUESTION_MESSAGE, null, possiblePokemon, possiblePokemon[0]);
+						
+						setNewHPBerry();
+					}
+					else if (selectedValue != null && selectedValue.equals("Use Fresh Water")){
+						setPossiblePokemonValues();
+						selectedPokemon = JOptionPane.showInputDialog(null, "Please select a Pokemon", "Pokemon", 
+								JOptionPane.QUESTION_MESSAGE, null, possiblePokemon, possiblePokemon[0]);
+						setNewHPWater();
+					}
 				}
+					
 
 				// return to overworld via backspace. should require an event
 				// trigger

@@ -12,6 +12,7 @@ public class Cubone extends Pokemon implements Serializable{
 	private static final int CATCHABILITY = 15; 
 	private static final int ESCAPABILITYCONSTANT = 5;
 	private static final int CATCHABILITYCONSTANT = 10;
+	private static final int HP = 50;
 	
 	
 	public Cubone(){ 
@@ -19,6 +20,7 @@ public class Cubone extends Pokemon implements Serializable{
 		this.setDuration(DURATION);
 		this.setEscapability(ESCAPABILITY);
 		this.setRarity(RARITY); //took out battle image
+		this.setHP(HP);
 		this.setName("Cubone");
 	}
 	

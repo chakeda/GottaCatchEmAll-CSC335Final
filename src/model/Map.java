@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.Point;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,8 +8,12 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Random;
 
+import model.items.BerryJuice;
 import model.items.CostumeChange;
+import model.items.EnergyRoot;
 import model.items.FishingPole;
+import model.items.FreshWater;
+import model.items.Lemonade;
 import model.items.RunningShoes;
 import model.pokemon.Chansey;
 import model.pokemon.Cubone;
@@ -71,7 +76,7 @@ public class Map extends Observable implements Serializable{
 		setBush(1,6);
 		setBush(0,6);
 		setItem(new RunningShoes("Running Shoes", Category.HOLD_ITEM), 10,10); 
-		
+		setItem(new BerryJuice("Berry Juice", Category.BERRIES), 21,24);
 		// map1.2: top right (0,16), (17,32)
 		setGrass(0,19);
 		setGrass(1,19);
@@ -84,7 +89,7 @@ public class Map extends Observable implements Serializable{
 		setBush(12,22);
 		setBush(13,23);
 		setItem(new FishingPole("Fishing Pole", Category.HOLD_ITEM), 26,26); 
-		
+		setItem(new EnergyRoot("Energy",Category.MEDICINE), 22,24);
 		// map1.3: bottom left (17,32), (0, 16)
 		setGrass(29,2);
 		setGrass(30,2);
@@ -98,7 +103,7 @@ public class Map extends Observable implements Serializable{
 		setBush(18,12);
 		setBush(25,5);
 		setBush(31,9);
-		
+		setItem(new FreshWater("Water", Category.MEDICINE), 20,24);
 		// map1.4: bottom right (17,32),(17,32)
 		setGrass(18,18);
 		setGrass(20,18);
@@ -117,7 +122,7 @@ public class Map extends Observable implements Serializable{
 		setBush(22,21);
 		setBush(22,21);
 		setItem(new CostumeChange("Costume Change", Category.HOLD_ITEM), 25, 25);
-		
+		setItem(new Lemonade("Lemonade", Category.MEDICINE), 23,24);
 		for(int i=0; i<7; i++){
 			setBush(4,i);
 		}
@@ -297,35 +302,35 @@ public class Map extends Observable implements Serializable{
 	 */
 	
 	// if the space is a bush/tree whatever, or is out of bounds, do not move in that direction
-	public boolean moveable(String direction){
+	public Point moveable(Direction direction){
 		int tempI = 0;
 		int tempJ = 0;
 		for (int i=0; i<map.length; i++){
 			for (int j=0; j<map.length; j++){
 				if (mapFog[i][j]!=null && mapFog[i][j].equals("T")){				
-					if (direction.equals("up")){
+					if (direction.equals(Direction.NORTH)){
 						tempI = i - 1;
 						tempJ = j;
 					}
-					if (direction.equals("right")){
+					if (direction.equals(Direction.EAST)){
 						tempI = i;
 						tempJ = j + 1;
 					}
-					if (direction.equals("down")){
+					if (direction.equals(Direction.SOUTH)){
 						tempI = i + 1;
 						tempJ = j;	
 					}
-					if (direction == "left"){
+					if (direction.equals(Direction.WEST)){
 						tempI = i;
 						tempJ = j - 1;
 					}
 					if(!checkMoveable(tempI, tempJ)){
-						return false;
+						return null;
 					}
 				}
 			}
 		}
-		return true;
+		return new Point(tempI, tempJ);
 	}
 	
 	// can I move there
@@ -488,6 +493,6 @@ public class Map extends Observable implements Serializable{
 	}
 	
 	public void removeItemAt(int i, int j){
-		mapItems[i][j] = null;
+		mapItems[j][i] = null;
 	}
 }

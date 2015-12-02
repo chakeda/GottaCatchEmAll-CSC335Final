@@ -43,6 +43,12 @@ public class Trainer implements Serializable {
 	public int getPokemonCaught(){
 		return pokemonCaught;
 	}
+	public ArrayList<Pokemon> getAllPokemon(){//Chris added these...needed access
+		return caughtPokemon; 
+	}
+	public ArrayList<Item> getAllItems(){//Chris added these...needed access
+		return itemList; 
+	}
 	public ArrayList<String> getPokemonList(){
 		ArrayList<String> pokemon = new ArrayList<String>();
 		for (Pokemon p: caughtPokemon){

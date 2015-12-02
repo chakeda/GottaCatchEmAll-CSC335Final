@@ -3,9 +3,9 @@ package model.items;
 import model.Category;
 import model.Item;
 
-public class MasterBall extends Item{
+public class SafariBall extends Item{
 
-	public MasterBall(String name, Category category) {
+	public SafariBall(String name, Category category) {
 		super(name, category);
 	}
 
@@ -13,12 +13,6 @@ public class MasterBall extends Item{
 	public void update() {
 		// Make the Trainers catchability 100%
 		this.foundByTrainer = true; 
-		
-	}
-
-	@Override
-	public void execute() {
-		// TODO Auto-generated method stub
 		
 	}
 
