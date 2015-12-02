@@ -64,11 +64,12 @@ public class BattleView extends JPanel {
 	private Color projectileColor;
 	private SongPlayer songplayer;
 	
-	// make a battle with the pokeman
+	// make a battle with the pokemon
 	public BattleView(Pokemon thePokemon, Trainer theTrainer, SongPlayer sp) {
 		this.pokemon = thePokemon;
 		this.trainer = theTrainer;
 	    timer = new Timer(40, new ProjectileListener());
+	    
 		
 		String pokemonFileName = thePokemon.getName().toLowerCase() + ".png";
 		
@@ -140,22 +141,23 @@ public class BattleView extends JPanel {
 
 		this.battleComplete = false;
 		this.songplayer = sp;
-		
-		// TODO: this does not set them off the screen as intended.
-		pokemonImageLabel.setLocation(pokemonImageLabel.getLocation().x-500, pokemonImageLabel.getLocation().y);
-		trainerImageLabel.setLocation(pokemonImageLabel.getLocation().x+756, trainerImageLabel.getLocation().y);
-		
+			
 		// initial slide in anime
 		ActionListener initialAnimationPerformer = new ActionListener(){
 			int count = 0;
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if(count==0){
+					pokemonImageLabel.setLocation(230, pokemonImageLabel.getLocation().y);
+					trainerImageLabel.setLocation(-30, trainerImageLabel.getLocation().y);
+				}
 				if (count == 20){
 					((Timer)e.getSource()).stop();
 				}else{
 					// and down
-					pokemonImageLabel.setLocation(pokemonImageLabel.getLocation().x+5, pokemonImageLabel.getLocation().y);
-					trainerImageLabel.setLocation(trainerImageLabel.getLocation().x-5, trainerImageLabel.getLocation().y);
+					pokemonImageLabel.setLocation(pokemonImageLabel.getLocation().x-5, pokemonImageLabel.getLocation().y);
+					trainerImageLabel.setLocation(trainerImageLabel.getLocation().x+5, trainerImageLabel.getLocation().y);
 					count++;	
 				}
 			}
@@ -338,13 +340,41 @@ public class BattleView extends JPanel {
 							((Timer)e.getSource()).stop();
 						}else{
 							// turn pokemon to ball
-							Icon pokemonBallImageIcon = new ImageIcon(pokeball);
-							pokemonImageLabel.setIcon(pokemonBallImageIcon);
+							//Icon pokemonBallImageIcon = new ImageIcon(pokeball);
+							//pokemonImageLabel.setIcon(pokemonBallImageIcon);
 							
 							count++;	
 						}
 					}
 				};
+				
+				ActionListener caught = new ActionListener(){
+					int count=0;
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						if(count==4){
+							Icon pokemonBallImageIcon = new ImageIcon(pokeball);
+							pokemonImageLabel.setIcon(pokemonBallImageIcon);	
+							((Timer)e.getSource()).stop();
+						}
+						count++;
+					}
+				};
+				
+				ActionListener burstFree = new ActionListener(){
+					int count = 0;
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						if(count == 4){
+							Icon pokemonImageIcon = new ImageIcon(pokemonImage);
+							pokemonImageLabel.setIcon(pokemonImageIcon);
+							((Timer)e.getSource()).stop();
+						}
+						count++;
+					}
+				};
+				
 				new Timer(100, animationPerformer).start();
 				
 				trainer.throwPokeball();
@@ -355,7 +385,7 @@ public class BattleView extends JPanel {
 					
 					//Icon pokemonBallImageIcon = new ImageIcon(pokeball);
 					//pokemonImageLabel.setIcon(pokemonBallImageIcon);
-					
+					new Timer(100, caught).start();
 					songplayer.playPokemonCaughtMusic();
 					battleLabel.setText("     You caught " + pokemon.getName() + "!     ");
 					trainer.addToPokemonList(pokemon);
@@ -363,6 +393,8 @@ public class BattleView extends JPanel {
 				}
 				else{
 					battleLabel.setText("     " + pokemon.getName() + " bursts free!     ");
+					pokemonImageLabel.setLocation(130, pokemonImageLabel.getLocation().y);
+					new Timer(100, burstFree).start();
 				} 
 			}
 		}

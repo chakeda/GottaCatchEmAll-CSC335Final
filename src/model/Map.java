@@ -84,10 +84,7 @@ public class Map extends Observable implements Serializable{
 		setGrass(0,20);
 		setGrass(1,20);
 		setGrass(2,20);
-		setBush(10,20);
-		setBush(11,21);
-		setBush(12,22);
-		setBush(13,23);
+		
 		setItem(new FishingPole("Fishing Pole", Category.HOLD_ITEM), 26,26); 
 		setItem(new EnergyRoot("Energy",Category.MEDICINE), 22,24);
 		// map1.3: bottom left (17,32), (0, 16)
@@ -210,6 +207,24 @@ public class Map extends Observable implements Serializable{
 		setWater(30,1);
 		setWater(29,0);
 		setWater(29,1);
+		
+		for(int i=4; i<18; i++){
+			for(int j=21; j<29; j++){
+				setGrass(i,j);
+			}
+		}
+		for(int i=4; i<18; i++){
+			setBush(i, 20);
+		}
+		
+		setBush(13, 21);
+		setBush(13, 22);
+		setBush(13, 23);
+		setBush(12, 23);
+		setBush(10, 23);
+		setBush(9, 23);
+		setBush(9, 22);
+		setBush(9, 21);
 	}
 	
 	public List<Pokemon> initializePokemonList(){
@@ -337,6 +352,9 @@ public class Map extends Observable implements Serializable{
 	private boolean checkMoveable(int tempI, int tempJ){
 		if (movementIsWithinBounds(tempI,tempJ)){ 
 			if (map[tempI][tempJ].equals("B")){ 
+				return false;
+			}
+			if(map[tempI][tempJ].equals("W")){
 				return false;
 			}
 			if (map[tempI][tempJ].equals("I")){
