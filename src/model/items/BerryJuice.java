@@ -1,9 +1,16 @@
 package model.items;
 
+import java.io.Serializable;
+
 import model.Category;
 import model.Item;
 
-public class BerryJuice extends Item{
+public class BerryJuice extends Item implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	//Increase by 20
 	public BerryJuice(String name, Category category) {
 		super(name, category);
