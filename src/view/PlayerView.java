@@ -45,7 +45,6 @@ public class PlayerView extends JFrame {
 	private Map map;
 	private Trainer trainer;
 	private SongPlayer songplayer;
-	private Pokemon test;
 	public PlayerView(Map aMap, Trainer aTrainer) {
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setSize(256, 256 + 20); // +20 for title etc
@@ -129,7 +128,7 @@ public class PlayerView extends JFrame {
 	}
 
 	private void checkBattle(Point p) {
-		if (map.beginPokemonBattle(p.y, p.x) == true) {
+		if (map.beginPokemonBattle(p.x, p.y) == true) {
 			songplayer.playBattleMusic();
 			mapPanel.beginBattleAnimation();
 			battlePanel = new BattleView(map.whoToBattle(), trainer, songplayer);
@@ -319,27 +318,31 @@ public class PlayerView extends JFrame {
 				}
 				if (ke.getKeyCode() == KeyEvent.VK_UP) {
 					if (map.moveable(Direction.NORTH)!=null) {
+						mapPanel.moveTrainer(Direction.NORTH);
+						checkBattle(map.moveable(Direction.NORTH));
 						map.moveTrainer(Direction.NORTH);
 						checkSteps();
-						checkBattle(map.moveable(Direction.NORTH));
 						checkItem();
+						
 					}
 				}
 
 				else if (ke.getKeyCode() == KeyEvent.VK_DOWN) {
 					if (map.moveable(Direction.SOUTH)!=null) {
+						mapPanel.moveTrainer(Direction.SOUTH);
+						checkBattle(map.moveable(Direction.SOUTH));
 						map.moveTrainer(Direction.SOUTH);
 						checkSteps();
-						checkBattle(map.moveable(Direction.SOUTH));
 						checkItem();
 					}
 				}
 
 				else if (ke.getKeyCode() == KeyEvent.VK_LEFT) {
 					if (map.moveable(Direction.WEST)!=null) {
+						mapPanel.moveTrainer(Direction.WEST);
+						checkBattle(map.moveable(Direction.WEST));
 						map.moveTrainer(Direction.WEST);
 						checkSteps();
-						checkBattle(map.moveable(Direction.WEST));
 						checkItem();
 					}
 
@@ -347,9 +350,10 @@ public class PlayerView extends JFrame {
 
 				else if (ke.getKeyCode() == KeyEvent.VK_RIGHT) {
 					if (map.moveable(Direction.EAST)!=null) {
+						mapPanel.moveTrainer(Direction.EAST);
+						checkBattle(map.moveable(Direction.EAST));
 						map.moveTrainer(Direction.EAST);
 						checkSteps();
-						checkBattle(map.moveable(Direction.EAST));
 						checkItem();
 					}
 				}

@@ -27,6 +27,7 @@ public class PokemonTest {
 		assertEquals(5, s.getDuration());
 		assertEquals(50, s.getEscapability());
 		assertEquals(75, s.getCatchability());
+		assertEquals(70, s.getHP());
 	}
 	
 	@Test

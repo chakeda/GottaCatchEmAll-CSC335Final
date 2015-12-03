@@ -452,8 +452,8 @@ public class Map extends Observable implements Serializable{
 		mapFog[tempI][tempJ] = "T";
 		
 		// update gui
-	    setChanged();
-	    notifyObservers(dir);
+	   /* setChanged();
+	    notifyObservers(dir);*/
 	
 	}
 	

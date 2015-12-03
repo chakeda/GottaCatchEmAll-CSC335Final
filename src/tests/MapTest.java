@@ -26,9 +26,8 @@ public class MapTest {
 		assertEquals(map.getTileAt(5, 5), "G");
 		
 		// so is the trainer. test his location
-		assertEquals(map.getFogAt(3, 3), "T");
-		assertEquals(map.getTrainerX(), 3);
-		assertEquals(map.getTrainerY(), 3);
+		assertEquals(map.getTrainerX(), 7);
+		assertEquals(map.getTrainerY(), 0);
 		
 		// test one movement
 		map.moveTrainer(Direction.NORTH); 

@@ -327,13 +327,18 @@ public class MapView extends JPanel implements Observer {
 			g2.fillRect(0, 0, 256, 256);
 		}
 	}
+	
+	public void moveTrainer(Direction d){
+		direction = d;
+		drawBoardWithAnimation();
+	}
 
 	// move around
 	private class TimerListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			if (tic <= n) {
+			if (tic < n) {
 				if (direction == Direction.NORTH) {
 					Y = Y - 2;
 					repaint();
