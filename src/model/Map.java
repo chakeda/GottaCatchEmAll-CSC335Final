@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.Point;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -339,35 +340,35 @@ public class Map extends Observable implements Serializable{
 	 */
 	
 	// if the space is a bush/tree whatever, or is out of bounds, do not move in that direction
-	public boolean moveable(String direction){
+	public Point moveable(Direction direction){
 		int tempI = 0;
 		int tempJ = 0;
 		for (int i=0; i<map.length; i++){
 			for (int j=0; j<map.length; j++){
 				if (mapFog[i][j]!=null && mapFog[i][j].equals("T")){				
-					if (direction.equals("up")){
+					if (direction.equals(Direction.NORTH)){
 						tempI = i - 1;
 						tempJ = j;
 					}
-					if (direction.equals("right")){
+					if (direction.equals(Direction.EAST)){
 						tempI = i;
 						tempJ = j + 1;
 					}
-					if (direction.equals("down")){
+					if (direction.equals(Direction.SOUTH)){
 						tempI = i + 1;
 						tempJ = j;	
 					}
-					if (direction == "left"){
+					if (direction.equals(Direction.WEST)){
 						tempI = i;
 						tempJ = j - 1;
 					}
 					if(!checkMoveable(tempI, tempJ)){
-						return false;
+						return null;
 					}
 				}
 			}
 		}
-		return true;
+		return new Point(tempI, tempJ);
 	}
 	
 	// can I move there
@@ -533,6 +534,6 @@ public class Map extends Observable implements Serializable{
 	}
 	
 	public void removeItemAt(int i, int j){
-		mapItems[i][j] = null;
+		mapItems[j][i] = null;
 	}
 }

@@ -28,10 +28,6 @@ public abstract class Item implements Serializable{
 	public void setCategory(Category category){
 		this.category = category; 
 	}
-	public boolean isFound(){
-		return foundByTrainer;
-		
-	}
 	
 	abstract public void update();//will be used when the object is found
 	//abstract public void execute();//execute will be the method that call animation for the individual items

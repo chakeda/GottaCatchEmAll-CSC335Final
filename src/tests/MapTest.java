@@ -42,28 +42,29 @@ public class MapTest {
 		// test inability to walk out of bounds
 		map.moveTrainer(Direction.NORTH); 
 		assertEquals(map.getFogAt(0, 7), "T");
-		assertFalse(map.moveable("up"));
+		assertNull(map.moveable(Direction.NORTH));
 		// note: running a moveTrainer("up") will cause an out of bounds exception.
 		
 		// test inability to walk on bushes
 		assertEquals(map.getTileAt(1, 1), "B");
 		map.moveTrainer(Direction.SOUTH); 
 		map.moveTrainer(Direction.WEST); 
-		assertFalse(map.moveable("left"));
-		assertTrue(map.moveable("down"));
+		assertNull(map.moveable(Direction.WEST));
+		assertNotNull(map.moveable(Direction.SOUTH));
 		
 		// for code coverage
 		map.moveTrainer(Direction.WEST); 
 		map.moveTrainer(Direction.WEST); 
 		map.moveTrainer(Direction.SOUTH); 
 		assertEquals(map.getFogAt(2, 4), "T");
-		assertFalse(map.moveable("up"));
+		assertNull(map.moveable(Direction.NORTH));
+
 
 		// try to get more code coverage
 		for(int i=4; i<map.getMapLength()-1; i++){
 			map.moveTrainer(Direction.EAST); 	
 		}
-		assertFalse(map.moveable("right"));
+		assertNotNull(map.moveable(Direction.EAST));
 		
 		// initialize pokemon
 		map.initializePokemonList();
