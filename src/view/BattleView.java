@@ -274,6 +274,7 @@ public class BattleView extends JPanel {
 	private class RockListener implements ActionListener {
 		public void actionPerformed(ActionEvent evt) {
 			if (!battleComplete) {
+				
 				projectileColor = Color.GRAY;
 				drawProjectileWithAnimation();
 				
@@ -320,6 +321,7 @@ public class BattleView extends JPanel {
 	private class BallListener implements ActionListener {
 		public void actionPerformed(ActionEvent evt) {
 			if (!battleComplete) {
+				
 				projectileColor = Color.GREEN;
 				drawProjectileWithAnimation();
 				

@@ -506,7 +506,7 @@ public class Map extends Observable implements Serializable{
 	
 	// get itemMap unit
 	public Item getItemAt(int i, int j){
-		return mapItems[j][i];
+		return mapItems[i][j];
 	}
 	
 	public void removeItemAt(int i, int j){
