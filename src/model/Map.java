@@ -75,7 +75,7 @@ public class Map extends Observable implements Serializable{
 		setBush(1,6);
 		setBush(0,6);
 		setItem(new RunningShoes("Running Shoes", Category.HOLD_ITEM), 10,10); 
-		setItem(new BerryJuice("Berry Juice", Category.BERRIES), 21,24);
+		setItem(new BerryJuice("Berry Juice", Category.BERRIES), 0,8);
 		// map1.2: top right (0,16), (17,32)
 		setGrass(0,19);
 		setGrass(1,19);
@@ -85,7 +85,7 @@ public class Map extends Observable implements Serializable{
 		setGrass(2,20);
 		
 		setItem(new FishingPole("Fishing Pole", Category.HOLD_ITEM), 26,26); 
-		setItem(new EnergyRoot("Energy",Category.MEDICINE), 22,24);
+		setItem(new EnergyRoot("Energy",Category.MEDICINE), 1,8);
 		// map1.3: bottom left (17,32), (0, 16)
 		setGrass(29,2);
 		setGrass(30,2);
@@ -99,7 +99,7 @@ public class Map extends Observable implements Serializable{
 		setBush(18,12);
 		setBush(25,5);
 		setBush(31,9);
-		setItem(new FreshWater("Water", Category.MEDICINE), 20,24);
+		setItem(new FreshWater("Water", Category.MEDICINE), 2,8);
 		// map1.4: bottom right (17,32),(17,32)
 		setGrass(18,18);
 		setGrass(20,18);
@@ -118,7 +118,7 @@ public class Map extends Observable implements Serializable{
 		setBush(22,21);
 		setBush(22,21);
 		setItem(new CostumeChange("Costume Change", Category.HOLD_ITEM), 25, 25);
-		setItem(new Lemonade("Lemonade", Category.MEDICINE), 23,24);
+		setItem(new Lemonade("Lemonade", Category.MEDICINE), 3,8);
 		for(int i=0; i<7; i++){
 			setBush(4,i);
 		}
