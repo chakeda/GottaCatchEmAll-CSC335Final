@@ -263,10 +263,33 @@ public class Map extends Observable implements Serializable{
 		}
 		
 		// map2.2: top right (0,16), (17,32)
+		for (int i=3; i<16; i++){
+			for (int j=20; j<32; j++){
+				if (i % 2 == 0){
+					setBush(i, j);
+				}
+			}
+		}
 		
 		// map2.3: bottom left (17,32), (0, 16)
+		for (int i=20; i<32; i++){
+			for (int j=0; j<16; j++){
+				if (j % 2 == 0){
+					setWater(i, j);
+				}
+			}
+		}
 
 		// map2.4: bottom right (17,32),(17,32)
+		for (int i=17; i<32; i++){
+			for (int j=17; j<32; j++){
+				if (i==26 && j==26){
+					setItem(new FishingPole("Fishing Pole", Category.HOLD_ITEM), 26,26); 
+				}else{
+					setGrass(i, j);
+				}
+			}
+		}
 	}
 	
 	// sets grass

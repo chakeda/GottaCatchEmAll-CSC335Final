@@ -46,6 +46,8 @@ public class PlayerView extends JFrame {
 	private Trainer trainer;
 	private SongPlayer songplayer;
 	private Pokemon test;
+	private boolean isEndlessMode;
+	
 	public PlayerView(Map aMap, Trainer aTrainer) {
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setSize(256, 256 + 20); // +20 for title etc
@@ -60,13 +62,14 @@ public class PlayerView extends JFrame {
 		if (aMap == null && aTrainer == null) {
 			
 			//select win condition
-			Object[] possibleValues1 = { "Traditional", "Catch the MercerMermaid" };
+			Object[] possibleValues1 = { "Traditional", "Endless Mode" };
 			Object selectedValue1 = JOptionPane.showInputDialog(null, "Select your win condition: ",
 					"Welcome to Pokeman", JOptionPane.INFORMATION_MESSAGE, null, possibleValues1, possibleValues1[0]);
 			if (selectedValue1.equals("Traditional")) {
-				//do something
-			} else if (selectedValue1.equals("Catch the MercerMermaid")) {
-				//do something
+				isEndlessMode = false;
+			} else if (selectedValue1.equals("Endless Mode")) {
+				isEndlessMode = true;
+				NUMBER_OF_STEPS_ALLOWED = Integer.MAX_VALUE;
 			} else {
 				System.exit(0);
 			}
@@ -317,7 +320,11 @@ public class PlayerView extends JFrame {
 				if (ke.getKeyCode() == KeyEvent.VK_UP) {
 					if (map.moveable("up")) {
 						map.moveTrainer(Direction.NORTH);
-						checkSteps();
+						if (isEndlessMode){
+							checkPokemonMaster();
+						}else{
+							checkSteps();
+						}
 						checkBattle();
 						checkItem();
 					}
@@ -326,7 +333,11 @@ public class PlayerView extends JFrame {
 				else if (ke.getKeyCode() == KeyEvent.VK_DOWN) {
 					if (map.moveable("down")) {
 						map.moveTrainer(Direction.SOUTH);
-						checkSteps();
+						if (isEndlessMode){
+							checkPokemonMaster();
+						}else{
+							checkSteps();
+						}
 						checkBattle();
 						checkItem();
 					}
@@ -335,7 +346,11 @@ public class PlayerView extends JFrame {
 				else if (ke.getKeyCode() == KeyEvent.VK_LEFT) {
 					if (map.moveable("left")) {
 						map.moveTrainer(Direction.WEST);
-						checkSteps();
+						if (isEndlessMode){
+							checkPokemonMaster();
+						}else{
+							checkSteps();
+						}
 						checkBattle();
 						checkItem();
 					}
@@ -345,7 +360,11 @@ public class PlayerView extends JFrame {
 				else if (ke.getKeyCode() == KeyEvent.VK_RIGHT) {
 					if (map.moveable("right")) {
 						map.moveTrainer(Direction.EAST);
-						checkSteps();
+						if (isEndlessMode){
+							checkPokemonMaster();
+						}else{
+							checkSteps();
+						}
 						checkBattle();
 						checkItem();
 					}
