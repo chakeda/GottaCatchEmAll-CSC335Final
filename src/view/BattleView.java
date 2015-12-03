@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -53,14 +52,14 @@ public class BattleView extends JPanel {
 	private JButton runAway;
 	private JPanel buttons;
 	private JTextArea exitScreen;
-	private boolean battleComplete;
+	private boolean battleComplete, pokeballToss;
 	
 	private JPanel imagePanel;
 	private Image pokemonImage, trainerImage, trainerImage2, pokeball;
 	private JLabel pokemonImageLabel, trainerImageLabel;
 	
 	private int projectileX, projectileY, tic, n;
-	private Timer timer;
+	private Timer timer, ballTimer;
 	private Color projectileColor;
 	private SongPlayer songplayer;
 	
@@ -69,7 +68,7 @@ public class BattleView extends JPanel {
 		this.pokemon = thePokemon;
 		this.trainer = theTrainer;
 	    timer = new Timer(40, new ProjectileListener());
-	    
+	    ballTimer = new Timer(40, new ProjectileListener());
 		
 		String pokemonFileName = thePokemon.getName().toLowerCase() + ".png";
 		
@@ -173,6 +172,7 @@ public class BattleView extends JPanel {
 	// launch projectile
 	private void drawProjectileWithAnimation() {
 		// set projectile initial position
+		pokeballToss = false;
 		projectileX = 100;
 		projectileY = 35;
 		n = 10; 
@@ -180,14 +180,29 @@ public class BattleView extends JPanel {
 		timer.start();
 	}
 	
+	
+	private void drawBallWithAnimation(){
+		pokeballToss = true;
+		projectileX = 100;
+		projectileY = 35;
+		n=10;
+		tic=1;
+		ballTimer.start();
+	}
+	
 	// projectile animation
 	public void paintComponent(Graphics g) {
 	    super.paintComponent(g);
 	    Graphics2D g2 = (Graphics2D) g;
-	    g2.setColor(projectileColor);
-		Ellipse2D.Double oval = new Ellipse2D.Double(
+	    if(pokeballToss){
+	    	g2.drawImage(pokeball, projectileX, projectileY, null);
+	    }
+	    else{
+	    	g2.setColor(projectileColor);
+	    	Ellipse2D.Double oval = new Ellipse2D.Double(
 				projectileX, projectileY, 10, 10);
-		g2.fill(oval);
+	    	g2.fill(oval);
+	    }
 		
 	}
 	
@@ -323,7 +338,7 @@ public class BattleView extends JPanel {
 			if (!battleComplete) {
 				
 				projectileColor = Color.GREEN;
-				drawProjectileWithAnimation();
+				drawBallWithAnimation();
 				
 				// animate pokemon
 				ActionListener animationPerformer = new ActionListener(){
@@ -355,8 +370,8 @@ public class BattleView extends JPanel {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						if(count==4){
-							Icon pokemonBallImageIcon = new ImageIcon(pokeball);
-							pokemonImageLabel.setIcon(pokemonBallImageIcon);	
+							//Icon pokemonBallImageIcon = new ImageIcon(pokeball);
+							pokemonImageLabel.setIcon(null);	
 							((Timer)e.getSource()).stop();
 						}
 						count++;
@@ -377,7 +392,7 @@ public class BattleView extends JPanel {
 					}
 				};
 				
-				new Timer(100, animationPerformer).start();
+				//new Timer(100, animationPerformer).start();
 				
 				trainer.throwPokeball();
 				if (pokemon.isCaught(new Random())) {
