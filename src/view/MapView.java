@@ -435,7 +435,7 @@ public class MapView extends JPanel implements Observer {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			if(tic2 < 15){
+			if(tic2 < 19){
 				battleAnimationFlag =! battleAnimationFlag;
 				tic2++;
 			}
