@@ -84,12 +84,12 @@ public class PlayerView extends JFrame {
 			// build trainer and map and battle
 			trainer = new Trainer("Testy");
 			mapPanel = new MapView(map);
-			battlePanel = new BattleView(new Scyther(), trainer, songplayer);
+			battlePanel = new BattleView(new Scyther(), trainer, songplayer, this);
 		} else {
 			map = aMap;
 			trainer = aTrainer;
 			mapPanel = new MapView(aMap);
-			battlePanel = new BattleView(new Scyther(), trainer, songplayer);
+			battlePanel = new BattleView(new Scyther(), trainer, songplayer, this);
 		}
 
 		// listeners
@@ -108,7 +108,7 @@ public class PlayerView extends JFrame {
 		bothViews.setFocusable(true);
 		this.add(bothViews, BorderLayout.CENTER);
 
-		songplayer = new SongPlayer();
+		songplayer = new SongPlayer();;
 
 		songplayer.playMainMusic();
 
@@ -127,17 +127,28 @@ public class PlayerView extends JFrame {
 		}
 	}
 
-	private void checkBattle(Point p) {
-		if (map.beginPokemonBattle(p.x, p.y) == true) {
+	private void checkBattle() {
+		if (map.beginPokemonBattle(map.getTrainerY(), map.getTrainerX())) {
+			lockKeyPad();
 			songplayer.playBattleMusic();
-			mapPanel.beginBattleAnimation();
-			battlePanel = new BattleView(map.whoToBattle(), trainer, songplayer);
-			bothViews.add(battlePanel, "battle");
-			CardLayout cardLayout = (CardLayout) bothViews.getLayout();
-			cardLayout.show(bothViews, "battle");
+			mapPanel.beginBattleAnimation(this);
 		}
 	}
+	
+	public void beginBattle(){
+		battlePanel = new BattleView(map.whoToBattle(), trainer, songplayer, this);
+		bothViews.add(battlePanel, "battle");
+		CardLayout cardLayout = (CardLayout) bothViews.getLayout();
+		cardLayout.show(bothViews, "battle");	
+	}
 
+	private boolean keyPadLocked = false;
+	public void lockKeyPad(){
+		keyPadLocked = true;
+	}
+	public void unLockKeyPad(){
+		keyPadLocked = false;
+	}
 
 	private void checkOutOfBalls() {
 		if (trainer.getPokeballsRemaining() == 0) {
@@ -171,7 +182,7 @@ public class PlayerView extends JFrame {
 	}
 
 	private void checkItem() {
-		Item i = map.getItemAt(map.getTrainerX(), map.getTrainerY());
+		Item i = map.getItemAt(map.getTrainerY(), map.getTrainerX());
 		// System.out.println(map.getTrainerX() + " " + map.getTrainerY());
 		if (i != null) {
 			// play congrats
@@ -311,50 +322,44 @@ public class PlayerView extends JFrame {
 
 			// take inputs only 330ms at a time. 320ms to complete animation (I
 			// think.)
-			if (System.currentTimeMillis() - lastPressProcessed > processingSpeed) {
+			if ((System.currentTimeMillis() - lastPressProcessed) > processingSpeed && !keyPadLocked) {
 
-				if (ke.getKeyCode() == KeyEvent.VK_COMMA) {
-					mapPanel.beginBattleAnimation();
-				}
+				
 				if (ke.getKeyCode() == KeyEvent.VK_UP) {
 					if (map.moveable(Direction.NORTH)!=null) {
-						mapPanel.moveTrainer(Direction.NORTH);
-						checkBattle(map.moveable(Direction.NORTH));
 						map.moveTrainer(Direction.NORTH);
-						checkSteps();
 						checkItem();
+						checkSteps();
+						checkBattle();
 						
 					}
 				}
 
 				else if (ke.getKeyCode() == KeyEvent.VK_DOWN) {
 					if (map.moveable(Direction.SOUTH)!=null) {
-						mapPanel.moveTrainer(Direction.SOUTH);
-						checkBattle(map.moveable(Direction.SOUTH));
 						map.moveTrainer(Direction.SOUTH);
-						checkSteps();
 						checkItem();
+						checkSteps();
+						checkBattle();
 					}
 				}
 
 				else if (ke.getKeyCode() == KeyEvent.VK_LEFT) {
 					if (map.moveable(Direction.WEST)!=null) {
-						mapPanel.moveTrainer(Direction.WEST);
-						checkBattle(map.moveable(Direction.WEST));
-						map.moveTrainer(Direction.WEST);
-						checkSteps();
+						map.moveTrainer(Direction.WEST);	
 						checkItem();
+						checkSteps();
+						checkBattle();
 					}
 
 				}
 
 				else if (ke.getKeyCode() == KeyEvent.VK_RIGHT) {
 					if (map.moveable(Direction.EAST)!=null) {
-						mapPanel.moveTrainer(Direction.EAST);
-						checkBattle(map.moveable(Direction.EAST));
 						map.moveTrainer(Direction.EAST);
-						checkSteps();
 						checkItem();
+						checkSteps();
+						checkBattle();
 					}
 				}
 
@@ -382,7 +387,7 @@ public class PlayerView extends JFrame {
 						setPossiblePokemonValues();
 						selectedPokemon = JOptionPane.showInputDialog(null, "Please select a Pokemon", "Pokemon", 
 								JOptionPane.QUESTION_MESSAGE, null, possiblePokemon, possiblePokemon[0]);
-						setNewHPLemonade(); 
+						setNewHPLemonade();
 					}
 					else if (selectedValue != null && selectedValue.equals("Use Energy Root")){
 						setPossiblePokemonValues();
@@ -415,9 +420,10 @@ public class PlayerView extends JFrame {
 					checkPokemonMaster();
 					checkOutOfBalls();
 				}
-
+				System.out.println(map.getTrainerX() +" , "+ map.getTrainerY());
 				lastPressProcessed = System.currentTimeMillis();
 			}
+			
 		}
 
 		@Override

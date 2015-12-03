@@ -63,11 +63,13 @@ public class BattleView extends JPanel {
 	private Timer timer;
 	private Color projectileColor;
 	private SongPlayer songplayer;
+	private PlayerView pv;
 	
 	// make a battle with the pokemon
-	public BattleView(Pokemon thePokemon, Trainer theTrainer, SongPlayer sp) {
+	public BattleView(Pokemon thePokemon, Trainer theTrainer, SongPlayer sp, PlayerView pv) {
 		this.pokemon = thePokemon;
 		this.trainer = theTrainer;
+		this.pv = pv;
 	    timer = new Timer(40, new ProjectileListener());
 	    
 		
@@ -188,7 +190,6 @@ public class BattleView extends JPanel {
 		Ellipse2D.Double oval = new Ellipse2D.Double(
 				projectileX, projectileY, 10, 10);
 		g2.fill(oval);
-		
 	}
 	
 	// move around
@@ -213,6 +214,7 @@ public class BattleView extends JPanel {
 
 	public void setBattleComplete() {
 		this.battleComplete = true;
+		pv.unLockKeyPad();
 		exitScreen.setText("Press BackSpace to exit.");
 	}
 
@@ -274,6 +276,7 @@ public class BattleView extends JPanel {
 	private class RockListener implements ActionListener {
 		public void actionPerformed(ActionEvent evt) {
 			if (!battleComplete) {
+				
 				projectileColor = Color.GRAY;
 				drawProjectileWithAnimation();
 				
@@ -320,6 +323,7 @@ public class BattleView extends JPanel {
 	private class BallListener implements ActionListener {
 		public void actionPerformed(ActionEvent evt) {
 			if (!battleComplete) {
+				
 				projectileColor = Color.GREEN;
 				drawProjectileWithAnimation();
 				

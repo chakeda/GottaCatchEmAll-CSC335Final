@@ -100,7 +100,12 @@ public class MapView extends JPanel implements Observer {
 
 	// timer based repaints
 	private void drawBoardWithAnimation() {
-		n = 8;
+		if(direction.equals(Direction.NORTH) || direction.equals(Direction.SOUTH)){
+			n = 8;
+		}
+		else{
+			n = 9;
+		}
 		tic = 1;
 		timer.start();
 	}
@@ -324,14 +329,15 @@ public class MapView extends JPanel implements Observer {
 		}
 		
 		if(battleAnimationFlag){
+			g2.setColor(getBackground());
 			g2.fillRect(0, 0, 256, 256);
 		}
 	}
 	
-	public void moveTrainer(Direction d){
+	/*public void moveTrainer(Direction d){
 		direction = d;
 		drawBoardWithAnimation();
-	}
+	}*/
 
 	// move around
 	private class TimerListener implements ActionListener {
@@ -412,7 +418,9 @@ public class MapView extends JPanel implements Observer {
 	private boolean battleAnimationFlag = false;
 	private Timer battleAnimationTimer = new Timer(125, new BattleAnimationListener(this));
 	private int tic2 = 0;
-	public void beginBattleAnimation(){
+	private PlayerView view;
+	public void beginBattleAnimation(PlayerView v){
+		view = v;
 		battleAnimationTimer.start();
 	}
 	
@@ -427,7 +435,7 @@ public class MapView extends JPanel implements Observer {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			if(tic2 < 8){
+			if(tic2 < 15){
 				battleAnimationFlag =! battleAnimationFlag;
 				tic2++;
 			}
@@ -435,6 +443,7 @@ public class MapView extends JPanel implements Observer {
 				battleAnimationTimer.stop();
 				battleAnimationFlag = false;
 				tic2 = 0;
+				view.beginBattle();
 			}
 			map.repaint();
 		}
