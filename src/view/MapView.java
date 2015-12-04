@@ -332,6 +332,7 @@ public class MapView extends JPanel implements Observer {
 			g2.setColor(getBackground());
 			g2.fillRect(0, 0, 256, 256);
 		}
+		
 	}
 	
 	/*public void moveTrainer(Direction d){

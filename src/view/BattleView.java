@@ -204,6 +204,12 @@ public class BattleView extends JPanel {
 			Ellipse2D.Double oval = new Ellipse2D.Double(projectileX, projectileY, 10, 10);
 			g2.fill(oval);
 		}
+		
+		if(outroBattleAnimationFlag){
+			//TODO
+			//super.paintComponent(g);
+			this.setBackground(new Color(238, 238, 238, alpha));
+		}
 
 	}
 
@@ -433,12 +439,47 @@ public class BattleView extends JPanel {
 
 	private class runAwayListener implements ActionListener {
 		public void actionPerformed(ActionEvent evt) {
-			// drawProjectileWithAnimation();
 			if (!battleComplete) {
 				battleLabel.setText("     Ran away safely!     ");
 				setBattleComplete();
 			}
 		}
+	}
+
+	
+	/**outro battle animation stuff is below**/
+	int alpha = this.getBackground().getAlpha();
+	boolean outroBattleAnimationFlag = false;
+	Timer outroTimer = new Timer(100, new battleOutroListener(this));
+	int tic2 = 0;
+	public void fadeOut(){
+		this.removeAll();
+		this.revalidate();
+		this.repaint();
+		outroBattleAnimationFlag = true;
+		outroTimer.start();
+	}
+	
+	private class battleOutroListener implements ActionListener{
+		BattleView ourBattleView;
+		public battleOutroListener(BattleView bv){
+			ourBattleView = bv;
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			if(tic2 < 4){
+				tic2++;
+				alpha-=25;
+				ourBattleView.repaint();
+			}
+			else{
+				outroTimer.stop();
+				pv.switchToOverworld();
+			}
+		}
+		
 	}
 
 }

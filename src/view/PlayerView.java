@@ -435,13 +435,8 @@ public class PlayerView extends JFrame {
 				// return to overworld via backspace. should require an event
 				// trigger
 				if (ke.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
-					CardLayout cardLayout = (CardLayout) bothViews.getLayout();
-					cardLayout.show(bothViews, "overworld");
-					songplayer.playMainMusic();
-					checkPokemonMaster();
-					checkOutOfBalls();
+					battlePanel.fadeOut();
 				}
-				//System.out.println(map.getTrainerX() +" , "+ map.getTrainerY()); // tester
 				lastPressProcessed = System.currentTimeMillis();
 			}
 			
@@ -490,5 +485,13 @@ public class PlayerView extends JFrame {
 		public void windowOpened(WindowEvent arg0) {
 		}
 
+	}
+	
+	public void switchToOverworld(){
+		CardLayout cardLayout = (CardLayout) bothViews.getLayout();
+		cardLayout.show(bothViews, "overworld");
+		songplayer.playMainMusic();
+		checkPokemonMaster();
+		checkOutOfBalls();
 	}
 }
