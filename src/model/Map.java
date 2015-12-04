@@ -185,7 +185,7 @@ public class Map extends Observable implements Serializable{
 			setGrass(i, j);
 		}
 		for(int i=7; i<18; i++){
-			setBush(18, i);
+			setBush(20, i);
 		}
 		for(int i=7; i<18; i++){
 			setWater(19, i);
@@ -398,9 +398,11 @@ public class Map extends Observable implements Serializable{
 			// pokemon spawn chance is 30%.
 			Random generator = new Random(); 
 			int random = generator.nextInt(10) + 1; // 1-10
+			/**
 			if (random % 3 == 0){
 				return true;
 			}
+			**/
 		}
 		return false;
 	}

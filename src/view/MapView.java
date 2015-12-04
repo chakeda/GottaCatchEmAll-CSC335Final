@@ -100,12 +100,7 @@ public class MapView extends JPanel implements Observer {
 
 	// timer based repaints
 	private void drawBoardWithAnimation() {
-		if(direction.equals(Direction.NORTH) || direction.equals(Direction.SOUTH)){
-			n = 8;
-		}
-		else{
-			n = 9;
-		}
+		n = 9;
 		tic = 1;
 		timer.start();
 	}
