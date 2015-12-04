@@ -64,7 +64,7 @@ public class MapTest {
 		for(int i=4; i<map.getMapLength()-1; i++){
 			map.moveTrainer(Direction.EAST); 	
 		}
-		assertNotNull(map.moveable(Direction.EAST));
+		assertNull(map.moveable(Direction.EAST));
 		
 		// initialize pokemon
 		map.initializePokemonList();
@@ -72,6 +72,18 @@ public class MapTest {
 		// make map 2
 		Map map2 = new Map("map2");
 		assertFalse(map2.beginPokemonBattle(20,20)); // false-- not on grass
+		
+		// We can go from top left to bottom left... so the problem is in the view
+		for(int i=4; i<map.getMapLength()-1; i++){
+			map.moveTrainer(Direction.WEST); 	
+		}
+		assertEquals(map.getFogAt(2, 4), "T");
+		for(int i=0; i<20; i++){
+			map.moveTrainer(Direction.SOUTH); 	
+		}
+		assertEquals(map.getFogAt(22, 4), "T");
+
+		
 		
 	
 	}	

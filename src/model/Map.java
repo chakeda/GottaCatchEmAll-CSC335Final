@@ -110,14 +110,14 @@ public class Map extends Observable implements Serializable{
 		setGrass(20,19);
 		setGrass(22,19);
 		setGrass(24,19);
-		setBush(18,20);
-		setBush(20,20);
-		setBush(22,20);
-		setBush(22,20);
 		setBush(18,21);
 		setBush(20,21);
 		setBush(22,21);
 		setBush(22,21);
+		setBush(18,22);
+		setBush(20,22);
+		setBush(22,22);
+		setBush(22,22);
 		setItem(new CostumeChange("Costume Change", Category.HOLD_ITEM), 25, 25);
 		setItem(new Lemonade("Lemonade", Category.MEDICINE), 3,8);
 		for(int i=0; i<7; i++){

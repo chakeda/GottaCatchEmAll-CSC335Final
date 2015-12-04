@@ -148,6 +148,7 @@ public class PlayerView extends JFrame {
 	}
 
 	private boolean keyPadLocked = false;
+	
 	public void lockKeyPad(){
 		keyPadLocked = true;
 	}
@@ -440,7 +441,7 @@ public class PlayerView extends JFrame {
 					checkPokemonMaster();
 					checkOutOfBalls();
 				}
-				System.out.println(map.getTrainerX() +" , "+ map.getTrainerY());
+				//System.out.println(map.getTrainerX() +" , "+ map.getTrainerY()); // tester
 				lastPressProcessed = System.currentTimeMillis();
 			}
 			
