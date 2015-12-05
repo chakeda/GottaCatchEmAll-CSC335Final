@@ -24,6 +24,8 @@ import com.sun.awt.AWTUtilities;
 import controller.SongPlayer;
 import model.Direction;
 import model.Map;
+import model.Pokemon;
+import model.pokemon.Pinsir;
 
 public class MapView extends JPanel implements Observer {
 
@@ -44,6 +46,7 @@ public class MapView extends JPanel implements Observer {
 	private Direction direction;
 	private Timer timer;
 	private boolean costumeFlag = true;
+	private Pokemon fillerPokemon = new Pinsir();
 
 	public MapView(Map map) {
 		this.map = map;
@@ -439,7 +442,7 @@ public class MapView extends JPanel implements Observer {
 				battleAnimationTimer.stop();
 				battleAnimationFlag = false;
 				tic2 = 0;
-				view.beginBattle();
+				view.beginBattle(fillerPokemon);
 			}
 			map.repaint();
 		}

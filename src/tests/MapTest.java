@@ -73,7 +73,7 @@ public class MapTest {
 		Map map2 = new Map("map2");
 		assertFalse(map2.beginPokemonBattle(20,20)); // false-- not on grass
 		
-		// We can go from top left to bottom left... so the problem is in the view
+		// Just testing the top left to bottom left shenangigans
 		for(int i=4; i<map.getMapLength()-1; i++){
 			map.moveTrainer(Direction.WEST); 	
 		}

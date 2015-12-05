@@ -53,178 +53,228 @@ public class Map extends Observable implements Serializable{
 		//// statically generate map 
 		
 		// map1.1: top left (0,16), (0,16)
+		
 		setTrainer(0,7); // trainer starts here
-		setGrass(4,4);
-		setGrass(5,5);
-		setGrass(4,5);
-		setGrass(5,4);
-		setGrass(0,2);
-		setGrass(0,3);
-		setGrass(0,4);
-		setGrass(0,5);
-		setGrass(2,4);
+		
+		setBush(0,5);
+		setBush(1,5);
+		setBush(1,4);
+		setBush(1,3);
+		setBush(1,2);
+		
+		setItem(new BerryJuice("Berry Juice", Category.BERRIES), 0,4);
+
+		setGrass(2,0);
+		setGrass(3,0);
+		setGrass(2,1);
+		setGrass(3,1);
+		setGrass(2,2);
+		setGrass(3,2);
 		setGrass(2,3);
 		setGrass(3,3);
+		setGrass(2,4);
 		setGrass(3,4);
 		
-		setBush(7,7);
-		setBush(1,1);
-		setBush(1,2);
-		setBush(1,3);
-		setBush(1,4);
-		setBush(1,5);
-		setBush(1,6);
-		setBush(0,6);
-		setItem(new RunningShoes("Running Shoes", Category.HOLD_ITEM), 10,10); 
-		setItem(new BerryJuice("Berry Juice", Category.BERRIES), 0,8);
+		setBush(4,4);
+		setBush(5,4);
+		setBush(6,4);
+		setBush(7,4);
+		setBush(8,4);
+		setBush(9,4);
+		setBush(10,4);
+		setBush(4,5);
+		setBush(4,6);
+		setBush(4,7);
+		setBush(4,8);
+		setBush(4,9);
+		setBush(4,10);
+		setBush(5,10);
+		setBush(6,10);
+		setBush(7,10);
+		setBush(8,10);
+		setBush(9,10);
+		setBush(10,10);
+		
+		for (int i=5; i<10; i++){
+			for (int j=5; j<10; j++){
+				setGrass(i, j);
+			}
+		}
+		
+		setItem(new RunningShoes("Running Shoes", Category.HOLD_ITEM), 5,7); 
+
+		for (int i=5; i<11; i++){
+			for (int j=11; j<16; j++){
+				setGrass(i, j);
+			}
+		}
+		
+		setBush(0,12);
+		setBush(1,12);
+		setBush(2,12);
+		setBush(3,12);
+		
+		setBush(4,12);
+		setBush(4,13);
+		setBush(4,14);
+		setBush(4,15);
+		setBush(4,16);
+		
+		setBush(13,6);
+		setBush(13,7);
+		setBush(14,6);
+		setBush(14,7);
+		
+		for (int i=13; i<16; i++){
+			for (int j=8; j<10; j++){
+				setGrass(i, j);
+			}
+		}
+	
+		for (int i=13; i<19; i++){
+			for (int j=0; j<5; j++){ // goes to other board
+				setWater(i, j);
+			}
+		}
+
 		// map1.2: top right (0,16), (17,32)
-		setGrass(0,19);
-		setGrass(1,19);
-		setGrass(2,19);
-		setGrass(0,20);
-		setGrass(1,20);
-		setGrass(2,20);
+
+		setBush(4, 17);
+		setBush(4, 18);
+		setBush(4, 19);
+		setBush(4, 20);
 		
-		setItem(new FishingPole("Fishing Pole", Category.HOLD_ITEM), 26,26); 
-		setItem(new EnergyRoot("Energy",Category.MEDICINE), 1,8);
+		setItem(new CostumeChange("Costume Change", Category.HOLD_ITEM), 1, 18);
+		
+		for (int i=4; i<12; i++){
+			for (int j=21; j<25; j++){
+				setWater(i, j);
+			}
+		}
+		
+		for (int j=21; j<29; j++){
+			setBush(12, j);
+		}
+		
+		setBush(12, 26);
+		setBush(12, 27);
+		setBush(12, 28);
+		setBush(12, 29);
+
+		for (int i=13; i<18; i++){
+			for (int j=18; j<30; j++){
+				setGrass(i, j);
+			}
+		}
+		
+		setBush(9, 26);
+		setBush(8, 26);
+		setBush(7, 26);
+		setBush(7, 27);
+		setBush(7, 28);
+		setBush(8, 28);
+		setBush(9, 28);
+		setItem(new EnergyRoot("Energy",Category.MEDICINE), 8,27);
+		
+		setWater(6, 26);		
+		setWater(5, 26);
+		setWater(4, 26);
+		setWater(6, 27);
+		setWater(5, 27);
+		setWater(4, 27);
+		setWater(6, 28);
+		setWater(5, 28);
+		setWater(4, 28);
+		
+		setGrass(29, 4);
+		setGrass(30, 4);
+		setGrass(29, 3);
+		setGrass(30, 3);
+		
+		for (int i=0; i<4; i++){
+			for (int j=20; j<26; j++){
+				setGrass(i, j);
+			}
+		}
+
 		// map1.3: bottom left (17,32), (0, 16)
-		setGrass(29,2);
-		setGrass(30,2);
-		setGrass(31,2);
-		setGrass(29,3);
-		setGrass(30,3);
-		setGrass(31,3);
-		setGrass(29,4);
-		setGrass(30,4);
-		setGrass(31,4);
-		setBush(18,12);
-		setBush(25,5);
-		setBush(31,9);
-		setItem(new FreshWater("Water", Category.MEDICINE), 2,8);
+		for (int i=23; i<30; i++){
+			for (int j=5; j<10; j++){
+				setWater(i, j);
+			}
+		}
+		
+		for (int i=22; i<30; i++){
+			setBush(i, 4);
+		}
+		for (int i=22; i<30; i++){
+			setBush(i, 11);
+		}
+		for (int j=4; j<12; j++){
+			setBush(30, j);
+		}
+		
+		setItem(new Lemonade("Lemonade", Category.MEDICINE), 26,14);
+
+		for (int i=19; i<23; i++){
+			for (int j=5; j<12; j++){
+				setGrass(i, j);
+			}
+		}
+		
+		for (int i=25; i<30; i++){
+			for (int j=0; j<4; j++){
+				setGrass(i, j);
+			}
+		}
+		
+		setItem(new FreshWater("Water", Category.MEDICINE), 24,3);
+
+
 		// map1.4: bottom right (17,32),(17,32)
-		setGrass(18,18);
-		setGrass(20,18);
-		setGrass(22,18);
-		setGrass(24,18);
-		setGrass(18,19);
-		setGrass(20,19);
-		setGrass(22,19);
-		setGrass(24,19);
-		setBush(18,21);
-		setBush(20,21);
-		setBush(22,21);
-		setBush(22,21);
-		setBush(18,22);
-		setBush(20,22);
-		setBush(22,22);
-		setBush(22,22);
-		setItem(new CostumeChange("Costume Change", Category.HOLD_ITEM), 25, 25);
-		setItem(new Lemonade("Lemonade", Category.MEDICINE), 3,8);
-		for(int i=0; i<7; i++){
-			setBush(4,i);
-		}
-		for(int i=5; i<14; i++){
-			setBush(i,6);
-		}
-		for(int i=5; i<22; i++){
-			for(int j = 0; j<6; j++){
-				setGrass(i,j);
-			}
-		}
-		setGrass(0,0);
-		setGrass(0,1);
-		setGrass(0,0);
-		setGrass(1,0);
-		setGrass(2,0);
-		setGrass(2,1);
-		setGrass(2,2);
-		setGrass(3,0);
-		setGrass(3,1);
-		setGrass(3,2);
 		
-		for(int i=0; i<3; i++){
-			for(int j=12; j<26; j++){
-				setGrass(i,j);
-			}
-		}
+		setBush(20, 20);
+		setBush(20, 21);
+		setBush(20, 22);
+		setBush(20, 23);
+		setBush(20, 24);
+		setBush(20, 25);
+		setBush(20, 26);
 		
-		for(int i=0; i<12; i++){
-			for(int j=31; j>28; j--){
-				setWater(i,j);
-			}
-		}
+		setBush(26, 20);
+		setBush(26, 21);
+		setBush(26, 22);
+		setBush(26, 23);
+		setBush(26, 24);
+		setBush(26, 25);
+		setBush(26, 26);
+
+		setGrass(21, 20);
+		setGrass(21, 21);
+		setGrass(21, 22);
+		setGrass(21, 23);
+		setGrass(21, 24);
+		setGrass(21, 25);
+		setGrass(21, 26);
 		
-		setBush(31,17);
-		setBush(30,17);
-		setBush(29,17);
-		setBush(28,17);
-		setBush(31,31);
-		setBush(30,31);
-		setBush(29,31);
-		setBush(28,31);
-		for(int i = 19; i<31; i++){
-			setBush(28, i);
-		}
-		for(int i=20; i<30; i++){
-			setWater(30, i);
-		}
-		for(int i=19; i<31; i++){
-			setGrass(29, i);
-		}
-		for(int i=19; i<31; i++){
-			setGrass(31, i);
-		}
-		setGrass(30,30);
-		setGrass(30,19);
-		setGrass(30,18);
-		setGrass(31,18);
-		setGrass(29,18);
+		setGrass(25, 20);
+		setGrass(25, 21);
+		setGrass(25, 22);
+		setGrass(25, 23);
+		setGrass(25, 24);
+		setGrass(25, 25);
+		setGrass(25, 26);
+
+		setItem(new FishingPole("Fishing Pole", Category.HOLD_ITEM), 23,23); 
 		
-		for(int i=8; i<18; i++){
-			for(int j=7; j<18; j++)
-			setGrass(i, j);
-		}
-		for(int i=7; i<18; i++){
-			setBush(20, i);
-		}
-		for(int i=7; i<18; i++){
-			setWater(19, i);
-		}
-		for(int i=14; i<22;i++){
-			setGrass(i,6);
-		}
-		for(int i=26; i<32; i++){
-			setBush(i, 5);
-		}
-		for(int i=25; i<30; i++){
-			for(int j=0; j<5; j++){
-				setGrass(i,j);
-			}
-		}
-		setWater(31,0);
-		setWater(31,1);
-		setWater(30,0);
-		setWater(30,1);
-		setWater(29,0);
-		setWater(29,1);
+		setWater(29, 29);
 		
-		for(int i=4; i<18; i++){
-			for(int j=21; j<29; j++){
-				setGrass(i,j);
-			}
-		}
-		for(int i=4; i<18; i++){
-			setBush(i, 20);
-		}
-		
-		setBush(13, 21);
-		setBush(13, 22);
-		setBush(13, 23);
-		setBush(12, 23);
-		setBush(10, 23);
-		setBush(9, 23);
-		setBush(9, 22);
-		setBush(9, 21);
+		setBush(29, 30);
+		setBush(30, 29);
+		setBush(30, 30);
+
+
+
 	}
 	
 	public List<Pokemon> initializePokemonList(){
@@ -395,10 +445,10 @@ public class Map extends Observable implements Serializable{
 	public boolean beginPokemonBattle(int tempI, int tempJ){
 		// only called in grass
 		if (map[tempI][tempJ].equals("G")){ 
-			// pokemon spawn chance is 30%.
+			// Let's make it 10%!
 			Random generator = new Random(); 
 			int random = generator.nextInt(10) + 1; // 1-10			
-			if (random % 3 == 0){
+			if (random % 10 == 0){
 				return true;
 			}
 		}

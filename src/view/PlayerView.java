@@ -26,6 +26,7 @@ import model.Item;
 import model.Map;
 import model.Pokemon;
 import model.Trainer;
+import model.pokemon.MercerMermaid;
 import model.pokemon.Scyther;
 
 // this file plays the game.
@@ -140,8 +141,22 @@ public class PlayerView extends JFrame {
 		}
 	}
 	
-	public void beginBattle(){
-		battlePanel = new BattleView(map.whoToBattle(), trainer, songplayer, this);
+	// battle with mercer. unfortunately the animation is not used
+	private void forceBattleWithMercer() {
+		Pokemon mercerMermaid = new MercerMermaid();
+		lockKeyPad();
+		songplayer.playBattleMusic();
+		beginBattle(mercerMermaid);
+	}
+	
+	public void beginBattle(Pokemon optionalPokemon){
+		if (optionalPokemon.getName().equals("Pinsir")){
+			// Pinsir is the filler pokemon. Get the random pokemon from the map
+			battlePanel = new BattleView(map.whoToBattle(), trainer, songplayer, this);
+		}else{
+			// a specified pokemon battle begins
+			battlePanel = new BattleView(optionalPokemon, trainer, songplayer, this);
+		}
 		bothViews.add(battlePanel, "battle");
 		CardLayout cardLayout = (CardLayout) bothViews.getLayout();
 		cardLayout.show(bothViews, "battle");	
@@ -384,7 +399,7 @@ public class PlayerView extends JFrame {
 					}
 				}
 
-				// check things - TODO: this is a stub
+				// menu 
 				else if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
 					setMenuPossibleValues();
 					Object selectedValue = JOptionPane.showInputDialog(null,
@@ -399,6 +414,19 @@ public class PlayerView extends JFrame {
 					} else if (selectedValue != null && selectedValue.equals("Equip Running Shoes")) {
 						mapPanel.speedUpTrainer();
 						processingSpeed = 50;
+					} else if (selectedValue != null && selectedValue.equals("Use Fishing Pole")) {
+						// adjacent tile is water? cast thy fishing pole
+						if (map.getTileAt(map.getTrainerY()+1, map.getTrainerX()).equals("W")
+								|| map.getTileAt(map.getTrainerY()-1, map.getTrainerX()).equals("W")
+								|| map.getTileAt(map.getTrainerY(), map.getTrainerX()+1).equals("W")
+								|| map.getTileAt(map.getTrainerY(), map.getTrainerX()-1).equals("W")
+								){
+							forceBattleWithMercer();
+						}else{
+							JOptionPane.showMessageDialog(null,
+									"Professor Mercer's words... There is a time and place and design principle for everything, laddie!");
+						}
+						// wow factor is here
 					} else if (selectedValue != null && selectedValue.equals("Change Costume")) {
 						mapPanel.changeCostume();
 					} else if (selectedValue != null && selectedValue.equals("Quit Game")) {
