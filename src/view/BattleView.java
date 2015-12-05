@@ -289,6 +289,7 @@ public class BattleView extends JPanel {
 				pokemon.baitThrown();
 				battleLabel.setText("     " + pokemon.getName() + " eats the bait!     ");
 				if (pokemon.willRunAway(new Random())) {
+					songplayer.playRunAwaySoundEffect();
 					battleLabel.setText("     " + pokemon.getName() + " ran away!     ");
 					setBattleComplete();
 				}
@@ -338,6 +339,7 @@ public class BattleView extends JPanel {
 				pokemon.rockThrown();
 				battleLabel.setText("     " + pokemon.getName() + " is pissed!     ");
 				if (pokemon.willRunAway(new Random())) {
+					songplayer.playRunAwaySoundEffect();
 					battleLabel.setText("     " + pokemon.getName() + " ran away!     ");
 					setBattleComplete();
 				}
@@ -440,6 +442,7 @@ public class BattleView extends JPanel {
 	private class runAwayListener implements ActionListener {
 		public void actionPerformed(ActionEvent evt) {
 			if (!battleComplete) {
+				songplayer.playRunAwaySoundEffect();
 				battleLabel.setText("     Ran away safely!     ");
 				setBattleComplete();
 			}
@@ -448,6 +451,7 @@ public class BattleView extends JPanel {
 
 	
 	/**outro battle animation stuff is below**/
+	
 	int alpha = this.getBackground().getAlpha();
 	boolean outroBattleAnimationFlag = false;
 	Timer outroTimer = new Timer(100, new battleOutroListener(this));

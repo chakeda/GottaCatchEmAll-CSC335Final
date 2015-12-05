@@ -397,12 +397,10 @@ public class Map extends Observable implements Serializable{
 		if (map[tempI][tempJ].equals("G")){ 
 			// pokemon spawn chance is 30%.
 			Random generator = new Random(); 
-			int random = generator.nextInt(10) + 1; // 1-10
-			/**
+			int random = generator.nextInt(10) + 1; // 1-10			
 			if (random % 3 == 0){
 				return true;
 			}
-			**/
 		}
 		return false;
 	}

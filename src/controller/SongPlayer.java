@@ -47,5 +47,18 @@ public class SongPlayer {
 	public void stopMusic(){
 		AudioPlayer.player.stop(audioStream);
 	}
+	
+	public void playRunAwaySoundEffect(){
+		SongPlayer sp = new SongPlayer();
+		sp.playRunAway();
+	}
+	
+	private void playRunAway(){
+		playSong("runAway.mp3");
+	}
+	
+	public void startMusic(){
+		AudioPlayer.player.start(audioStream);
+	}
 
 }
