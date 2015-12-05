@@ -9,13 +9,18 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.awt.image.BufferedImage;
+import java.awt.Image;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -434,27 +439,59 @@ public class PlayerView extends JFrame {
 					}
 					else if (selectedValue != null && selectedValue.equals("Use Lemonade")){
 						setPossiblePokemonValues();
+						Image theImage = null;
+						try {
+							theImage = ImageIO.read(new File("./images/lemon.jpg"));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						ImageIcon image = new ImageIcon(theImage);
 						selectedPokemon = JOptionPane.showInputDialog(null, "Please select a Pokemon", "Pokemon", 
-								JOptionPane.QUESTION_MESSAGE, null, possiblePokemon, possiblePokemon[0]);
+								JOptionPane.QUESTION_MESSAGE, image, possiblePokemon, possiblePokemon[0]);
 						setNewHPLemonade();
 					}
 					else if (selectedValue != null && selectedValue.equals("Use Energy Root")){
 						setPossiblePokemonValues();
+						Image theImage = null;
+						try {
+							theImage = ImageIO.read(new File("./images/EnergyRoot.png"));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						ImageIcon image = new ImageIcon(theImage);
 						selectedPokemon = JOptionPane.showInputDialog(null, "Please select a Pokemon", "Pokemon", 
-								JOptionPane.QUESTION_MESSAGE, null, possiblePokemon, possiblePokemon[0]);
+								JOptionPane.QUESTION_MESSAGE, image, possiblePokemon, possiblePokemon[0]);
 						setNewHPEnergy();
 					}
 					else if (selectedValue != null && selectedValue.equals("Use Berry Juice")){
 						setPossiblePokemonValues();
+						Image theImage = null;
+						try {
+							theImage = ImageIO.read(new File("./images/BerryJuice.png"));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						ImageIcon image = new ImageIcon(theImage);
 						selectedPokemon = JOptionPane.showInputDialog(null, "Please select a Pokemon", "Pokemon", 
-								JOptionPane.QUESTION_MESSAGE, null, possiblePokemon, possiblePokemon[0]);
+								JOptionPane.QUESTION_MESSAGE, image, possiblePokemon, possiblePokemon[0]);
 						
 						setNewHPBerry();
 					}
 					else if (selectedValue != null && selectedValue.equals("Use Fresh Water")){
 						setPossiblePokemonValues();
+						Image theImage = null;
+						try {
+							theImage = ImageIO.read(new File("./images/FreshWater.png"));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						ImageIcon image = new ImageIcon(theImage);
 						selectedPokemon = JOptionPane.showInputDialog(null, "Please select a Pokemon", "Pokemon", 
-								JOptionPane.QUESTION_MESSAGE, null, possiblePokemon, possiblePokemon[0]);
+								JOptionPane.QUESTION_MESSAGE, image, possiblePokemon, possiblePokemon[0]);
 						setNewHPWater();
 					}
 				}
