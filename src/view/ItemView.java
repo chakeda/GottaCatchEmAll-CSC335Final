@@ -1,15 +1,9 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.Ellipse2D;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -30,7 +24,7 @@ public class ItemView {
 	private int tic, time, itemX, itemY;
 	private Image pokemonImage, itemImage;
 	private JFrame frame;
-	private JLabel pokemonImageLabel, itemImageLabel;
+	private JLabel pokemonImageLabel, itemImageLabel, finalMessage;
 
 	public ItemView(String pok, String it) {
 		itemX = 100;
@@ -38,6 +32,7 @@ public class ItemView {
 		time = 200;
 		tic = 0;
 		frame = new JFrame("Item Fun");
+		frame.setLayout(new GridLayout(3, 1));
 		// timer = new Timer(40, new ItemListener());
 		// timer.start();
 		String pokemonFileName = pok.toLowerCase() + ".png";
@@ -70,24 +65,31 @@ public class ItemView {
 			}
 		} else if (it.equals("Fresh Water")) {
 			try {
-				System.out.println("In fresh water iff");
-				itemImage = ImageIO.read(new File("./images/FreshWater2.png"));
+				//System.out.println("In fresh water iff");
+				itemImage = ImageIO.read(new File("./images/FreshWater.png"));
 			} catch (IOException e) {
 				e.printStackTrace();
 				//System.out.println("In fresh water iff not working");
 			}
 		}
+		
+		pokemonImageLabel = new JLabel(new ImageIcon(pokemonImage));
+		frame.add(pokemonImageLabel);
 		// frame.add(itemImage);
-		//frame.setBackground(Color.WHITE);
+		//frame.setBackground(Color.WHITE);		
+		finalMessage = new JLabel("");
+		finalMessage.setLocation(10,10);
+		frame.add(finalMessage);
+		
 		itemImageLabel = new JLabel(new ImageIcon(itemImage));
 		frame.add(itemImageLabel);
 
 		// poke image
-		pokemonImageLabel = new JLabel(new ImageIcon(pokemonImage));
-		frame.add(pokemonImageLabel);
+		
+		
 
 		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		frame.setSize(250, 250);
+		frame.setSize(300, 300);
 		// frame.add(canvas);
 		// frame.setLayout(new BorderLayout());
 		// frame.add(new ItemListener());
@@ -103,17 +105,25 @@ public class ItemView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (count == 0) {
-					itemImageLabel.setLocation(10,60);
-					pokemonImageLabel.setLocation(10,60);
+					itemImageLabel.setLocation(10,320);
+					pokemonImageLabel.setLocation(10,-20);
 					
 				}
-				if (count == 100) {
+				if (count == 85) {
+					finalMessage.setText(pok + "'s " + it + " HP increase complete");
+					itemImageLabel.setIcon(null);
+					pokemonImageLabel.setIcon(null);
+					
 					((Timer) e.getSource()).stop();
+					
 				} else {
 					// and down
-					//itemImageLabel.setLocation(
-						//	itemImageLabel.getLocation().x + 5,
-							//itemImageLabel.getLocation().y);
+					pokemonImageLabel.setLocation(
+							pokemonImageLabel.getLocation().x,
+							pokemonImageLabel.getLocation().y + 2);
+					itemImageLabel.setLocation(
+							itemImageLabel.getLocation().x,
+							itemImageLabel.getLocation().y - 2);
 					count++;
 				}
 			}
