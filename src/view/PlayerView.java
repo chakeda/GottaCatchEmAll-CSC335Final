@@ -47,6 +47,7 @@ public class PlayerView extends JFrame {
 
 	private MapView mapPanel;
 	private BattleView battlePanel;
+	private ItemView itemView; 
 	private JPanel bothViews;
 	private Map map;
 	private Trainer trainer;
@@ -437,6 +438,7 @@ public class PlayerView extends JFrame {
 					} else if (selectedValue != null && selectedValue.equals("Quit Game")) {
 						System.exit(0);
 					}
+					//added a little bit of "WOW" place image next to the items that increase HP
 					else if (selectedValue != null && selectedValue.equals("Use Lemonade")){
 						setPossiblePokemonValues();
 						Image theImage = null;
@@ -450,6 +452,7 @@ public class PlayerView extends JFrame {
 						selectedPokemon = JOptionPane.showInputDialog(null, "Please select a Pokemon", "Pokemon", 
 								JOptionPane.QUESTION_MESSAGE, image, possiblePokemon, possiblePokemon[0]);
 						setNewHPLemonade();
+						itemView = new ItemView((String) selectedPokemon, "Lemonade");
 					}
 					else if (selectedValue != null && selectedValue.equals("Use Energy Root")){
 						setPossiblePokemonValues();
@@ -464,6 +467,7 @@ public class PlayerView extends JFrame {
 						selectedPokemon = JOptionPane.showInputDialog(null, "Please select a Pokemon", "Pokemon", 
 								JOptionPane.QUESTION_MESSAGE, image, possiblePokemon, possiblePokemon[0]);
 						setNewHPEnergy();
+						itemView = new ItemView((String) selectedPokemon, "Energy Root");
 					}
 					else if (selectedValue != null && selectedValue.equals("Use Berry Juice")){
 						setPossiblePokemonValues();
@@ -479,6 +483,7 @@ public class PlayerView extends JFrame {
 								JOptionPane.QUESTION_MESSAGE, image, possiblePokemon, possiblePokemon[0]);
 						
 						setNewHPBerry();
+						itemView = new ItemView((String) selectedPokemon, "Berry Juice");
 					}
 					else if (selectedValue != null && selectedValue.equals("Use Fresh Water")){
 						setPossiblePokemonValues();
@@ -493,6 +498,7 @@ public class PlayerView extends JFrame {
 						selectedPokemon = JOptionPane.showInputDialog(null, "Please select a Pokemon", "Pokemon", 
 								JOptionPane.QUESTION_MESSAGE, image, possiblePokemon, possiblePokemon[0]);
 						setNewHPWater();
+						itemView = new ItemView((String) selectedPokemon, "Fresh Water");
 					}
 				}
 					
