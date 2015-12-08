@@ -107,7 +107,7 @@ public class ItemView {
 					pokemonImageLabel.setLocation(10,-80);
 				
 				}
-				if (count == 32) {
+				if (count == 40) {
 					
 					sp.playCongratsMusic();
 					itemImageLabel.setIcon(null);
@@ -126,15 +126,15 @@ public class ItemView {
 					// and down
 					pokemonImageLabel.setLocation(
 							pokemonImageLabel.getLocation().x,
-							pokemonImageLabel.getLocation().y + 5);
+							pokemonImageLabel.getLocation().y + 4);
 					itemImageLabel.setLocation(
 							itemImageLabel.getLocation().x,
-							itemImageLabel.getLocation().y - 5);
+							itemImageLabel.getLocation().y - 4);
 					count++;
 				}
 			}
 		};
-		new Timer(100, initialAnimationPerformer).start();
+		new Timer(30, initialAnimationPerformer).start();
 		/*
 		 * public void paintComponent(Graphics g) { //super.paintComponent(g);
 		 * Graphics2D g2 = (Graphics2D) g; //g.drawImage(boat, itemX, itemY,
