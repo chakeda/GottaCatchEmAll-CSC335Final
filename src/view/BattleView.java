@@ -153,19 +153,19 @@ public class BattleView extends JPanel {
 					pokemonImageLabel.setLocation(230, pokemonImageLabel.getLocation().y);
 					trainerImageLabel.setLocation(-30, trainerImageLabel.getLocation().y);
 				}
-				if (count == 20) {
+				if (count == 100) {
 					((Timer) e.getSource()).stop();
 				} else {
 					// and down
-					pokemonImageLabel.setLocation(pokemonImageLabel.getLocation().x - 5,
+					pokemonImageLabel.setLocation(pokemonImageLabel.getLocation().x - 1,
 							pokemonImageLabel.getLocation().y);
-					trainerImageLabel.setLocation(trainerImageLabel.getLocation().x + 5,
+					trainerImageLabel.setLocation(trainerImageLabel.getLocation().x + 1,
 							trainerImageLabel.getLocation().y);
 					count++;
 				}
 			}
 		};
-		new Timer(100, initialAnimationPerformer).start();
+		new Timer(5, initialAnimationPerformer).start();
 
 	}
 
