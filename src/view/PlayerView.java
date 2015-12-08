@@ -52,8 +52,6 @@ public class PlayerView extends JFrame {
 	private Map map;
 	private Trainer trainer;
 	private SongPlayer songplayer;
-	
-	private Pokemon test;
 	private boolean isEndlessMode;
 	
 
@@ -197,7 +195,7 @@ public class PlayerView extends JFrame {
 		pokemons.clear();
 		pokemons.addAll(uniquePokemons);
 		// caught all pokemons?
-		if (pokemons.size() == 10) {
+		if (pokemons.size() == 11) {
 			JOptionPane.showMessageDialog(null,
 					"<html><body><p>Congratulations! You caught all the pokemon.</p><br />" + "<p>Steps Taken: "
 							+ trainer.getSteps() + "</p><p><br />Pokemon Caught: " + trainer.getPokemonList()
@@ -443,7 +441,7 @@ public class PlayerView extends JFrame {
 						setPossiblePokemonValues();
 						Image theImage = null;
 						try {
-							theImage = ImageIO.read(new File("./images/lemon.jpg"));
+							theImage = ImageIO.read(new File("./images/lemon.png"));
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -452,7 +450,7 @@ public class PlayerView extends JFrame {
 						selectedPokemon = JOptionPane.showInputDialog(null, "Please select a Pokemon", "Pokemon", 
 								JOptionPane.QUESTION_MESSAGE, image, possiblePokemon, possiblePokemon[0]);
 						setNewHPLemonade();
-						itemView = new ItemView((String) selectedPokemon, "Lemonade");
+						itemView = new ItemView((String) selectedPokemon, "Lemonade", songplayer);
 					}
 					else if (selectedValue != null && selectedValue.equals("Use Energy Root")){
 						setPossiblePokemonValues();
@@ -467,7 +465,7 @@ public class PlayerView extends JFrame {
 						selectedPokemon = JOptionPane.showInputDialog(null, "Please select a Pokemon", "Pokemon", 
 								JOptionPane.QUESTION_MESSAGE, image, possiblePokemon, possiblePokemon[0]);
 						setNewHPEnergy();
-						itemView = new ItemView((String) selectedPokemon, "Energy Root");
+						itemView = new ItemView((String) selectedPokemon, "Energy Root", songplayer);
 					}
 					else if (selectedValue != null && selectedValue.equals("Use Berry Juice")){
 						setPossiblePokemonValues();
@@ -483,7 +481,7 @@ public class PlayerView extends JFrame {
 								JOptionPane.QUESTION_MESSAGE, image, possiblePokemon, possiblePokemon[0]);
 						
 						setNewHPBerry();
-						itemView = new ItemView((String) selectedPokemon, "Berry Juice");
+						itemView = new ItemView((String) selectedPokemon, "Berry Juice", songplayer);
 					}
 					else if (selectedValue != null && selectedValue.equals("Use Fresh Water")){
 						setPossiblePokemonValues();
@@ -498,7 +496,7 @@ public class PlayerView extends JFrame {
 						selectedPokemon = JOptionPane.showInputDialog(null, "Please select a Pokemon", "Pokemon", 
 								JOptionPane.QUESTION_MESSAGE, image, possiblePokemon, possiblePokemon[0]);
 						setNewHPWater();
-						itemView = new ItemView((String) selectedPokemon, "Fresh Water");
+						itemView = new ItemView((String) selectedPokemon, "Fresh Water", songplayer);
 					}
 				}
 					

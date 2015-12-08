@@ -9,6 +9,7 @@ import org.junit.Test;
 import model.pokemon.Chansey;
 import model.pokemon.Cubone;
 import model.pokemon.Kangaskhan;
+import model.pokemon.MercerMermaid;
 import model.pokemon.Nidoran;
 import model.pokemon.Paras;
 import model.pokemon.Pinsir;
@@ -978,4 +979,105 @@ public class PokemonTest {
 		assertEquals(0, s.getCatchability());
 	}
 	
+	
+	/**
+	 * Begin MercerMermaid Tests
+	 * private static final int RARITY = Integer.MAX_VALUE; // shouldnt be able to encounter normally
+	private static final int DURATION = 5; 
+	private static final int ESCAPABILITY = 85;
+	private static final int CATCHABILITY = 85; 
+	private static final int ESCAPABILITYCONSTANT = 15;
+	private static final int CATCHABILITYCONSTANT = 5;
+	private static final int HP = 105;
+	
+	// Same stats as Kangaskhan, who is quite hard to catch
+	public MercerMermaid(){ 
+		this.setCatchability(CATCHABILITY);
+		this.setDuration(DURATION);
+		this.setEscapability(ESCAPABILITY);
+		this.setRarity(RARITY);
+		this.setHP(HP);
+		this.setName("MercerMermaid");
+		
+	}
+	
+	
+	@Override
+	public void increaseEscapability() {
+		int newEscapability = this.getEscapability() + ESCAPABILITYCONSTANT;
+		if(newEscapability > 100)
+			newEscapability = 100;
+		this.setEscapability(newEscapability);
+	}
+	@Override
+	public void increaseCatchability() {
+		int newCatchAbility = this.getCatchability() + CATCHABILITYCONSTANT;
+		if(newCatchAbility > 100)
+			newCatchAbility = 100;
+		this.setCatchability(newCatchAbility);		
+	}
+	
+	@Override
+	public void decreaseEscapability() {
+		int newEscapability = this.getEscapability() - ESCAPABILITYCONSTANT;
+		if(newEscapability < 0)
+			newEscapability = 0;
+		this.setEscapability(newEscapability);
+	}
+	@Override
+	public void decreaseCatchability() {
+		int newCatchAbility = this.getCatchability() - CATCHABILITYCONSTANT;
+		if(newCatchAbility < 0)
+			newCatchAbility = 0;
+		this.setCatchability(newCatchAbility);	
+	}
+	 * 
+	 * 
+	 */
+	
+	@Test
+	public void testMercerIncreaseAndDecreaseCatchability(){
+		MercerMermaid mm = new MercerMermaid();
+		assertEquals(85, mm.getCatchability());
+		mm.rockThrown();
+		mm.rockThrown();
+		mm.rockThrown();
+		mm.rockThrown();
+		assertEquals(100, mm.getCatchability());
+		assertEquals(100, mm.getEscapability());
+		mm.baitThrown();
+		mm.baitThrown();
+		mm.baitThrown();
+		mm.baitThrown();
+		mm.baitThrown();
+		mm.baitThrown();
+		mm.baitThrown();
+		mm.baitThrown();
+		mm.baitThrown();
+		mm.baitThrown();
+		mm.baitThrown();
+		mm.baitThrown();
+		mm.baitThrown();
+		mm.baitThrown();
+		mm.baitThrown();
+		mm.baitThrown();
+		mm.baitThrown();
+		mm.baitThrown();
+		mm.baitThrown();
+		mm.baitThrown();
+		assertEquals(0, mm.getCatchability());
+		mm.baitThrown();
+		mm.baitThrown();
+		mm.baitThrown();
+		mm.baitThrown();
+		mm.baitThrown();
+		mm.baitThrown();
+		mm.baitThrown();
+		mm.baitThrown();
+		mm.baitThrown();
+		mm.baitThrown();
+		mm.baitThrown();
+		mm.baitThrown();
+		assertEquals(0, mm.getEscapability());
+	}
 }

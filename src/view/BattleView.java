@@ -289,12 +289,16 @@ public class BattleView extends JPanel {
 				pokemon.baitThrown();
 				battleLabel.setText("     " + pokemon.getName() + " eats the bait!     ");
 				if (pokemon.willRunAway(new Random())) {
-					songplayer.playRunAwaySoundEffect();
-					battleLabel.setText("     " + pokemon.getName() + " ran away!     ");
-					setBattleComplete();
+					pokemonRanAway();
 				}
 			}
 		}
+	}
+	
+	private void pokemonRanAway(){
+		songplayer.playRunAwaySoundEffect();
+		battleLabel.setText("     " + pokemon.getName() + " ran away!     ");
+		setBattleComplete();
 	}
 
 	// throw rock
@@ -433,12 +437,24 @@ public class BattleView extends JPanel {
 				} else {
 					battleLabel.setText("     " + pokemon.getName() + " bursts free!     ");
 					pokemonImageLabel.setLocation(130, pokemonImageLabel.getLocation().y);
-					new Timer(100, burstFree).start();
+					burstFreeTimer =new Timer(2000, new burstFreeListener());
+					burstFreeTimer.start();
 				}
 			}
 		}
 	}
+	
+	Timer burstFreeTimer;
 
+	private class burstFreeListener implements ActionListener {
+		public void actionPerformed(ActionEvent evt) {
+			if(pokemon.willRunAway(new Random())){
+				pokemonRanAway();
+			}
+			burstFreeTimer.stop();
+		}
+	}
+	
 	private class runAwayListener implements ActionListener {
 		public void actionPerformed(ActionEvent evt) {
 			if (!battleComplete) {

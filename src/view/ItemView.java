@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 
+import controller.SongPlayer;
 import model.Item;
 import model.Pokemon;
 
@@ -26,7 +27,7 @@ public class ItemView {
 	private JFrame frame;
 	private JLabel pokemonImageLabel, itemImageLabel, finalMessage;
 
-	public ItemView(String pok, String it) {
+	public ItemView(String pok, String it, SongPlayer sp) {
 		itemX = 100;
 		itemY = 100;
 		time = 200;
@@ -45,7 +46,7 @@ public class ItemView {
 		if (it.equals("Lemonade")) {
 			try {
 				//System.out.println("In lemoande iff");
-				itemImage = ImageIO.read(new File("./images/lemon.jpg"));
+				itemImage = ImageIO.read(new File("./images/lemon.png"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -77,9 +78,6 @@ public class ItemView {
 		frame.add(pokemonImageLabel);
 		// frame.add(itemImage);
 		//frame.setBackground(Color.WHITE);		
-		finalMessage = new JLabel("");
-		finalMessage.setLocation(10,10);
-		frame.add(finalMessage);
 		
 		itemImageLabel = new JLabel(new ImageIcon(itemImage));
 		frame.add(itemImageLabel);
@@ -105,25 +103,33 @@ public class ItemView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (count == 0) {
-					itemImageLabel.setLocation(10,320);
-					pokemonImageLabel.setLocation(10,-20);
-					
+					itemImageLabel.setLocation(10,250);
+					pokemonImageLabel.setLocation(10,-80);
+				
 				}
-				if (count == 85) {
-					finalMessage.setText(pok + "'s " + it + " HP increase complete");
+				if (count == 32) {
+					
+					sp.playCongratsMusic();
 					itemImageLabel.setIcon(null);
 					pokemonImageLabel.setIcon(null);
-					
 					((Timer) e.getSource()).stop();
-					
+					try {
+						Thread.sleep(3890);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					sp.playMainMusic();
+					frame.setVisible(false); //you can't see me!
+					frame.dispose(); //Destroy the JFrame object
 				} else {
 					// and down
 					pokemonImageLabel.setLocation(
 							pokemonImageLabel.getLocation().x,
-							pokemonImageLabel.getLocation().y + 2);
+							pokemonImageLabel.getLocation().y + 5);
 					itemImageLabel.setLocation(
 							itemImageLabel.getLocation().x,
-							itemImageLabel.getLocation().y - 2);
+							itemImageLabel.getLocation().y - 5);
 					count++;
 				}
 			}
