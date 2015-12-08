@@ -978,4 +978,10 @@ public class PokemonTest {
 		assertEquals(0, s.getCatchability());
 	}
 	
+	@Test
+	public void testNames(){
+		Scyther s = new Scyther();
+		assertEquals(s.getName(), "Scyther");
+	}
+	
 }
