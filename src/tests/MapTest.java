@@ -46,6 +46,7 @@ public class MapTest {
 		// note: running a moveTrainer("up") will cause an out of bounds exception.
 		
 		// test inability to walk on bushes
+		map.setBush(1, 1);
 		assertEquals(map.getTileAt(1, 1), "B");
 		map.moveTrainer(Direction.SOUTH); 
 		map.moveTrainer(Direction.WEST); 

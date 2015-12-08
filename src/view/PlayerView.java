@@ -147,11 +147,13 @@ public class PlayerView extends JFrame {
 	
 	// battle with mercer. unfortunately the animation is not used
 	private void forceBattleWithMercer() {
+		
 		Pokemon mercerMermaid = new MercerMermaid();
 		lockKeyPad();
 		songplayer.playBattleMusic();
 		beginBattle(mercerMermaid);
 	}
+
 	
 	public void beginBattle(Pokemon optionalPokemon){
 		if (optionalPokemon.getName().equals("Pinsir")){
@@ -425,7 +427,17 @@ public class PlayerView extends JFrame {
 								|| map.getTileAt(map.getTrainerY(), map.getTrainerX()+1).equals("W")
 								|| map.getTileAt(map.getTrainerY(), map.getTrainerX()-1).equals("W")
 								){
+							mapPanel.changeCostumeFishing();
+
+							try {
+								Thread.sleep(2000);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 							forceBattleWithMercer();
+							
+							mapPanel.resetFishChange();
 						}else{
 							JOptionPane.showMessageDialog(null,
 									"Professor Mercer's words... There is a time and place and design principle for everything, laddie!");

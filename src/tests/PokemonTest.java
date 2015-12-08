@@ -1080,4 +1080,5 @@ public class PokemonTest {
 		mm.baitThrown();
 		assertEquals(0, mm.getEscapability());
 	}
+
 }

@@ -15,7 +15,9 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -41,12 +43,14 @@ public class MapView extends JPanel implements Observer {
 	private Image playerForward1, playerForward2, playerForward3, playerLeft1, playerLeft2, playerLeft3, playerBack1,
 			playerBack2, playerBack3, playerRight1, playerRight2, playerRight3;
 	private Image costumeForward1, costumeForward2, costumeForward3, costumeLeft1, costumeLeft2, costumeLeft3,
-			costumeBack1, costumeBack2, costumeBack3, costumeRight1, costumeRight2, costumeRight3;
+			costumeBack1, costumeBack2, costumeBack3, costumeRight1, costumeRight2, costumeRight3, fishingCostumeUp, fishingCostumeDown,
+			fishingCostumeRight, fishingCostumeLeft;
 	private int X, Y, tic, n;
 	private Direction direction;
 	private Timer timer;
 	private boolean costumeFlag = true;
 	private Pokemon fillerPokemon = new Pinsir();
+	private JLabel trainerImageLabel;
 
 	public MapView(Map map) {
 		this.map = map;
@@ -84,6 +88,13 @@ public class MapView extends JPanel implements Observer {
 			costumeRight1 = ImageIO.read(new File("./images/costumeChange/rubyRight1.png"));
 			costumeRight2 = ImageIO.read(new File("./images/costumeChange/rubyRight2.png"));
 			costumeRight3 = ImageIO.read(new File("./images/costumeChange/rubyRight3.png"));
+			
+			fishingCostumeUp = ImageIO.read(new File("./images/trainerImages/fish-up.png"));
+			fishingCostumeRight = ImageIO.read(new File("./images/trainerImages/fish-right.png"));
+			fishingCostumeLeft = ImageIO.read(new File("./images/trainerImages/fish-left.png"));
+			fishingCostumeDown = ImageIO.read(new File("./images/trainerImages/fish-down.png"));
+			
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -410,6 +421,64 @@ public class MapView extends JPanel implements Observer {
 		}
 		costumeFlag = !costumeFlag;
 		repaint();
+	}
+	
+	public void changeCostumeFishing(){
+		System.out.println("FISHING CHANGE");
+		
+			playerRight1 = fishingCostumeRight;
+			playerRight2 = fishingCostumeRight;
+			playerRight3 = fishingCostumeRight;
+		
+			playerLeft1 = fishingCostumeLeft;
+			playerLeft2 = fishingCostumeLeft;
+			playerLeft3 = fishingCostumeLeft;
+			
+			playerForward1 = fishingCostumeDown;
+			playerForward2 = fishingCostumeDown;
+			playerForward3 = fishingCostumeDown;
+		
+			playerBack1 = fishingCostumeUp;
+			playerBack2 = fishingCostumeUp;
+			playerBack3 = fishingCostumeUp;
+			Graphics g;
+			g = getGraphics();
+			paint(g);
+	}
+	
+	public void resetFishChange(){
+		if(costumeFlag){
+			try {
+				playerForward1 = ImageIO.read(new File("./images/trainerImages/trainerForward1.png"));
+				playerForward2 = ImageIO.read(new File("./images/trainerImages/trainerForward2.png"));
+				playerForward3 = ImageIO.read(new File("./images/trainerImages/trainerForward3.png"));
+				playerLeft1 = ImageIO.read(new File("./images/trainerImages/trainerLeft1.png"));
+				playerLeft2 = ImageIO.read(new File("./images/trainerImages/trainerLeft2.png"));
+				playerLeft3 = ImageIO.read(new File("./images/trainerImages/trainerLeft3.png"));
+				playerBack1 = ImageIO.read(new File("./images/trainerImages/trainerBack1.png"));
+				playerBack2 = ImageIO.read(new File("./images/trainerImages/trainerBack2.png"));
+				playerBack3 = ImageIO.read(new File("./images/trainerImages/trainerBack3.png"));
+				playerRight1 = ImageIO.read(new File("./images/trainerImages/trainerRight1.png"));
+				playerRight2 = ImageIO.read(new File("./images/trainerImages/trainerRight2.png"));
+				playerRight3 = ImageIO.read(new File("./images/trainerImages/trainerRight3.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		else{
+			playerForward1 = costumeForward1;
+			playerForward2 = costumeForward2;
+			playerForward3 = costumeForward3;
+			playerLeft1 = costumeLeft1;
+			playerLeft2 = costumeLeft2;
+			playerLeft3 = costumeLeft3;
+			playerBack1 = costumeBack1;
+			playerBack2 = costumeBack2;
+			playerBack3 = costumeBack3;
+			playerRight1 = costumeRight1;
+			playerRight2 = costumeRight2;
+			playerRight3 = costumeRight3;
+		}
 	}
 	
 	/**intro battle animation stuff is below**/
